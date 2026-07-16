@@ -1,33 +1,7 @@
 import Link from "next/link";
+import JobsList from "@/components/careers/JobsList";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
-
-/** Replace with your HRMS careers / apply base URL */
-const HRMS_URL =
-  process.env.NEXT_PUBLIC_HRMS_URL ?? "https://hrms.example.com/careers";
-
-const roles = [
-  {
-    title: "AI Enablement Lead",
-    type: "Full-time",
-    location: "Hybrid / India",
-    summary:
-      "Design and run fluency programmes for client organisations—bridging leadership intent and frontline practice.",
-  },
-  {
-    title: "Implementation Engineer",
-    type: "Full-time",
-    location: "Hybrid / India",
-    summary:
-      "Integrate and ship AI systems into production workflows with clear handoffs, docs, and ownership.",
-  },
-  {
-    title: "Client Delivery Associate",
-    type: "Full-time",
-    location: "Hybrid / India",
-    summary:
-      "Coordinate dual-track engagements across adoption and implementation, keeping outcomes visible.",
-  },
-] as const;
+import { fetchJobs } from "@/lib/hrms/fetch-jobs";
 
 const values = [
   {
@@ -44,16 +18,17 @@ const values = [
   },
 ] as const;
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const { jobs, error } = await fetchJobs();
+
   return (
     <SiteChrome>
       <PageHero
         eyebrow="Careers"
         title="Build AI fluency into organisations—with us"
-        description="We're hiring people who take adoption as seriously as delivery. Open roles are listed here and apply through our HRMS."
+        description="We're hiring people who take adoption as seriously as delivery. Open roles are listed below—apply directly from this page."
       />
 
-      {/* Culture */}
       <section className="bg-white text-black">
         <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
           <div className="max-w-2xl">
@@ -88,60 +63,22 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Open roles */}
       <section className="border-t border-neutral-200 bg-[#f6f6f6] text-black">
         <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-                Open roles
-              </p>
-              <h2 className="mt-3 font-[family-name:var(--font-serif)] text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em] text-neutral-950">
-                Apply via HRMS
-              </h2>
-            </div>
-            <a
-              href={HRMS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-cut inline-flex h-11 w-fit items-center justify-center bg-black px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-neutral-800"
-            >
-              Open HRMS portal
-            </a>
+          <div>
+            <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
+              Open roles
+            </p>
+            <h2 className="mt-3 font-[family-name:var(--font-serif)] text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em] text-neutral-950">
+              Apply below
+            </h2>
+            <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-neutral-500">
+              Roles are loaded from our HRMS. Select a position, complete the
+              form, and upload your resume.
+            </p>
           </div>
 
-          <ul className="mt-10 divide-y divide-neutral-200 border border-neutral-200 bg-white">
-            {roles.map((role) => (
-              <li
-                key={role.title}
-                className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7"
-              >
-                <div className="max-w-2xl">
-                  <h3 className="text-[17px] font-semibold text-neutral-950">
-                    {role.title}
-                  </h3>
-                  <p className="mt-1 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-neutral-400">
-                    {role.type} · {role.location}
-                  </p>
-                  <p className="mt-3 text-[14px] leading-relaxed text-neutral-600">
-                    {role.summary}
-                  </p>
-                </div>
-                <a
-                  href={HRMS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-cut inline-flex h-10 shrink-0 items-center justify-center border border-black px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.06em] text-black transition-all hover:bg-black hover:text-white"
-                >
-                  Apply in HRMS
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <p className="mt-4 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-neutral-400">
-            Set NEXT_PUBLIC_HRMS_URL to your live HRMS careers link
-          </p>
+          <JobsList jobs={jobs} fetchError={error} />
         </div>
       </section>
 
