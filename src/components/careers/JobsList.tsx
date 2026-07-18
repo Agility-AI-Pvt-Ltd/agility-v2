@@ -15,7 +15,7 @@ export default function JobsList({ jobs, fetchError }: JobsListProps) {
 
   if (fetchError) {
     return (
-      <div className="mt-10 border border-amber-200 bg-amber-50 p-6">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
         <p className="text-[14px] text-amber-900">{fetchError}</p>
       </div>
     );
@@ -23,31 +23,37 @@ export default function JobsList({ jobs, fetchError }: JobsListProps) {
 
   if (jobs.length === 0) {
     return (
-      <div className="mt-10 border border-neutral-200 bg-white p-8 text-center">
-        <p className="font-[family-name:var(--font-serif)] text-[20px] text-neutral-900">
+      <div className="rounded-2xl border border-neutral-200 bg-white p-8 text-center">
+        <p className="text-[20px] font-semibold tracking-[-0.02em] text-neutral-900">
           No open roles right now
         </p>
         <p className="mt-3 text-[14px] leading-relaxed text-neutral-500">
-          Check back soon—or reach out if you&apos;d like to introduce yourself
-          anyway.
+          Check back soon — or reach out if you&apos;d like to introduce
+          yourself anyway.
         </p>
       </div>
     );
   }
 
   return (
-    <ul className="mt-10 divide-y divide-neutral-200 border border-neutral-200 bg-white">
-      {jobs.map((job) => {
+    <ul className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+      {jobs.map((job, index) => {
         const isOpen = activeSlug === job.slug;
 
         return (
-          <li key={job.slug} className="p-6 sm:p-7">
+          <li
+            key={job.slug}
+            className={[
+              "p-6 sm:p-7",
+              index > 0 ? "border-t border-neutral-200" : "",
+            ].join(" ")}
+          >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="max-w-2xl">
-                <h3 className="text-[17px] font-semibold text-neutral-950">
+                <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-neutral-950">
                   {job.title}
                 </h3>
-                <p className="mt-1 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-neutral-400">
+                <p className="mt-1.5 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-neutral-400">
                   {jobMeta(job)}
                 </p>
                 <p className="mt-3 whitespace-pre-line text-[14px] leading-relaxed text-neutral-600">
@@ -58,7 +64,12 @@ export default function JobsList({ jobs, fetchError }: JobsListProps) {
               <button
                 type="button"
                 onClick={() => setActiveSlug(isOpen ? null : job.slug)}
-                className="cta-cut inline-flex h-10 shrink-0 items-center justify-center border border-black px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.06em] text-black transition-all hover:bg-black hover:text-white"
+                className={[
+                  "inline-flex h-11 shrink-0 items-center justify-center rounded-full px-6 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] transition-all active:scale-[0.98]",
+                  isOpen
+                    ? "border border-neutral-300 bg-white text-neutral-800 hover:border-neutral-400"
+                    : "bg-[#222] text-white hover:bg-black",
+                ].join(" ")}
               >
                 {isOpen ? "Close" : "Apply"}
               </button>

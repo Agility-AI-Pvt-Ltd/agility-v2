@@ -29,17 +29,6 @@ export default function ContactCTA({
       <div className="mx-auto max-w-[1400px] px-6 py-16 sm:px-10 sm:py-20 md:px-14 lg:px-16 xl:px-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="mb-4 flex items-center gap-3">
-              <span className="h-[3px] w-8 bg-[#3b6ef5]" aria-hidden="true" />
-              <p
-                className={[
-                  "font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em]",
-                  isDark ? "text-white/50" : "text-neutral-500",
-                ].join(" ")}
-              >
-                Get started
-              </p>
-            </div>
             <h2
               id={`${id}-heading`}
               className="font-[family-name:var(--font-serif)] text-[clamp(1.85rem,3.8vw,2.75rem)] leading-[1.12] tracking-[-0.02em]"

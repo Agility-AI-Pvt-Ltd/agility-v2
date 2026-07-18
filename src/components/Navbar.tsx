@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import logo from "../../public/new_logo.png";
 
 const navLinks = [
-  { label: "About", href: "/about" },
+  { label: "AI Maturity Check", href: "/ai-maturity-check" },
   { label: "Services", href: "/services" },
-  { label: "Industries", href: "/industries" },
+  // { label: "Industries", href: "/industries" },
   { label: "Testimonial", href: "/testimonials" },
-  { label: "Team", href: "/team" },
+  { label: "Team and Advisors", href: "/team" },
   { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about" },
+  // { label: "Contact", href: "/contact" },
 ] as const;
 
 function Logo() {

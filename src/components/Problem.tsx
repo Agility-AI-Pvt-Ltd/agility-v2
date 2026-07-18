@@ -144,102 +144,75 @@ export default function Problem() {
         </div>
       </div>
 
-      {/* What we do — adoption vs implementation */}
+      {/* What we do */}
       <div
         id="services"
         className="border-t border-neutral-200 bg-[#fafafa]"
       >
         <div className="mx-auto max-w-[1400px] px-6 py-14 sm:px-10 sm:py-16 md:px-14 lg:px-16 lg:py-20 xl:px-20">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <div className="mb-4 flex items-center gap-2.5">
               <span
                 className="size-2.5 shrink-0 bg-[#3b6ef5] sm:size-3"
                 aria-hidden="true"
               />
               <p className="font-[family-name:var(--font-geist-mono)] text-[13px] font-medium tracking-[-0.01em] text-[#3b6ef5] sm:text-[14px]">
-                What we do.
+                What we do
               </p>
             </div>
-            <h3 className="text-[clamp(1.5rem,3.2vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-neutral-950">
-              AI adoption and AI implementation—two jobs, one outcome
+            <h3 className="text-[clamp(1.5rem,3.2vw,2.25rem)] font-semibold leading-[1.2] tracking-[-0.03em] text-neutral-950">
+              Buying AI is easy. Most vendors will sell it to you by Friday.
+              Running it well, six months later, without calling them every
+              time something breaks, is the part nobody prices in.
             </h3>
-            <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-neutral-500 sm:text-[16px] sm:leading-[1.65]">
-              Most teams treat them as the same thing. They aren&apos;t. We
-              work both sides so AI doesn&apos;t just get installed—it gets
-              used, governed, and improved.
+            <p className="mt-5 max-w-[52ch] text-[15px] leading-relaxed text-neutral-500 sm:text-[16px] sm:leading-[1.65]">
+              That&apos;s the work we do. We build the system, then we build the
+              fluency in your team to keep it alive.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-0 border border-neutral-200 bg-white sm:mt-12 md:grid-cols-2">
-            <article className="border-b border-neutral-200 p-7 sm:p-8 md:border-b-0 md:border-r md:p-10">
-              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-                AI Adoption
-              </p>
-              <h4 className="mt-3 text-[20px] font-semibold tracking-[-0.02em] text-neutral-950 sm:text-[22px]">
-                Getting your organisation ready
-              </h4>
-              <p className="mt-3 text-[14px] leading-relaxed text-neutral-500 sm:text-[15px] sm:leading-[1.7]">
-                Adoption is about people, process, and confidence. We help
-                teams understand where AI fits, build fluency across roles,
-                and create the habits and ownership needed to use AI every
-                day—not once in a pilot.
-              </p>
-              <ul className="mt-5 space-y-2 font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.02em] text-neutral-600 sm:text-[13px]">
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Skills, change, and operating cadence
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Clear ownership and decision rights
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Governance before sprawl sets in
-                </li>
-              </ul>
-            </article>
+          <div className="mt-12 sm:mt-14">
+            <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
+              What this looks like
+            </p>
 
-            <article className="p-7 sm:p-8 md:p-10">
-              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-                AI Implementation
-              </p>
-              <h4 className="mt-3 text-[20px] font-semibold tracking-[-0.02em] text-neutral-950 sm:text-[22px]">
-                Putting working systems in place
-              </h4>
-              <p className="mt-3 text-[14px] leading-relaxed text-neutral-500 sm:text-[15px] sm:leading-[1.7]">
-                Implementation is the technical delivery. We integrate,
-                configure, and ship AI systems into real workflows—so
-                models, tools, and data actually run in production and can
-                be extended as the business evolves.
-              </p>
-              <ul className="mt-5 space-y-2 font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.02em] text-neutral-600 sm:text-[13px]">
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Integration into existing stacks
+            <ul className="mt-6 grid gap-0 border border-neutral-200 bg-white sm:grid-cols-2">
+              {[
+                {
+                  title: "Strategy",
+                  body: "Figure out where AI actually pays for itself, and where it's just noise.",
+                },
+                {
+                  title: "Enablement",
+                  body: "Train your people to use what we build, so it doesn't sit unused in six months.",
+                },
+                {
+                  title: "Automation",
+                  body: "Take the repetitive work off your team's plate, properly, not as a demo.",
+                },
+                {
+                  title: "Governance",
+                  body: "Know what your systems are doing before a regulator, client, or your own board asks.",
+                },
+              ].map((item, index) => (
+                <li
+                  key={item.title}
+                  className={[
+                    "border-neutral-200 p-7 sm:p-8 md:p-9",
+                    index < 2 ? "border-b" : "",
+                    index === 2 ? "border-b sm:border-b-0" : "",
+                    index % 2 === 0 ? "sm:border-r" : "",
+                  ].join(" ")}
+                >
+                  <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
+                    {item.title}
+                  </p>
+                  <p className="mt-3 text-[15px] leading-relaxed tracking-[-0.01em] text-neutral-700 sm:text-[16px] sm:leading-[1.65]">
+                    {item.body}
+                  </p>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Production-ready rollout and support
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  Designed to run, govern, and extend
-                </li>
-              </ul>
-            </article>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

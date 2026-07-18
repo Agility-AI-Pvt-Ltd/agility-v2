@@ -1,192 +1,143 @@
-import type { ReactNode } from "react";
+"use client";
 
-const capabilities = [
+const sources = [
+  { label: "Priorities", level: 42 },
+  { label: "Tools", level: 56 },
+  { label: "Work", level: 70 },
+  { label: "Risk", level: 84 },
+] as const;
+
+const stages = [
   {
-    title: "AI Strategy",
-    description:
-      "Clarify where AI creates value, what to prioritise, and how adoption and delivery should work together across the organisation.",
-    icon: StrategyIcon,
+    title: "Strategy",
+    icon: (
+      <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+        <path d="M12 3l8 9-8 9-8-9 8-9z" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
   },
   {
-    title: "Training & Enablement",
-    description:
-      "Build AI fluency for teams and leaders—so people can use, challenge, and improve AI systems with confidence.",
-    icon: EnablementIcon,
+    title: "Enablement",
+    icon: (
+      <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+        <path
+          d="M12 3l1.8 5.4H19l-4.2 3.2 1.6 5.4L12 14.2 7.6 17l1.6-5.4L5 8.4h5.2L12 3z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
-    title: "Automation Delivery",
-    description:
-      "Design, integrate, and ship AI-powered workflows into production—not demos—wired into the tools your organisation already runs.",
-    icon: AutomationIcon,
+    title: "Automation",
+    icon: (
+      <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+        <path
+          d="M13 3L5 13h6l-1 8 9-12h-6l0-6z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
     title: "Governance",
-    description:
-      "Put ownership, controls, and operating rhythms in place so AI can be run, audited, and extended without creating risk or sprawl.",
-    icon: GovernanceIcon,
+    icon: (
+      <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M8 12h8M12 8v8" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
   },
 ] as const;
 
-function StrategyIcon() {
+function NoteIcon() {
   return (
-    <svg
-      viewBox="0 0 120 120"
-      className="mx-auto h-28 w-28 sm:h-32 sm:w-32"
+    <span
+      className="relative inline-flex size-7 shrink-0 items-center justify-center"
       aria-hidden="true"
     >
-      <defs>
-        <clipPath id="clip-strategy">
-          <polygon points="60,12 108,60 60,108 12,60" />
-        </clipPath>
-        <pattern
-          id="scan-strategy"
-          width="120"
-          height="3.2"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="120" height="1.4" fill="#3b6ef5" />
-        </pattern>
-      </defs>
-      <rect
-        width="120"
-        height="120"
-        fill="url(#scan-strategy)"
-        clipPath="url(#clip-strategy)"
+      <span className="absolute inset-0 rotate-[-8deg] rounded-[4px] bg-neutral-200" />
+      <span className="absolute inset-[3px] rotate-[4deg] rounded-[3px] border border-neutral-400 bg-white" />
+      <span className="relative size-2 rounded-sm bg-black" />
+    </span>
+  );
+}
+
+function HubGlyph() {
+  return (
+    <svg viewBox="0 0 64 64" className="size-10 text-white" aria-hidden="true">
+      <circle
+        cx="32"
+        cy="32"
+        r="14"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        opacity="0.35"
+      />
+      <circle cx="32" cy="32" r="6" fill="currentColor" />
+      <path
+        d="M32 8v10M32 46v10M8 32h10M46 32h10M14 14l7 7M43 43l7 7M50 14l-7 7M21 43l-7 7"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        opacity="0.55"
       />
     </svg>
   );
 }
 
-function EnablementIcon() {
+function TraceBars() {
+  const rows = [
+    [18, 42, 28],
+    [8, 55, 20],
+    [24, 30, 35],
+    [12, 48, 22],
+    [30, 25, 28],
+    [6, 60, 18],
+    [20, 38, 26],
+  ];
+
   return (
-    <svg
-      viewBox="0 0 120 120"
-      className="mx-auto h-28 w-28 sm:h-32 sm:w-32"
+    <div
+      className="capabilities-trace flex flex-1 flex-col justify-center gap-2 px-3 py-3"
       aria-hidden="true"
     >
-      <defs>
-        <clipPath id="clip-enable">
-          <path d="M62 10 L74 52 L118 52 L84 78 L96 118 L62 92 L28 118 L40 78 L6 52 L50 52 Z" />
-        </clipPath>
-        <pattern
-          id="scan-enable"
-          width="120"
-          height="3.2"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="120" height="1.4" fill="#3b6ef5" />
-        </pattern>
-      </defs>
-      <rect
-        width="120"
-        height="120"
-        fill="url(#scan-enable)"
-        clipPath="url(#clip-enable)"
-      />
-    </svg>
-  );
-}
-
-function AutomationIcon() {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      className="mx-auto h-28 w-28 sm:h-32 sm:w-32"
-      aria-hidden="true"
-    >
-      <defs>
-        <clipPath id="clip-auto">
-          <path d="M68 8 L78 48 L118 54 L78 62 L68 112 L58 62 L18 54 L58 48 Z" />
-        </clipPath>
-        <pattern
-          id="scan-auto"
-          width="120"
-          height="3.2"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="120" height="1.4" fill="#3b6ef5" />
-        </pattern>
-      </defs>
-      <rect
-        width="120"
-        height="120"
-        fill="url(#scan-auto)"
-        clipPath="url(#clip-auto)"
-      />
-    </svg>
-  );
-}
-
-function GovernanceIcon() {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      className="mx-auto h-28 w-28 sm:h-32 sm:w-32"
-      aria-hidden="true"
-    >
-      <defs>
-        <clipPath id="clip-gov">
-          <path d="M40 54 V42 C40 28 50 18 60 18 C70 18 80 28 80 42 V54 H88 V102 H32 V54 H40 Z M50 54 V42 C50 34 54 28 60 28 C66 28 70 34 70 42 V54 H50 Z" />
-        </clipPath>
-        <pattern
-          id="scan-gov"
-          width="120"
-          height="3.2"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="120" height="1.4" fill="#3b6ef5" />
-        </pattern>
-      </defs>
-      <rect
-        width="120"
-        height="120"
-        fill="url(#scan-gov)"
-        clipPath="url(#clip-gov)"
-      />
-    </svg>
-  );
-}
-
-const tabClip =
-  "polygon(0 14px, 68% 14px, 76% 0, 100% 0, 100% 100%, 0 100%)";
-
-function CapabilityCard({
-  title,
-  description,
-  icon: Icon,
-}: {
-  title: string;
-  description: string;
-  icon: () => ReactNode;
-}) {
-  return (
-    <div className="relative h-full min-h-[360px]">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-neutral-200"
-        style={{ clipPath: tabClip }}
-      />
-      <article
-        className="absolute inset-[1px] flex flex-col bg-white"
-        style={{ clipPath: tabClip }}
-      >
-        <div className="flex flex-1 flex-col px-5 pb-6 pt-8 sm:px-6 sm:pb-7 sm:pt-9">
-          <h3 className="text-[16px] font-semibold tracking-[-0.02em] text-neutral-950 sm:text-[17px]">
-            {title}
-          </h3>
-
-          <div className="flex flex-1 items-center justify-center py-6 sm:py-8">
-            <Icon />
-          </div>
-
-          <div className="border-t border-dashed border-neutral-300 pt-5">
-            <p className="text-[13px] leading-relaxed text-neutral-500 sm:text-[14px] sm:leading-[1.65]">
-              {description}
-            </p>
-          </div>
+      {rows.map((segments, row) => (
+        <div key={row} className="flex h-2.5 items-center gap-1">
+          {segments.map((flex, i) => (
+            <span
+              key={i}
+              className="h-full rounded-sm"
+              style={{
+                flex,
+                backgroundColor:
+                  i === 0
+                    ? "rgba(0,0,0,0.12)"
+                    : i === 1
+                      ? "#111111"
+                      : "rgba(0,0,0,0.06)",
+                animationDelay: `${row * 0.12 + i * 0.05}s`,
+              }}
+            />
+          ))}
         </div>
-      </article>
+      ))}
     </div>
+  );
+}
+
+function PulseRing({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={[
+        "capabilities-pulse absolute rounded-full border border-black/20",
+        className,
+      ].join(" ")}
+      aria-hidden="true"
+    />
   );
 }
 
@@ -195,36 +146,136 @@ export default function Capabilities() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-heading"
-      className="bg-white text-black"
+      className="sticky top-0 z-20 flex h-svh flex-col overflow-hidden bg-white text-black"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-16 sm:px-10 sm:py-20 md:px-14 lg:px-16 lg:py-24 xl:px-20">
-        <div className="max-w-3xl">
-          <div className="mb-5 flex items-center gap-3">
-            <span
-              className="h-[3px] w-8 bg-[#3b6ef5] sm:w-10"
-              aria-hidden="true"
-            />
-            <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500 sm:text-[12px]">
-              Stop settling for trade-offs
+      <div className="mx-auto flex h-full w-full max-w-[1280px] min-h-0 flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-8 lg:py-7">
+        <div className="mx-auto w-full max-w-2xl shrink-0 text-center">
+          <div className="mb-2 flex items-center justify-center gap-2">
+            <NoteIcon />
+            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-neutral-500">
+              What we do
             </p>
           </div>
-
           <h2
             id="capabilities-heading"
-            className="font-[family-name:var(--font-serif)] text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.12] tracking-[-0.02em] text-neutral-900"
+            className="text-[clamp(1.15rem,2.4vw,1.65rem)] font-semibold leading-snug tracking-[-0.02em] text-black"
           >
-            Capability that turns AI intent into organisational muscle
+            Buy AI fast. Run it well.
           </h2>
-          <p className="mt-4 max-w-[48ch] text-[15px] leading-relaxed text-neutral-500 sm:mt-5 sm:text-[16px] sm:leading-[1.65]">
-            Four ways we help you move from AI interest to durable adoption,
-            delivery, and control.
-          </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:mt-14 sm:gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {capabilities.map((item) => (
-            <CapabilityCard key={item.title} {...item} />
-          ))}
+        <div className="relative mt-4 grid min-h-0 flex-1 gap-3 lg:mt-5 lg:grid-cols-[0.9fr_1.4fr_0.9fr] lg:gap-4">
+          <div className="relative flex min-h-0 flex-col rounded-2xl border border-neutral-200 bg-[#fafafa] p-3 sm:p-4">
+            <p className="mb-3 font-[family-name:var(--font-geist-mono)] text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+              Your organisation
+            </p>
+            <div className="relative flex min-h-0 flex-1 flex-col justify-center gap-3">
+              {sources.map((item) => (
+                <div key={item.label} className="relative flex items-center gap-3">
+                  <div className="relative flex size-11 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white">
+                    <PulseRing className="inset-[-4px]" />
+                    <span className="size-2.5 rounded-full bg-black" />
+                  </div>
+                  <div className="min-w-0 flex-1 rounded-lg border border-neutral-200 bg-white px-3 py-2.5">
+                    <p className="text-[13px] font-medium tracking-[-0.01em] text-neutral-900">
+                      {item.label}
+                    </p>
+                    <div
+                      className="capabilities-meter mt-1.5 h-1 overflow-hidden rounded-full bg-neutral-100"
+                      aria-hidden="true"
+                    >
+                      <span
+                        className="block h-full rounded-full bg-black"
+                        style={{ width: `${item.level}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <svg
+                className="pointer-events-none absolute right-[-18px] top-1/2 hidden h-[70%] w-5 -translate-y-1/2 lg:block"
+                viewBox="0 0 20 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                {[18, 42, 66, 90].map((y) => (
+                  <path
+                    key={y}
+                    className="capabilities-dash"
+                    d={`M0 ${y} C10 ${y}, 10 50, 20 50`}
+                    fill="none"
+                    stroke="rgba(0,0,0,0.28)"
+                    strokeWidth="1.2"
+                  />
+                ))}
+              </svg>
+            </div>
+          </div>
+
+          <div className="relative flex min-h-0 flex-col rounded-2xl border border-neutral-200 bg-[#fafafa] p-3 sm:p-4">
+            <p className="mb-3 font-[family-name:var(--font-geist-mono)] text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+              Agility AI
+            </p>
+
+            <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center">
+              <div className="relative mb-5 flex size-24 items-center justify-center rounded-2xl bg-black sm:size-28">
+                <PulseRing className="inset-[-10px] border-black/20" />
+                <PulseRing className="inset-[-22px] border-black/10" />
+                <HubGlyph />
+              </div>
+
+              <div className="grid w-full max-w-md grid-cols-2 gap-2.5 sm:gap-3">
+                {stages.map((stage, index) => (
+                  <div
+                    key={stage.title}
+                    className="capabilities-stage relative overflow-hidden rounded-xl border border-neutral-200 bg-white px-3 py-3 text-center"
+                    style={{ animationDelay: `${index * 0.15}s` }}
+                  >
+                    <div
+                      className="mx-auto mb-2 flex size-10 items-center justify-center rounded-lg bg-neutral-100 text-black"
+                      aria-hidden="true"
+                    >
+                      {stage.icon}
+                    </div>
+                    <p className="text-[12px] font-semibold tracking-[-0.01em] text-black sm:text-[13px]">
+                      {stage.title}
+                    </p>
+                    <span className="capabilities-stage-bar absolute inset-x-0 bottom-0 h-0.5 bg-black" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="relative flex min-h-0 flex-col rounded-2xl border border-neutral-200 bg-[#fafafa] p-3 sm:p-4">
+            <p className="mb-3 font-[family-name:var(--font-geist-mono)] text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-600">
+              Running well
+            </p>
+
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white">
+              <div className="flex items-center justify-between border-b border-neutral-200 bg-black px-3 py-2">
+                <span className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.14em] text-white/50">
+                  Live
+                </span>
+                <span className="flex items-center gap-1.5 font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.12em] text-white">
+                  <span className="capabilities-live-dot size-1.5 rounded-full bg-white" />
+                  Fluent
+                </span>
+              </div>
+              <TraceBars />
+              <div className="grid grid-cols-3 gap-px border-t border-neutral-200 bg-neutral-200">
+                {["Run", "Own", "Extend"].map((label) => (
+                  <div
+                    key={label}
+                    className="bg-white px-2 py-2.5 text-center font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-neutral-600"
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
