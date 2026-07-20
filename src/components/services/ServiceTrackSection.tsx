@@ -1,6 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
-import OfferingVisual from "@/components/services/OfferingVisual";
+import Reveal from "@/components/about/Reveal";
+import OfferingIcon from "@/components/services/OfferingIcon";
+import OfferingMascot, {
+  type MascotPlacement,
+} from "@/components/services/OfferingMascot";
+
+type OfferingVariant = "enablement" | "integration" | "products";
 
 type ServiceTrackSectionProps = {
   id: string;
@@ -15,11 +23,95 @@ type ServiceTrackSectionProps = {
     label: string;
     href: string;
   };
-  inverted?: boolean;
-  sticky?: boolean;
-  zIndex?: number;
-  visual?: "enablement" | "integration" | "products";
+  variant: OfferingVariant;
 };
+
+const VARIANT_CONFIG: Record<
+  OfferingVariant,
+  {
+    icon: "layers" | "connect" | "product";
+    gradient: string;
+    mascot: { placement: MascotPlacement; message: string; anchor: "hero" | "card"; cardIndex?: number };
+    cardOffsets: [string, string, string];
+  }
+> = {
+  enablement: {
+    icon: "layers",
+    gradient: "services-offering-detail-a",
+    mascot: {
+      placement: "top-right",
+      message: "Let's get your team fluent!",
+      anchor: "hero",
+    },
+    cardOffsets: ["", "lg:mt-8", "lg:mt-16"],
+  },
+  integration: {
+    icon: "connect",
+    gradient: "services-offering-detail-b",
+    mascot: {
+      placement: "mid-right",
+      message: "No new dashboards. Promise.",
+      anchor: "card",
+      cardIndex: 1,
+    },
+    cardOffsets: ["lg:mt-4", "lg:mt-12", "lg:mt-20"],
+  },
+  products: {
+    icon: "product",
+    gradient: "services-offering-detail-c",
+    mascot: {
+      placement: "bottom-left",
+      message: "Start using it this week!",
+      anchor: "card",
+      cardIndex: 2,
+    },
+    cardOffsets: ["", "lg:mt-6", "lg:mt-12"],
+  },
+};
+
+const DETAIL_BLOCKS = [
+  { key: "includes", title: "What's included" },
+  { key: "forWhom", title: "Who it's for" },
+  { key: "doneLooksLike", title: "What done looks like" },
+] as const;
+
+function DetailCard({
+  title,
+  items,
+  offsetClass,
+  mascot,
+}: {
+  title: string;
+  items: readonly string[];
+  offsetClass: string;
+  mascot?: ReactNode;
+}) {
+  return (
+    <article
+      className={[
+        "services-offering-detail-card relative flex min-h-[240px] flex-col rounded-[1.5rem] border border-white/80 bg-white p-6 shadow-[0_16px_44px_rgba(15,23,42,0.07)] sm:min-h-[260px] sm:p-7",
+        mascot ? "overflow-visible" : "",
+        offsetClass,
+      ].join(" ")}
+    >
+      {mascot}
+      <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-[#94a3b8]">
+        {title}
+      </p>
+      <ul className="mt-4 space-y-3 text-[14px] leading-relaxed text-[#475569]">
+        {items.map((item) => (
+          <li key={item} className="flex gap-2.5">
+            <span
+              className="mt-2 size-1.5 shrink-0 rounded-full bg-[#3b6ef5]"
+              aria-hidden="true"
+            />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
 
 export default function ServiceTrackSection({
   id,
@@ -31,162 +123,99 @@ export default function ServiceTrackSection({
   forWhom,
   doneLooksLike,
   cta,
-  inverted,
-  sticky,
-  zIndex = 10,
-  visual,
+  variant,
 }: ServiceTrackSectionProps) {
-  const tone = inverted ? "bg-[#f0f0f0] text-black" : "bg-white text-black";
+  const config = VARIANT_CONFIG[variant];
+  const lists = { includes, forWhom, doneLooksLike };
 
   return (
     <section
       id={id}
-      style={sticky ? { zIndex } : undefined}
       className={[
-        tone,
-        sticky
-          ? "sticky top-0 flex h-svh max-h-svh flex-col overflow-hidden border-b border-neutral-200/80 shadow-[0_-12px_40px_rgba(0,0,0,0.08)]"
-          : "",
+        "relative overflow-x-hidden overflow-y-visible border-b border-[#dbeafe]/60 scroll-mt-20",
+        config.gradient,
       ].join(" ")}
     >
       <div
+        className="pointer-events-none absolute inset-0 services-offerings-glow"
+        aria-hidden="true"
+      />
+
+      <div
         className={[
-          "mx-auto flex w-full max-w-[1100px] flex-col",
-          sticky
-            ? "h-full min-h-0 justify-between gap-4 overflow-y-auto overscroll-contain px-6 py-7 sm:gap-5 sm:px-10 sm:py-9 lg:justify-center lg:gap-6 lg:py-10"
-            : "px-6 py-12 sm:px-10 sm:py-16",
+          "relative z-10 mx-auto max-w-[1100px] px-6 sm:px-10",
+          variant === "enablement"
+            ? "pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20"
+            : "py-14 sm:py-16 lg:py-20",
         ].join(" ")}
       >
-        <div
-          className={[
-            sticky ? "min-h-0 shrink" : "",
-            visual ? "grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_200px] lg:items-start" : "",
-          ].join(" ")}
-        >
-          <div>
-            <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-              {label}
-            </p>
-            <h2
-              className={[
-                "mt-2 font-[family-name:var(--font-serif)] leading-[1.12] tracking-[-0.02em] text-neutral-950",
-                sticky
-                  ? "text-[clamp(1.5rem,2.8vw,2.15rem)]"
-                  : "mt-3 text-[clamp(1.75rem,3.5vw,2.5rem)]",
-              ].join(" ")}
-            >
-              {title}
-            </h2>
-            <p
-              className={[
-                "max-w-[58ch] leading-relaxed text-neutral-600",
-                sticky
-                  ? "mt-2 text-[14px] sm:text-[15px]"
-                  : "mt-4 text-[15px] sm:text-[16px]",
-              ].join(" ")}
-            >
-              {summary}
-            </p>
-            {extra}
-          </div>
-          {visual && (
-            <div className="hidden lg:block">
-              <OfferingVisual kind={visual} />
+        <Reveal className="overflow-visible">
+          <article className="services-offering-detail-hero relative overflow-visible rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_20px_55px_rgba(15,23,42,0.09)] sm:p-8 lg:p-10">
+            {config.mascot.anchor === "hero" && (
+              <OfferingMascot
+                placement={config.mascot.placement}
+                message={config.mascot.message}
+              />
+            )}
+
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
+              <div className="shrink-0">
+                <OfferingIcon kind={config.icon} className="size-12 sm:size-14" />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
+                  {label}
+                </p>
+                <h2 className="mt-2 font-[family-name:var(--font-serif)] text-[clamp(1.85rem,3.8vw,2.75rem)] leading-[1.1] tracking-[-0.03em] text-[#0f172a]">
+                  {title}
+                </h2>
+                <p className="mt-4 max-w-[58ch] text-[15px] leading-relaxed text-[#475569] sm:text-[16px]">
+                  {summary}
+                </p>
+                {extra && <div className="mt-4">{extra}</div>}
+
+                {cta && (
+                  <div className="mt-6">
+                    <Link
+                      href={cta.href}
+                      className="cta-cut inline-flex h-11 items-center justify-center bg-[#0f172a] px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-[#1e293b]"
+                    >
+                      {cta.label}
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
+          </article>
+        </Reveal>
 
         <div
           className={[
-            "grid border-t border-neutral-200 md:grid-cols-3",
-            sticky
-              ? "mt-4 min-h-0 gap-5 pt-4 md:gap-6 md:pt-5"
-              : "mt-8 gap-8 pt-8 md:mt-10 md:pt-10",
+            "mt-8 grid gap-5 md:grid-cols-3 md:gap-6 lg:mt-10 lg:items-start",
+            variant === "products" ? "lg:pb-16" : "",
           ].join(" ")}
         >
-          <div>
-            <h3 className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500">
-              What&apos;s included
-            </h3>
-            <ul
-              className={[
-                "leading-relaxed text-neutral-700",
-                sticky
-                  ? "mt-2.5 space-y-2 text-[13px]"
-                  : "mt-4 space-y-3 text-[14px]",
-              ].join(" ")}
-            >
-              {includes.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500">
-              Who it&apos;s for
-            </h3>
-            <ul
-              className={[
-                "leading-relaxed text-neutral-700",
-                sticky
-                  ? "mt-2.5 space-y-2 text-[13px]"
-                  : "mt-4 space-y-3 text-[14px]",
-              ].join(" ")}
-            >
-              {forWhom.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500">
-              What done looks like
-            </h3>
-            <ul
-              className={[
-                "leading-relaxed text-neutral-700",
-                sticky
-                  ? "mt-2.5 space-y-2 text-[13px]"
-                  : "mt-4 space-y-3 text-[14px]",
-              ].join(" ")}
-            >
-              {doneLooksLike.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="text-[#3b6ef5]" aria-hidden="true">
-                    —
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {DETAIL_BLOCKS.map((block, index) => (
+            <Reveal key={block.key} delay={100 + index * 80} className={config.cardOffsets[index]}>
+              <DetailCard
+                title={block.title}
+                items={lists[block.key]}
+                offsetClass=""
+                mascot={
+                  config.mascot.anchor === "card" &&
+                  index === (config.mascot.cardIndex ?? DETAIL_BLOCKS.length - 1) ? (
+                    <OfferingMascot
+                      placement={config.mascot.placement}
+                      message={config.mascot.message}
+                      compact={config.mascot.placement !== "mid-right"}
+                    />
+                  ) : undefined
+                }
+              />
+            </Reveal>
+          ))}
         </div>
-
-        {cta && (
-          <div
-            className={[
-              "border-t border-dashed border-neutral-300",
-              sticky ? "mt-4 shrink-0 pt-4" : "mt-8 pt-6 md:mt-10 md:pt-8",
-            ].join(" ")}
-          >
-            <Link
-              href={cta.href}
-              className="cta-cut inline-flex h-10 items-center justify-center bg-black px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-neutral-800 sm:h-11 sm:px-6"
-            >
-              {cta.label}
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

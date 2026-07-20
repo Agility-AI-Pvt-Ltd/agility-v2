@@ -4,18 +4,17 @@ import { useEffect, useId, useState } from "react";
 
 type Mode = "manual" | "agility";
 
-const RAW_ROWS = [
-  { id: "R-1042", signal: "47.2", note: "unlabelled", flag: "—" },
-  { id: "R-1043", signal: "12.8", note: "dup?", flag: "warn" },
-  { id: "R-1044", signal: "91.0", note: "null field", flag: "—" },
-  { id: "R-1045", signal: "3.4", note: "mixed unit", flag: "err" },
-  { id: "R-1046", signal: "66.1", note: "unlabelled", flag: "—" },
+const SOURCES = [
+  { id: "email", label: "Email", detail: "47 unread threads" },
+  { id: "sheet", label: "Spreadsheet", detail: "3 tabs, outdated" },
+  { id: "crm", label: "CRM", detail: "Notes in 4 places" },
+  { id: "chat", label: "Team chat", detail: "Scattered updates" },
 ] as const;
 
-const INSIGHTS = [
-  { label: "Primary driver", value: "Volume concentration in segment B" },
-  { label: "Anomaly rate", value: "6.2% of rows need review" },
-  { label: "Recommended action", value: "Reallocate capacity to top 3 queues" },
+const FOLLOW_UPS = [
+  { name: "Northfield Ops", note: "Contract renewal due Friday" },
+  { name: "Harbor Finance", note: "Asked twice, no reply yet" },
+  { name: "Summit Legal", note: "Waiting on signed scope" },
 ] as const;
 
 function TimeBadge({
@@ -51,75 +50,86 @@ function TimeBadge({
   );
 }
 
+function SourceIcon({ kind }: { kind: (typeof SOURCES)[number]["id"] }) {
+  const paths: Record<(typeof SOURCES)[number]["id"], string> = {
+    email: "M4 6h12v8H4V6zm0 0l6 4 6-4",
+    sheet: "M6 4h8l4 4v10H6V4zm8 0v4h4",
+    crm: "M8 8a3 3 0 116 0 3 3 0 01-6 0zm-5 10a5 5 0 0110 0",
+    chat: "M5 6h10v6H9l-2 2v-2H5V6z",
+  };
+
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      className="size-5 shrink-0"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      aria-hidden="true"
+    >
+      <path d={paths[kind]} strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function ManualPanel() {
   return (
-    <div className="grid h-full min-h-0 gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="flex min-h-0 flex-col border border-neutral-200 bg-[#f7f7f7]">
-        <div className="flex shrink-0 items-center justify-between border-b border-neutral-200 px-3 py-2">
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-            Source data
-          </p>
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-amber-700">
-            Unresolved
-          </p>
-        </div>
-        <div className="min-h-0 flex-1 overflow-hidden">
-          <table className="w-full text-left font-[family-name:var(--font-geist-mono)] text-[11px]">
-            <thead className="border-b border-neutral-200 text-[9px] uppercase tracking-[0.12em] text-neutral-400">
-              <tr>
-                <th className="px-3 py-1.5 font-medium">Record</th>
-                <th className="px-3 py-1.5 font-medium">Signal</th>
-                <th className="hidden px-3 py-1.5 font-medium sm:table-cell">
-                  Note
-                </th>
-                <th className="px-3 py-1.5 font-medium">Flag</th>
-              </tr>
-            </thead>
-            <tbody className="text-neutral-600">
-              {RAW_ROWS.map((row) => (
-                <tr key={row.id} className="border-b border-neutral-200/80">
-                  <td className="px-3 py-1.5">{row.id}</td>
-                  <td className="px-3 py-1.5 tabular-nums">{row.signal}</td>
-                  <td className="hidden px-3 py-1.5 text-neutral-400 sm:table-cell">
-                    {row.note}
-                  </td>
-                  <td className="px-3 py-1.5">
-                    <span
-                      className={
-                        row.flag === "err"
-                          ? "text-red-600"
-                          : row.flag === "warn"
-                            ? "text-amber-600"
-                            : "text-neutral-300"
-                      }
-                    >
-                      {row.flag}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <div className="flex h-full min-h-0 flex-col gap-4">
+      <div className="shrink-0 rounded-sm border border-amber-200 bg-amber-50 px-3 py-2.5 sm:px-4">
+        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-amber-800">
+          The question
+        </p>
+        <p className="mt-1 text-[14px] font-medium tracking-[-0.01em] text-neutral-900 sm:text-[15px]">
+          Who needs a follow-up this week?
+        </p>
       </div>
 
-      <div className="flex min-h-0 flex-col border border-dashed border-neutral-300 bg-white">
-        <div className="shrink-0 border-b border-dashed border-neutral-300 px-3 py-2">
+      <div className="grid min-h-0 flex-1 gap-3 sm:grid-cols-2">
+        <div className="flex min-h-0 flex-col border border-neutral-200 bg-white p-3 sm:p-4">
           <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-            Insight
+            Checking by hand
+          </p>
+          <ul className="mt-3 space-y-2">
+            {SOURCES.map((source, index) => (
+              <li
+                key={source.id}
+                className="proof-manual-source flex items-center gap-3 border border-neutral-200 bg-[#fafafa] px-3 py-2.5"
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                <span className="text-neutral-400">
+                  <SourceIcon kind={source.id} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] font-medium text-neutral-800">
+                    {source.label}
+                  </p>
+                  <p className="text-[11px] text-neutral-400">{source.detail}</p>
+                </div>
+                <span className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-amber-600">
+                  Open
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-auto pt-3 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-neutral-400">
+            One tab at a time · copy · paste · repeat
           </p>
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center gap-2 px-4 py-4 text-center">
-          <div className="size-8 border border-neutral-300" aria-hidden="true">
-            <div className="flex h-full items-center justify-center text-neutral-300">
+
+        <div className="flex min-h-0 flex-col items-center justify-center border border-dashed border-neutral-300 bg-[#f7f7f7] p-4 text-center">
+          <div
+            className="proof-manual-spin flex size-14 items-center justify-center rounded-full border-2 border-dashed border-neutral-300 bg-white"
+            aria-hidden="true"
+          >
+            <span className="font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-neutral-400">
               ?
-            </div>
+            </span>
           </div>
-          <p className="max-w-[22ch] font-[family-name:var(--font-geist-mono)] text-[12px] leading-relaxed text-neutral-400">
-            Still sorting fields by hand. Patterns stay buried in the dump.
+          <p className="mt-4 max-w-[24ch] text-[14px] leading-relaxed text-neutral-600">
+            Still hunting through inboxes and spreadsheets. No clear list yet.
           </p>
-          <p className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.14em] text-neutral-300">
-            Progress · stalled
+          <p className="mt-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-400">
+            Answer · not ready
           </p>
         </div>
       </div>
@@ -128,135 +138,161 @@ function ManualPanel() {
 }
 
 function AgilityPanel({ animate }: { animate: boolean }) {
-  const [stage, setStage] = useState(0);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     if (!animate) {
-      setStage(3);
+      setStep(3);
       return;
     }
 
-    setStage(0);
+    setStep(0);
     const timers = [
-      window.setTimeout(() => setStage(1), 350),
-      window.setTimeout(() => setStage(2), 1100),
-      window.setTimeout(() => setStage(3), 1900),
+      window.setTimeout(() => setStep(1), 400),
+      window.setTimeout(() => setStep(2), 1200),
+      window.setTimeout(() => setStep(3), 2000),
     ];
-
     return () => timers.forEach((id) => window.clearTimeout(id));
   }, [animate]);
 
-  const stages = [
-    { label: "Ingest", done: stage >= 1 },
-    { label: "Structure", done: stage >= 2 },
-    { label: "Insight", done: stage >= 3 },
-  ];
-
   return (
-    <div className="grid h-full min-h-0 gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="flex min-h-0 flex-col border border-neutral-200 bg-neutral-950 text-white">
-        <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-3 py-2">
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-white/50">
-            Pipeline
-          </p>
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-300">
-            Moving
-          </p>
-        </div>
-
-        <div className="flex min-h-0 flex-1 flex-col gap-2.5 px-3 py-2.5">
-          <div className="flex shrink-0 flex-wrap gap-1.5">
-            {stages.map((item, index) => (
-              <div
-                key={item.label}
-                className={[
-                  "flex items-center gap-1.5 border px-2 py-1 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] transition-all duration-500",
-                  item.done
-                    ? "border-white/40 bg-white/10 text-white"
-                    : "border-white/10 text-white/30",
-                ].join(" ")}
-              >
-                <span
-                  className={[
-                    "size-1.5 rounded-full transition-colors duration-500",
-                    item.done ? "bg-emerald-300" : "bg-white/20",
-                  ].join(" ")}
-                />
-                {index + 1}. {item.label}
-              </div>
-            ))}
-          </div>
-
-          <div className="relative min-h-0 flex-1 overflow-hidden border border-white/10 bg-black/40">
-            <div
-              className={[
-                "proof-stream divide-y divide-white/5 font-[family-name:var(--font-geist-mono)] text-[10px]",
-                animate ? "proof-stream-active" : "",
-              ].join(" ")}
-            >
-              {[...RAW_ROWS, ...RAW_ROWS, ...RAW_ROWS].map((row, index) => (
-                <div
-                  key={`${row.id}-${index}`}
-                  className="flex items-center justify-between gap-3 px-2.5 py-1.5 text-white/55"
-                >
-                  <span>{row.id}</span>
-                  <span className="tabular-nums text-white/35">
-                    {row.signal}
-                  </span>
-                  <span
-                    className={[
-                      "transition-colors duration-500",
-                      stage >= 2 ? "text-emerald-300/80" : "text-white/25",
-                    ].join(" ")}
-                  >
-                    {stage >= 2 ? "mapped" : row.note}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-neutral-950 to-transparent" />
-          </div>
-        </div>
+    <div className="flex h-full min-h-0 flex-col gap-4">
+      <div className="shrink-0 rounded-sm border border-emerald-200 bg-emerald-50 px-3 py-2.5 sm:px-4">
+        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-800">
+          The question
+        </p>
+        <p className="mt-1 text-[14px] font-medium tracking-[-0.01em] text-neutral-900 sm:text-[15px]">
+          Who needs a follow-up this week?
+        </p>
       </div>
 
-      <div className="flex min-h-0 flex-col border border-neutral-200 bg-white">
-        <div className="flex shrink-0 items-center justify-between border-b border-neutral-200 px-3 py-2">
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-            Readable result
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[1fr_1.1fr]">
+        <div className="relative flex min-h-0 flex-col border border-neutral-200 bg-neutral-950 p-3 text-white sm:p-4">
+          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-white/45">
+            All your sources, at once
           </p>
-          <p
-            className={[
-              "font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] transition-colors duration-500",
-              stage >= 3 ? "text-emerald-700" : "text-neutral-300",
-            ].join(" ")}
-          >
-            {stage >= 3 ? "Ready" : "Building"}
-          </p>
+
+          <div className="relative mt-4 flex min-h-0 flex-1 flex-col justify-between gap-3">
+            <ul className="grid grid-cols-2 gap-2">
+              {SOURCES.map((source, index) => (
+                <li
+                  key={source.id}
+                  className={[
+                    "flex items-center gap-2 border px-2.5 py-2 transition-all duration-500",
+                    step >= 1
+                      ? "border-emerald-400/40 bg-emerald-400/10 text-white"
+                      : "border-white/10 text-white/40",
+                  ].join(" ")}
+                  style={{ transitionDelay: `${index * 80}ms` }}
+                >
+                  <SourceIcon kind={source.id} />
+                  <span className="text-[11px] font-medium">{source.label}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="relative flex flex-1 items-center justify-center py-2">
+              <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 200 120"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                {[30, 70, 130, 170].map((x, index) => (
+                  <line
+                    key={x}
+                    x1={x}
+                    y1="20"
+                    x2="100"
+                    y2="95"
+                    stroke="rgba(52,211,153,0.45)"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    className={[
+                      "proof-agility-line transition-opacity duration-500",
+                      step >= 1 ? "opacity-100" : "opacity-0",
+                    ].join(" ")}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  />
+                ))}
+              </svg>
+
+              <div
+                className={[
+                  "relative z-10 flex size-14 items-center justify-center rounded-full border transition-all duration-500",
+                  step >= 2
+                    ? "border-emerald-300 bg-emerald-400/20 scale-100 opacity-100"
+                    : "border-white/20 bg-white/5 scale-90 opacity-50",
+                ].join(" ")}
+              >
+                <span className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.1em] text-emerald-200">
+                  AI
+                </span>
+              </div>
+            </div>
+
+            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-white/35">
+              {step < 2
+                ? "Connecting sources…"
+                : step < 3
+                  ? "Finding patterns…"
+                  : "Done"}
+            </p>
+          </div>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col justify-center gap-2 overflow-hidden px-3 py-2.5">
-          {INSIGHTS.map((insight, index) => {
-            const visible = stage >= 3;
-            return (
-              <div
-                key={insight.label}
+        <div className="flex min-h-0 flex-col border border-neutral-200 bg-white p-3 sm:p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+              Your answer
+            </p>
+            <p
+              className={[
+                "font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] transition-colors duration-500",
+                step >= 3 ? "text-emerald-700" : "text-neutral-300",
+              ].join(" ")}
+            >
+              {step >= 3 ? "Ready" : "Building"}
+            </p>
+          </div>
+
+          <div
+            className={[
+              "mt-3 rounded-sm border border-emerald-200 bg-emerald-50 px-3 py-3 transition-all duration-500",
+              step >= 3 ? "translate-y-0 opacity-100" : "translate-y-2 opacity-30",
+            ].join(" ")}
+          >
+            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-800">
+              This week
+            </p>
+            <p className="mt-1 font-[family-name:var(--font-serif)] text-[1.35rem] leading-tight tracking-[-0.02em] text-neutral-950">
+              12 customers need a follow-up
+            </p>
+            <p className="mt-1 text-[13px] text-neutral-600">
+              Start with these three — pulled from email, CRM, and your team&apos;s
+              notes.
+            </p>
+          </div>
+
+          <ul className="mt-3 min-h-0 flex-1 space-y-2 overflow-hidden">
+            {FOLLOW_UPS.map((item, index) => (
+              <li
+                key={item.name}
                 className={[
-                  "border border-neutral-200 bg-[#fafafa] px-2.5 py-2 transition-all duration-500",
-                  visible
+                  "border border-neutral-200 bg-[#fafafa] px-3 py-2.5 transition-all duration-500",
+                  step >= 3
                     ? "translate-y-0 opacity-100"
-                    : "translate-y-1 opacity-30",
+                    : "translate-y-2 opacity-25",
                 ].join(" ")}
-                style={{ transitionDelay: visible ? `${index * 90}ms` : "0ms" }}
+                style={{ transitionDelay: step >= 3 ? `${index * 100}ms` : "0ms" }}
               >
-                <p className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.14em] text-neutral-400">
-                  {insight.label}
+                <p className="text-[13px] font-medium text-neutral-900">
+                  {item.name}
                 </p>
-                <p className="mt-1 text-[13px] leading-snug tracking-[-0.02em] text-neutral-900">
-                  {insight.value}
-                </p>
-              </div>
-            );
-          })}
+                <p className="mt-0.5 text-[12px] text-neutral-500">{item.note}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
@@ -282,14 +318,10 @@ export default function InteractiveProof() {
 
     const id = window.setInterval(() => {
       setMode((current) => (current === "manual" ? "agility" : "manual"));
-    }, 4500);
+    }, 5000);
 
     return () => window.clearInterval(id);
   }, [reduceMotion, paused]);
-
-  function selectMode(next: Mode) {
-    setMode(next);
-  }
 
   return (
     <section
@@ -306,19 +338,16 @@ export default function InteractiveProof() {
       }}
     >
       <div className="mx-auto flex h-full w-full max-w-[1100px] min-h-0 flex-col px-5 py-5 sm:px-6 sm:py-6 md:py-7">
-        <div className="mx-auto w-full max-w-[40rem] shrink-0 text-center">
-          {/* <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.16em] text-neutral-500">
-            Interactive proof
-          </p> */}
+        <div className="mx-auto w-full max-w-[42rem] shrink-0 text-center">
           <h2
             id={labelId}
-            className="mt-1.5 font-[family-name:var(--font-serif)] text-[clamp(1.25rem,2.8vw,1.85rem)] leading-[1.15] tracking-[-0.02em] text-neutral-950"
+            className="font-[family-name:var(--font-serif)] text-[clamp(1.25rem,2.8vw,1.85rem)] leading-[1.15] tracking-[-0.02em] text-neutral-950"
           >
-            Same task. Two ways through the data.
+            Same question. Two very different afternoons.
           </h2>
-          <p className="mx-auto mt-1.5 hidden max-w-[40ch] font-[family-name:var(--font-geist-mono)] text-[12px] leading-relaxed text-neutral-500 sm:block">
-            A raw data dump becomes a clear insight — either by hand, or with
-            Agility AI.
+          <p className="mx-auto mt-2 max-w-[44ch] text-[13px] leading-relaxed text-neutral-500 sm:text-[14px]">
+            A simple business question — answered by digging through tabs, or
+            answered in one clear list.
           </p>
         </div>
 
@@ -331,7 +360,7 @@ export default function InteractiveProof() {
             type="button"
             role="tab"
             aria-selected={mode === "manual"}
-            onClick={() => selectMode("manual")}
+            onClick={() => setMode("manual")}
             className={[
               "flex-1 px-3 py-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] transition-colors sm:text-[11px]",
               mode === "manual"
@@ -339,13 +368,13 @@ export default function InteractiveProof() {
                 : "text-neutral-500 hover:text-neutral-900",
             ].join(" ")}
           >
-            Manual
+            By hand
           </button>
           <button
             type="button"
             role="tab"
             aria-selected={mode === "agility"}
-            onClick={() => selectMode("agility")}
+            onClick={() => setMode("agility")}
             className={[
               "flex-1 px-3 py-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] transition-colors sm:text-[11px]",
               mode === "agility"
@@ -358,11 +387,7 @@ export default function InteractiveProof() {
         </div>
 
         <div className="mt-3 grid shrink-0 gap-2 sm:grid-cols-2 sm:gap-3">
-          <TimeBadge
-            label="Manual"
-            value="6 hours"
-            active={mode === "manual"}
-          />
+          <TimeBadge label="By hand" value="6 hours" active={mode === "manual"} />
           <TimeBadge
             label="With Agility AI"
             value="20 minutes"

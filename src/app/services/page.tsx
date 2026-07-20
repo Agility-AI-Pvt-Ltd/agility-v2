@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/about/Reveal";
+import BuiltProjectsStack from "@/components/services/BuiltProjectsStack";
+import OfferingsShowcase from "@/components/services/OfferingsShowcase";
 import ServiceTrackSection from "@/components/services/ServiceTrackSection";
 import ServicesHeroVisual from "@/components/services/ServicesHeroVisual";
 import SessionCounter from "@/components/services/SessionCounter";
@@ -115,88 +117,77 @@ export default function ServicesPage() {
       </section>
 
       <div className="relative">
-        <div className="relative h-[180svh]">
-          <ServiceTrackSection
-            id="enablement"
-            label="Offering 01"
-            title="AI Enablement"
-            sticky
-            zIndex={10}
-            visual="enablement"
-            summary="We teach your employees to use AI in the work they're already doing, not as a separate skill to pick up on the side, but folded into their actual day. Efficiency doesn't creep up slowly. It jumps."
-            extra={<SessionCounter />}
-            includes={[
-              "Live, hands on sessions built around your team's actual tools, not generic slideware or a canned demo.",
-              "Practice tied to real daily tasks, so the learning sticks past the last slide of the workshop.",
-              "A short follow up window after the session for questions, so people aren't left stuck the first time they try it alone.",
-            ]}
-            forWhom={[
-              "Teams where AI was technically rolled out but nobody's actually opened it twice.",
-              "Organisations about to launch an AI tool and wanting people ready before day one, not scrambling after.",
-              "Anyone tired of a training deck that got read once and forgotten.",
-            ]}
-            doneLooksLike={[
-              "Your team using AI inside their real workflow without being reminded to.",
-              "Fewer questions bouncing back to IT, or back to us.",
-              "A task that used to take an afternoon now taking twenty minutes, and everyone knowing why.",
-            ]}
-            cta={{
-              label: "Book a corporate training",
-              href: "/contact",
-            }}
-          />
-        </div>
+        <OfferingsShowcase />
 
-        <div className="relative h-[180svh]">
-          <ServiceTrackSection
-            id="integration"
-            label="Offering 02"
-            title="AI Integration"
-            inverted
-            sticky
-            zIndex={20}
-            visual="integration"
-            summary="We don't hand you a new dashboard to check every morning. We wire AI into the systems you already use, so it works quietly in the background instead of becoming one more tab. That includes hands on workshops for your team and integration builds shaped around the systems you're already running, not a generic plug in."
-            includes={[
-              "An audit of what you're already running, so nothing gets ripped out that was actually working.",
-              "An integration plan built around your existing stack, not a rebuild disguised as an upgrade.",
-              "The actual build, tested against how your team really works, plus a runbook your own people can read without calling us.",
-            ]}
-            forWhom={[
-              "Organisations with real, working systems that AI needs to plug into, not a blank slate.",
-              "Teams who've been burned before by a vendor that dropped in a black box and disappeared the day it shipped.",
-            ]}
-            doneLooksLike={[
-              "AI running inside the tools your team already opens every day, with no new login anyone resents.",
-              "A system your own people can maintain and adjust, not one that only makes sense to the person who built it.",
-            ]}
-          />
-        </div>
+        <ServiceTrackSection
+          id="enablement"
+          variant="enablement"
+          label="Offering 01"
+          title="AI Enablement"
+          summary="We teach your employees to use AI in the work they're already doing, not as a separate skill to pick up on the side, but folded into their actual day. Efficiency doesn't creep up slowly. It jumps."
+          extra={<SessionCounter />}
+          includes={[
+            "Live, hands on sessions built around your team's actual tools, not generic slideware or a canned demo.",
+            "Practice tied to real daily tasks, so the learning sticks past the last slide of the workshop.",
+            "A short follow up window after the session for questions, so people aren't left stuck the first time they try it alone.",
+          ]}
+          forWhom={[
+            "Teams where AI was technically rolled out but nobody's actually opened it twice.",
+            "Organisations about to launch an AI tool and wanting people ready before day one, not scrambling after.",
+            "Anyone tired of a training deck that got read once and forgotten.",
+          ]}
+          doneLooksLike={[
+            "Your team using AI inside their real workflow without being reminded to.",
+            "Fewer questions bouncing back to IT, or back to us.",
+            "A task that used to take an afternoon now taking twenty minutes, and everyone knowing why.",
+          ]}
+          cta={{
+            label: "Book a corporate training",
+            href: "/contact",
+          }}
+        />
 
-        <div className="relative h-[180svh]">
-          <ServiceTrackSection
-            id="products"
-            label="Offering 03"
-            title="AI Products"
-            sticky
-            zIndex={30}
-            visual="products"
-            summary="We also build ready made tools, the kind you can start using without waiting on a custom project. But even these get shaped and customized to how your organization actually works, not handed over exactly as they are, off the shelf."
-            includes={[
-              "Direct access to a working product, not a pilot or a proof of concept.",
-              "Onboarding support so your team is using it inside days, not months.",
-              "Configuration to fit how your organisation actually operates, rather than forcing your process to match the software.",
-            ]}
-            forWhom={[
-              "Teams that need something working now, not in a quarter, and don't need a fully bespoke build to get real value.",
-            ]}
-            doneLooksLike={[
-              "A tool your team is actually using inside a week, not sitting in a folder marked to try later.",
-            ]}
-          />
-        </div>
+        <ServiceTrackSection
+          id="integration"
+          variant="integration"
+          label="Offering 02"
+          title="AI Integration"
+          summary="We don't hand you a new dashboard to check every morning. We wire AI into the systems you already use, so it works quietly in the background instead of becoming one more tab. That includes hands on workshops for your team and integration builds shaped around the systems you're already running, not a generic plug in."
+          includes={[
+            "An audit of what you're already running, so nothing gets ripped out that was actually working.",
+            "An integration plan built around your existing stack, not a rebuild disguised as an upgrade.",
+            "The actual build, tested against how your team really works, plus a runbook your own people can read without calling us.",
+          ]}
+          forWhom={[
+            "Organisations with real, working systems that AI needs to plug into, not a blank slate.",
+            "Teams who've been burned before by a vendor that dropped in a black box and disappeared the day it shipped.",
+          ]}
+          doneLooksLike={[
+            "AI running inside the tools your team already opens every day, with no new login anyone resents.",
+            "A system your own people can maintain and adjust, not one that only makes sense to the person who built it.",
+          ]}
+        />
 
-        <div className="relative z-40">
+        <ServiceTrackSection
+          id="products"
+          variant="products"
+          label="Offering 03"
+          title="AI Products"
+          summary="We also build ready made tools, the kind you can start using without waiting on a custom project. But even these get shaped and customized to how your organization actually works, not handed over exactly as they are, off the shelf."
+          includes={[
+            "Direct access to a working product, not a pilot or a proof of concept.",
+            "Onboarding support so your team is using it inside days, not months.",
+            "Configuration to fit how your organisation actually operates, rather than forcing your process to match the software.",
+          ]}
+          forWhom={[
+            "Teams that need something working now, not in a quarter, and don't need a fully bespoke build to get real value.",
+          ]}
+          doneLooksLike={[
+            "A tool your team is actually using inside a week, not sitting in a folder marked to try later.",
+          ]}
+        />
+
+        <div className="relative">
           <section className="border-t border-neutral-200 bg-[#f7f7f7] text-black">
             <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
               <Reveal>
@@ -236,46 +227,7 @@ export default function ServicesPage() {
             </div>
           </section>
 
-          <section className="border-t border-neutral-200 bg-white text-black">
-            <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
-              <Reveal>
-                <div className="mb-8 flex items-center gap-3">
-                  <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-                  <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                    Built projects
-                  </p>
-                </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <h2 className="font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
-                  What we&apos;ve built
-                </h2>
-              </Reveal>
-              <Reveal delay={120}>
-                <p className="mt-3 text-[15px] text-neutral-600">
-                  A few things we&apos;ve actually built:
-                </p>
-              </Reveal>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {builtProjects.map((project, index) => (
-                  <Reveal key={project.name} delay={100 + index * 70}>
-                    <article className="services-project-card h-full border border-neutral-200 bg-[#fafafa] p-5">
-                      <div className="mb-3 flex size-8 items-center justify-center border border-neutral-200 bg-white font-[family-name:var(--font-geist-mono)] text-[11px] text-[#3b6ef5]">
-                        {String(index + 1).padStart(2, "0")}
-                      </div>
-                      <h3 className="font-[family-name:var(--font-serif)] text-[1.15rem] leading-tight tracking-[-0.02em] text-neutral-950">
-                        {project.name}
-                      </h3>
-                      <p className="mt-3 text-[14px] leading-relaxed text-neutral-600">
-                        {project.description}
-                      </p>
-                    </article>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </section>
+          <BuiltProjectsStack projects={builtProjects} />
 
           <Reveal>
             <TimeSavedCalculator />

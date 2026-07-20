@@ -128,6 +128,44 @@ html.lenis body {
   animation: hero-marker-float 5s ease-in-out infinite;
 }
 
+.proof-manual-source {
+  animation: proof-manual-pulse 2.4s ease-in-out infinite;
+}
+
+.proof-manual-spin {
+  animation: proof-manual-spin 3s linear infinite;
+}
+
+@keyframes proof-manual-pulse {
+  0%,
+  100% {
+    border-color: rgba(0, 0, 0, 0.08);
+    background: #fafafa;
+  }
+  50% {
+    border-color: rgba(245, 158, 11, 0.35);
+    background: #fffbeb;
+  }
+}
+
+@keyframes proof-manual-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.proof-agility-line {
+  animation: about-dash 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proof-manual-source,
+  .proof-manual-spin,
+  .proof-agility-line {
+    animation: none !important;
+  }
+}
+
 @keyframes proof-stream {
   from {
     transform: translateY(0);
@@ -1226,6 +1264,117 @@ html.lenis body {
   color: #fff;
 }
 
+.services-offerings-gradient {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(147, 197, 253, 0.35), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(196, 181, 253, 0.28), transparent 40%),
+    linear-gradient(135deg, #eef4ff 0%, #f3f0ff 52%, #f8f4ff 100%);
+}
+
+.services-offering-detail-a {
+  background:
+    radial-gradient(circle at 8% 20%, rgba(251, 191, 36, 0.12), transparent 38%),
+    radial-gradient(circle at 92% 10%, rgba(147, 197, 253, 0.22), transparent 42%),
+    linear-gradient(160deg, #eef4ff 0%, #f5f8ff 55%, #faf5ff 100%);
+}
+
+.services-offering-detail-b {
+  background:
+    radial-gradient(circle at 90% 18%, rgba(167, 139, 250, 0.2), transparent 40%),
+    radial-gradient(circle at 10% 80%, rgba(59, 110, 245, 0.1), transparent 42%),
+    linear-gradient(160deg, #f3f0ff 0%, #eef2ff 50%, #f8f4ff 100%);
+}
+
+.services-offering-detail-c {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(34, 197, 94, 0.1), transparent 38%),
+    radial-gradient(circle at 85% 75%, rgba(196, 181, 253, 0.22), transparent 42%),
+    linear-gradient(160deg, #f0fdf4 0%, #f3f0ff 48%, #eef4ff 100%);
+}
+
+.services-offering-detail-hero {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.services-offering-detail-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.services-offering-detail-card:hover,
+.services-offering-detail-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.11);
+  border-color: rgba(59, 110, 245, 0.16);
+}
+
+.services-offerings-glow {
+  background:
+    radial-gradient(circle at 70% 80%, rgba(59, 110, 245, 0.08), transparent 45%),
+    radial-gradient(circle at 20% 90%, rgba(167, 139, 250, 0.1), transparent 40%);
+}
+
+.services-offering-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  border-color: rgba(59, 110, 245, 0.18);
+}
+
+.services-offerings-robot {
+  animation: services-robot-bob 4s ease-in-out infinite;
+}
+
+.services-offerings-bubble {
+  animation: services-bubble-in 0.6s ease both;
+}
+
+.services-offerings-eye {
+  animation: services-eye-glow 2.4s ease-in-out infinite;
+}
+
+.services-offerings-robot-body {
+  transition: transform 0.25s ease;
+}
+
+.services-offerings-robot-body:hover {
+  transform: scale(1.03);
+}
+
+@keyframes services-robot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes services-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes services-eye-glow {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .services-offer-viz {
   border: 1px solid rgba(0, 0, 0, 0.08);
   background:
@@ -1265,6 +1414,34 @@ html.lenis body {
     box-shadow 0.35s ease,
     border-color 0.35s ease,
     background 0.35s ease;
+}
+
+.built-project-panel {
+  will-change: transform;
+}
+
+.built-project-card-inner {
+  will-change: transform, opacity, box-shadow;
+  backface-visibility: hidden;
+  transition: box-shadow 0.4s ease;
+}
+
+.built-project-track:last-child {
+  margin-bottom: 0;
+}
+
+.built-project-cursor {
+  animation: built-project-float 3.5s ease-in-out infinite;
+}
+
+@keyframes built-project-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .services-project-card:hover {
@@ -1596,7 +1773,10 @@ html.lenis body {
   .services-offer-path,
   .services-offer-node,
   .services-offer-pack,
+  .services-offerings-robot,
+  .services-offerings-eye,
   .services-industry-chip,
+  .built-project-cursor,
   .services-cta-orb {
     animation: none !important;
     opacity: 1;
