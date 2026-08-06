@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/about/Reveal";
-import BuiltProjectsStack from "@/components/services/BuiltProjectsStack";
+import BuiltProjectsGrid from "@/components/services/BuiltProjectsGrid";
 import OfferingsShowcase from "@/components/services/OfferingsShowcase";
 import ServiceTrackSection from "@/components/services/ServiceTrackSection";
 import ServicesHeroVisual from "@/components/services/ServicesHeroVisual";
@@ -227,7 +227,7 @@ export default function ServicesPage() {
             </div>
           </section>
 
-          <BuiltProjectsStack projects={builtProjects} />
+          <BuiltProjectsGrid projects={builtProjects} />
 
           <Reveal>
             <TimeSavedCalculator />
