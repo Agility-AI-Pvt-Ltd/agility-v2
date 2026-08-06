@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Capabilities from "@/components/Capabilities";
-import Chatbot from "@/components/Chatbot";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import IndustriesTeaser from "@/components/IndustriesTeaser";
@@ -49,7 +48,6 @@ export default function Home() {
         </div>
       </main>
       <Footer />
-      <Chatbot />
     </div>
   );
 }

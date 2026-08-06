@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { openBookCall } from "@/lib/book-call/open-book-call";
 
 export const OPEN_CHAT_EVENT = "agility:open-chat";
@@ -15,16 +15,21 @@ type Message = {
   text: string;
 };
 
+const WELCOME: Message = {
+  id: "welcome",
+  from: "bot",
+  text: "Hi — ask me anything about Agility AI: services, team, careers, industries, products, the maturity check, or how to get in touch.",
+};
+
 export default function Chatbot() {
   const titleId = useId();
+  const inputId = useId();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      from: "bot",
-      text: "Hi — how can we help? The fastest path is usually a short call.",
-    },
-  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([WELCOME]);
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
@@ -40,48 +45,120 @@ export default function Chatbot() {
     }
 
     window.addEventListener("keydown", onKey);
+    inputRef.current?.focus();
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  function chooseBookCall() {
-    setMessages((prev) => [
-      ...prev,
-      { id: `u-${Date.now()}`, from: "user", text: "Book a call" },
-      {
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
+
+  function toApiMessages(nextMessages: Message[]) {
+    return nextMessages.map((message) => ({
+      role: message.from === "user" ? ("user" as const) : ("assistant" as const),
+      content: message.text,
+    }));
+  }
+
+  function handleAction(action?: "book_call" | "contact") {
+    if (action === "book_call") {
+      setOpen(false);
+      openBookCall();
+      return;
+    }
+
+    if (action === "contact") {
+      setOpen(false);
+      const contact = document.getElementById("contact");
+      if (contact) {
+        contact.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      window.location.href = "/contact#contact";
+    }
+  }
+
+  async function sendText(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed || loading) return;
+
+    const userMessage: Message = {
+      id: `u-${Date.now()}`,
+      from: "user",
+      text: trimmed,
+    };
+
+    const nextMessages = [...messages, userMessage];
+    setMessages(nextMessages);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: toApiMessages(nextMessages) }),
+      });
+
+      const body = (await res.json()) as {
+        reply?: string;
+        action?: "book_call" | "contact";
+        error?: string;
+      };
+
+      if (!res.ok) {
+        throw new Error(body.error ?? "Request failed");
+      }
+
+      const botMessage: Message = {
         id: `b-${Date.now()}`,
         from: "bot",
-        text: "Fill in a few details — we’ll confirm a time by email.",
-      },
-    ]);
-    setOpen(false);
-    openBookCall();
+        text: body.reply ?? "Sorry — I couldn't reply just then. Try again in a moment.",
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+      handleAction(body.action);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `b-${Date.now()}`,
+          from: "bot",
+          text: "Something went wrong on my end. Try again, or use Book a call below.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+      inputRef.current?.focus();
+    }
+  }
+
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void sendText(input);
+  }
+
+  function chooseBookCall() {
+    void sendText("I'd like to book a call");
   }
 
   function chooseMessage() {
-    setMessages((prev) => [
-      ...prev,
-      { id: `u-${Date.now()}`, from: "user", text: "Send a message" },
-      {
-        id: `b-${Date.now()}`,
-        from: "bot",
-        text: "Jump to the contact form below and share a short brief — we’ll reply shortly.",
-      },
-    ]);
-    setOpen(false);
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    void sendText("I'd like to send a message");
   }
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="cta-cut fixed bottom-5 right-5 z-50 inline-flex h-11 items-center justify-center bg-white px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-black shadow-lg transition-all hover:bg-neutral-100 sm:bottom-6 sm:right-6"
-        aria-haspopup="dialog"
-        aria-expanded={open}
-      >
-        Talk to us
-      </button>
+      {!open && (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="cta-cut fixed bottom-5 right-5 z-50 inline-flex h-11 items-center justify-center bg-white px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-black shadow-lg transition-all hover:bg-neutral-100 sm:bottom-6 sm:right-6"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+        >
+          Talk to us
+        </button>
+      )}
 
       {open && (
         <div
@@ -130,7 +207,7 @@ export default function Chatbot() {
                 <div
                   key={message.id}
                   className={[
-                    "max-w-[90%] px-3 py-2 text-[13px] leading-relaxed",
+                    "max-w-[90%] whitespace-pre-line px-3 py-2 text-[13px] leading-relaxed",
                     message.from === "bot"
                       ? "self-start border border-neutral-200 bg-white text-neutral-800"
                       : "self-end bg-black text-white",
@@ -139,28 +216,63 @@ export default function Chatbot() {
                   {message.text}
                 </div>
               ))}
+
+              {loading && (
+                <div className="self-start border border-neutral-200 bg-white px-3 py-2 text-[13px] text-neutral-500">
+                  <span className="inline-flex gap-1">
+                    <span className="animate-pulse">•</span>
+                    <span className="animate-pulse [animation-delay:120ms]">•</span>
+                    <span className="animate-pulse [animation-delay:240ms]">•</span>
+                  </span>
+                </div>
+              )}
+
+              <div ref={messagesEndRef} />
             </div>
 
             <div className="border-t border-neutral-200 bg-white p-3">
-              <p className="mb-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-                Choose an option
-              </p>
-              <div className="flex flex-col gap-2">
+              <div className="mb-2 flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={chooseBookCall}
-                  className="cta-cut inline-flex h-10 items-center justify-center bg-black px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-colors hover:bg-neutral-800"
+                  disabled={loading}
+                  className="cta-cut inline-flex h-8 items-center justify-center bg-black px-3 font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
                 >
                   Book a call
                 </button>
                 <button
                   type="button"
                   onClick={chooseMessage}
-                  className="inline-flex h-10 items-center justify-center border border-neutral-300 px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-700 transition-colors hover:border-neutral-500 hover:text-neutral-950"
+                  disabled={loading}
+                  className="inline-flex h-8 items-center justify-center border border-neutral-300 px-3 font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.08em] text-neutral-700 transition-colors hover:border-neutral-500 hover:text-neutral-950 disabled:opacity-50"
                 >
-                  Send a message
+                  Contact us
                 </button>
               </div>
+
+              <form onSubmit={onSubmit} className="flex gap-2">
+                <label htmlFor={inputId} className="sr-only">
+                  Message
+                </label>
+                <input
+                  ref={inputRef}
+                  id={inputId}
+                  type="text"
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  placeholder="Ask anything…"
+                  disabled={loading}
+                  autoComplete="off"
+                  className="min-w-0 flex-1 border border-neutral-300 bg-white px-3 py-2 text-[13px] text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-500 disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={loading || !input.trim()}
+                  className="cta-cut inline-flex shrink-0 items-center justify-center bg-black px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
+                >
+                  Send
+                </button>
+              </form>
             </div>
           </div>
         </div>

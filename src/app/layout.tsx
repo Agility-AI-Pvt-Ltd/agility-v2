@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BookCallModal from "@/components/BookCallModal";
+import Chatbot from "@/components/Chatbot";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const geistSans = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({
         <SmoothScroll />
         {children}
         <BookCallModal />
+        <Chatbot />
       </body>
     </html>
   );
