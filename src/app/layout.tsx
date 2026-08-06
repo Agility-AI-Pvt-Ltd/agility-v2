@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import BookCallModal from "@/components/BookCallModal";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-[family-name:var(--font-geist-mono)]">
         <SmoothScroll />
         {children}
+        <BookCallModal />
       </body>
     </html>
   );

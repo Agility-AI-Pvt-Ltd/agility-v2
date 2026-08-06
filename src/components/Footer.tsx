@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BookCallButton } from "@/components/BookCallModal";
 
 const footerLinks = [
   { label: "About", href: "/about" },
@@ -36,12 +37,9 @@ export default function Footer() {
             >
               Open Form
             </a>
-            <a
-              href="/contact#book-call"
-              className="cta-cut inline-flex h-11 items-center justify-center border border-white/70 px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-black"
-            >
+            <BookCallButton className="cta-cut inline-flex h-11 items-center justify-center border border-white/70 px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-black">
               Book a Call
-            </a>
+            </BookCallButton>
           </div>
         </div>
       </div>

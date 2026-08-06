@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BookCallButton } from "@/components/BookCallModal";
+import { openBookCall } from "@/lib/book-call/open-book-call";
 import logo from "../../public/new_logo.png";
 
 const navLinks = [
@@ -137,24 +139,20 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="#get-started"
-            className="cta-cut inline-flex h-9 items-center justify-center bg-white px-3.5 text-[12px] font-medium uppercase tracking-[0.04em] text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98]"
-          >
+          <BookCallButton className="cta-cut inline-flex h-9 items-center justify-center bg-white px-3.5 text-[12px] font-medium uppercase tracking-[0.04em] text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98]">
             Get Started
-          </a>
+          </BookCallButton>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <a
-            href="#get-started"
+          <BookCallButton
             className={[
               "cta-cut inline-flex h-8 items-center justify-center bg-white px-3 text-[11px] font-medium uppercase tracking-[0.04em] text-black transition-all duration-300 hover:bg-white/90",
               open ? "pointer-events-none scale-95 opacity-0" : "opacity-100",
             ].join(" ")}
           >
             Get Started
-          </a>
+          </BookCallButton>
           <HamburgerButton open={open} onToggle={() => setOpen((v) => !v)} />
         </div>
       </nav>
@@ -218,13 +216,16 @@ export default function Navbar() {
               open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
             ].join(" ")}
           >
-            <a
-              href="#get-started"
-              onClick={() => setOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openBookCall();
+              }}
               className="cta-cut inline-flex h-11 w-full items-center justify-center bg-white text-[13px] font-medium uppercase tracking-[0.05em] text-black transition-all duration-300 hover:bg-white/90"
             >
               Get Started
-            </a>
+            </button>
           </div>
         </div>
       </div>

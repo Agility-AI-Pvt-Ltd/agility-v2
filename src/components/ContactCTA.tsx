@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { BookCallButton } from "@/components/BookCallModal";
 
 type ContactCTAProps = {
   id?: string;
@@ -45,8 +46,7 @@ export default function ContactCTA({
               adoption and implementation without the theatre.
             </p>
 
-            <a
-              href="#book-call"
+            <BookCallButton
               className={[
                 "cta-cut mt-8 inline-flex h-11 items-center justify-center px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] transition-all duration-300",
                 isDark
@@ -55,7 +55,7 @@ export default function ContactCTA({
               ].join(" ")}
             >
               Book a Call
-            </a>
+            </BookCallButton>
           </div>
 
           <form
@@ -175,13 +175,7 @@ export default function ContactCTA({
             Prefer a conversation first? Book a call and we&apos;ll walk through
             adoption vs implementation for your context.
           </p>
-          <a
-            href={
-              id === "contact" ? "https://cal.com" : "/contact#book-call"
-            }
-            {...(id === "contact"
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
+          <BookCallButton
             className={[
               "cta-cut inline-flex h-11 shrink-0 items-center justify-center border px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] transition-all duration-300",
               isDark
@@ -190,7 +184,7 @@ export default function ContactCTA({
             ].join(" ")}
           >
             Book a Call
-          </a>
+          </BookCallButton>
         </div>
       </div>
     </section>

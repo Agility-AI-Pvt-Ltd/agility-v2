@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { openBookCall } from "@/lib/book-call/open-book-call";
 
 export const OPEN_CHAT_EVENT = "agility:open-chat";
 
@@ -13,8 +14,6 @@ type Message = {
   from: "bot" | "user";
   text: string;
 };
-
-const BOOK_CALL_URL = "https://cal.com";
 
 export default function Chatbot() {
   const titleId = useId();
@@ -51,10 +50,11 @@ export default function Chatbot() {
       {
         id: `b-${Date.now()}`,
         from: "bot",
-        text: "Opening booking — pick a time that works and we’ll take it from there.",
+        text: "Fill in a few details — we’ll confirm a time by email.",
       },
     ]);
-    window.open(BOOK_CALL_URL, "_blank", "noopener,noreferrer");
+    setOpen(false);
+    openBookCall();
   }
 
   function chooseMessage() {
