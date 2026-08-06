@@ -17,10 +17,10 @@ export function buildSiteKnowledgeBase() {
     (item) => `Q: ${item.question}\nA: ${item.answer}`,
   ).join("\n\n");
 
-  const pagesBlock = SITE_PAGES.map(
-    (page) =>
-      `- ${page.label}: ${page.path}${page.anchors ? ` (${page.anchors.join(", ")})` : ""}`,
-  ).join("\n");
+  const pagesBlock = SITE_PAGES.map((page) => {
+    const anchors = "anchors" in page ? ` (${page.anchors.join(", ")})` : "";
+    return `- ${page.label}: ${page.path}${anchors}`;
+  }).join("\n");
 
   return `
 ## COMPANY OVERVIEW
