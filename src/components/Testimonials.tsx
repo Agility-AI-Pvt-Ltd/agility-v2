@@ -32,7 +32,7 @@ export default function Testimonials() {
   return (
     <>
       {/* Trust strip */}
-      <section
+      {/* <section
         id="testimonial"
         aria-label="Trust strip"
         className="border-y border-neutral-200 bg-[#f6f6f6] text-black"
@@ -58,10 +58,10 @@ export default function Testimonials() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Voices preview */}
-      <section
+      {/* <section
         aria-labelledby="voices-heading"
         className="border-b border-neutral-200 bg-white text-black"
       >
@@ -108,7 +108,7 @@ export default function Testimonials() {
             ))}
           </ul>
         </div>
-      </section>
+      </section> */}
 
       {/* Dig deeper */}
       <section

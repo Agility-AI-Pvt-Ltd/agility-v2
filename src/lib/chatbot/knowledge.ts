@@ -125,8 +125,8 @@ export function buildSiteKnowledgeBase() {
   - Fluent → AI Products (/contact)
 
 ## TESTIMONIALS (/testimonials)
-- Real video testimonials from AI enablement sessions.
-- Common themes: teams going from AI curious to AI fluent; enablement built around real daily tools not generic decks; hands-on sessions that stick; afternoon tasks now take twenty minutes; AI living inside workflow not as side experiment.
+- Real portrait video testimonials recorded after AI enablement sessions. Clips play from a public Google Drive folder; the site stores file IDs only.
+- Do not invent participant names, organisations, or quotes. The page shows the recordings themselves.
 
 ## CONTACT & BOOKING
 - Email: hello@agilityai.in

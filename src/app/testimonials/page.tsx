@@ -22,54 +22,18 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Swap in unlisted YouTube IDs as footage is pulled from Instagram / Drive.
- * Captions stay visible to search engines even before play.
- */
 const videos: TestimonialVideo[] = [
-  {
-    id: "1",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "How a 40 person team went from AI curious to AI fluent in two sessions.",
-  },
-  {
-    id: "2",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "What changed when enablement was built around real daily tools, not a generic deck.",
-  },
-  {
-    id: "3",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "From one curious teammate to a shared approach the rest of the floor could actually use.",
-  },
-  {
-    id: "4",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "Why a hands-on session stuck longer than the last training deck that got read once and forgotten.",
-  },
-  {
-    id: "5",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "How a task that used to take an afternoon started taking twenty minutes — and everyone knew why.",
-  },
-  {
-    id: "6",
-    name: "Participant Name",
-    organization: "Organisation",
-    caption:
-      "What it felt like when AI stopped being a side experiment and started living inside the workflow.",
-  },
-];
+  { id: "IMG_4141", driveFileId: "19GoScUvUAnhHMcA9lgdqEuY6o4YZ2RUb" },
+  { id: "IMG_4183", driveFileId: "1pKxp8CY92kcQ3c6G8Dm5RymCgdNZPWMs" },
+  { id: "IMG_4184", driveFileId: "1njYghf6sXc1fxAIU7iaX7Nt3cnkhCQFM" },
+  { id: "IMG_4225", driveFileId: "1WbttR9JS5uFaEQWlK225lvzX6KuiGnCG" },
+  { id: "IMG_4263", driveFileId: "1uRKLNuSqP6wqmMuyZFMDi0dEBrBxtO8O" },
+  { id: "IMG_4354", driveFileId: "1cxBz8XE3XA_DESrb_5OUjndRw7VJlZD7" },
+].map((video) => ({
+  ...video,
+  aspect: "portrait" as const,
+  thumbnailUrl: `/testimonials/thumbs/${video.id}.jpg`,
+}));
 
 export default function TestimonialsPage() {
   return (
@@ -90,13 +54,6 @@ export default function TestimonialsPage() {
           </div>
 
           <TestimonialVideoGrid videos={videos} />
-
-          <p className="mt-8 max-w-[62ch] text-[13px] leading-relaxed text-neutral-500">
-            Videos will play from unlisted YouTube links once footage is pulled
-            together from Instagram and Google Drive. Each card already carries
-            a written caption so search and answer engines can read the story
-            before anyone presses play.
-          </p>
         </div>
       </section>
     </SiteChrome>
