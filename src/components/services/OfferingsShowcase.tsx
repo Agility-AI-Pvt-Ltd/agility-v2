@@ -53,8 +53,8 @@ export default function OfferingsShowcase() {
         </Reveal>
         <Reveal delay={140}>
           <p className="mt-4 max-w-[42ch] text-[15px] leading-relaxed text-[#475569] sm:text-[16px]">
-            Three ways in — pick where you&apos;re stuck, then dig into the details
-            below.
+            Three ways in — pick where you&apos;re stuck, then dig into the
+            details below.
           </p>
         </Reveal>
 

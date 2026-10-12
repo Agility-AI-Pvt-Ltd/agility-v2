@@ -124,6 +124,7 @@ function detectAction(query: string): ChatAction | undefined {
       "send a message",
       "reach out",
       "get in touch",
+      "agilityaibusiness@gmail",
       "hello@agilityai",
       "contact form",
     ])

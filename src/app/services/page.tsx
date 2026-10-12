@@ -55,12 +55,24 @@ const builtProjects = [
   },
 ] as const;
 
-const industries = [
-  "Dairy",
-  "FMCG",
-  "Education",
-  "Legal",
-  "Auditing",
+const trackRecord = [
+  {
+    value: "5,200+",
+    label:
+      "professionals trained across government, PSUs, corporates and non-profits",
+  },
+  {
+    value: "600+",
+    label: "staff trained across NDDB and its associated bodies",
+  },
+  {
+    value: "92%+",
+    label: "rated the sessions excellent",
+  },
+  {
+    value: "4-6 hrs",
+    label: "saved per week on routine documentation",
+  },
 ] as const;
 
 export default function ServicesPage() {
@@ -68,7 +80,10 @@ export default function ServicesPage() {
     <SiteChrome>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/10 bg-black text-white">
-        <div className="absolute inset-0 services-hero-ambient" aria-hidden="true" />
+        <div
+          className="absolute inset-0 services-hero-ambient"
+          aria-hidden="true"
+        />
         <div className="relative z-10 mx-auto grid max-w-[1100px] gap-12 px-6 py-16 sm:px-10 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-10 lg:py-28">
           <div>
             <Reveal>
@@ -82,7 +97,9 @@ export default function ServicesPage() {
             <Reveal delay={80}>
               <h1 className="font-[family-name:var(--font-serif)] text-[clamp(2.1rem,5vw,3.5rem)] leading-[1.08] tracking-[-0.02em]">
                 Three ways in.{" "}
-                <span className="about-text-shimmer">Pick where you&apos;re stuck.</span>
+                <span className="about-text-shimmer">
+                  Pick where you&apos;re stuck.
+                </span>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -194,35 +211,40 @@ export default function ServicesPage() {
                 <div className="mb-5 flex items-center gap-3">
                   <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
                   <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                    Industries
+                    Industries we&apos;ve worked with
                   </p>
                 </div>
               </Reveal>
               <Reveal delay={80}>
                 <h2 className="font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
-                  Industries we&apos;ve worked with
+                  Our Track Record
                 </h2>
               </Reveal>
+
               <Reveal delay={140}>
-                <p className="mt-4 max-w-[58ch] text-[15px] leading-relaxed text-neutral-600 sm:text-[16px]">
-                  We&apos;ve worked across dairy, FMCG, education, legal, and
-                  auditing, among others. Different sector, same pattern each
-                  time: too much manual work, not enough time to actually think.
-                  That&apos;s usually where we start.
-                </p>
-              </Reveal>
-              <Reveal delay={200}>
-                <ul className="mt-8 flex flex-wrap gap-2">
-                  {industries.map((industry, index) => (
+                <ul className="mt-8 grid gap-px border border-neutral-900 bg-neutral-900 sm:grid-cols-2 lg:grid-cols-4">
+                  {trackRecord.map((stat) => (
                     <li
-                      key={industry}
-                      className="services-industry-chip"
-                      style={{ animationDelay: `${index * 80}ms` }}
+                      key={stat.value}
+                      className="flex flex-col bg-[#0b1f4a] px-5 py-7 sm:px-6 sm:py-8"
                     >
-                      {industry}
+                      <p className="font-[family-name:var(--font-serif)] text-[clamp(1.85rem,3.5vw,2.5rem)] leading-none tracking-[-0.02em] text-[#f0e6a8]">
+                        {stat.value}
+                      </p>
+                      <p className="mt-4 text-[13px] leading-relaxed text-white/80 sm:text-[14px]">
+                        {stat.label}
+                      </p>
                     </li>
                   ))}
                 </ul>
+              </Reveal>
+
+              <Reveal delay={200}>
+                <p className="mt-6 max-w-[70ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
+                  Institutional engagements include NDDB, the Foundation for
+                  Innovation and Action (FIA), the Entrepreneurship Development
+                  Institute of India (EDII), NCDFI, KMF and IDMC.
+                </p>
               </Reveal>
             </div>
           </section>

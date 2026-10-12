@@ -2,12 +2,18 @@ import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
-export default function SiteChrome({ children }: { children: ReactNode }) {
+export default function SiteChrome({
+  children,
+  hideFooterCta = false,
+}: {
+  children: ReactNode;
+  hideFooterCta?: boolean;
+}) {
   return (
     <div className="flex min-h-full flex-col bg-black text-white">
       <Navbar />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer hideCta={hideFooterCta} />
     </div>
   );
 }

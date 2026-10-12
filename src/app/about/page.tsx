@@ -6,123 +6,27 @@ import {
   FoundingMixViz,
   StagesPipelineViz,
 } from "@/components/about/AboutIllustrations";
+import CredentialsSection from "@/components/about/CredentialsSection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
 import SiteChrome from "@/components/SiteChrome";
+import { COMPANY_SUBHEADING } from "@/lib/company";
 import { FAQ_ITEMS, buildFaqPageSchema } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: {
     absolute: "About Agility AI | AI Enablement and Integration Company",
   },
-  description:
-    "Agility AI is an AI enablement, integration and product company built on the idea that AI adoption and AI implementation are two different problems, solved together.",
+  description: COMPANY_SUBHEADING,
   openGraph: {
     title: "About Agility AI | AI Enablement and Integration Company",
-    description:
-      "Agility AI is an AI enablement, integration and product company built on the idea that AI adoption and AI implementation are two different problems, solved together.",
+    description: COMPANY_SUBHEADING,
   },
   twitter: {
     title: "About Agility AI | AI Enablement and Integration Company",
-    description:
-      "Agility AI is an AI enablement, integration and product company built on the idea that AI adoption and AI implementation are two different problems, solved together.",
+    description: COMPANY_SUBHEADING,
   },
 };
-
-function QuietCredentialMarks() {
-  return (
-    <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
-      <svg
-        viewBox="0 0 128 28"
-        className="h-8 w-auto text-neutral-400 sm:h-9"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <circle
-          cx="12"
-          cy="14"
-          r="9"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M12 6.8c2.4 2 3.8 4.2 3.8 7.2S14.4 19.2 12 21.2C9.6 19.2 8.2 17 8.2 14S9.6 8.8 12 6.8z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.15"
-        />
-        <text
-          x="28"
-          y="12.5"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
-          fontSize="9.5"
-          fontWeight="700"
-          letterSpacing="0.1em"
-        >
-          STARTUP
-        </text>
-        <text
-          x="28"
-          y="23"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
-          fontSize="9.5"
-          fontWeight="700"
-          letterSpacing="0.22em"
-        >
-          INDIA
-        </text>
-      </svg>
-
-      <span
-        className="hidden h-8 w-px bg-neutral-200 sm:block"
-        aria-hidden="true"
-      />
-
-      <svg
-        viewBox="0 0 148 28"
-        className="h-8 w-auto text-neutral-400 sm:h-9"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <rect
-          x="1.5"
-          y="4"
-          width="20"
-          height="20"
-          rx="2"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M6.4 18.2V9.8h3.4c1.9 0 3 .95 3 2.45 0 1.55-1.15 2.5-3 2.5H8.6v3.45H6.4zm2.2-5.3h1c.85 0 1.35-.4 1.35-1.05S10.4 10.8 9.6 10.8h-1v2.1z"
-          fill="currentColor"
-        />
-        <text
-          x="30"
-          y="12.5"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
-          fontSize="9.5"
-          fontWeight="700"
-          letterSpacing="0.14em"
-        >
-          IRMA ISEED
-        </text>
-        <text
-          x="30"
-          y="23"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
-          fontSize="8"
-          fontWeight="500"
-          letterSpacing="0.18em"
-        >
-          FOUNDATION
-        </text>
-      </svg>
-    </div>
-  );
-}
 
 const stages = [
   {
@@ -291,43 +195,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Credentials */}
-      <section
-        aria-label="Credentials"
-        className="border-t border-neutral-200 bg-white text-black"
-      >
-        <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
-          <Reveal>
-            <div className="mb-4 flex items-center gap-3">
-              <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                Credentials
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 className="font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
-              Recognised. Incubated. Accountable.
-            </h2>
-          </Reveal>
-
-          <Reveal delay={140}>
-            <div className="mt-8 flex flex-col gap-8 border-t border-neutral-200 pt-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-              <QuietCredentialMarks />
-              <p className="max-w-[58ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
-                Agility AI is recognised as a Startup by the Department for
-                Promotion of Industry and Internal Trade (DPIIT), Ministry of
-                Commerce and Industry, Government of India, under Startup India
-                Certificate No. DIPP205863, and is incubated at the IRMA ISEED
-                Foundation, the technology business incubator of the Institute
-                of Rural Management, Anand. Our CEO was also selected for the
-                Stanford Seed programme at Stanford Graduate School of Business,
-                one of 100 ventures chosen across South Asia.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CredentialsSection />
 
       {/* FAQ */}
       <section

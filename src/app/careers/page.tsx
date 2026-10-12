@@ -53,7 +53,7 @@ export default async function CareersPage() {
   const { jobs, error } = await fetchJobs();
 
   return (
-    <SiteChrome>
+    <SiteChrome hideFooterCta>
       {/* Hero — light, bold, centered */}
       <section className="bg-[#e8e8e4] text-black">
         <div className="mx-auto flex min-h-[42svh] max-w-[1100px] flex-col items-center justify-center px-6 py-20 text-center sm:px-10 sm:py-28">

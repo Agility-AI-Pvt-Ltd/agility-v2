@@ -1,4 +1,10 @@
-import Link from "next/link";
+const CONTACT_EMAIL = "agilityaibusiness@gmail.com";
+const PROGRAMMES_PHONE = "7042149608";
+const PROGRAMMES_PHONE_HREF = "tel:+917042149608";
+const PROGRAMMES_CONTACT = {
+  name: "Bhawna Khorwal",
+  role: "Head of Programmes",
+} as const;
 
 export default function AboutContactSection() {
   return (
@@ -31,8 +37,8 @@ export default function AboutContactSection() {
         </p>
 
         <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <Link
-            href="/contact?intent=training"
+          <a
+            href={PROGRAMMES_PHONE_HREF}
             className="about-contact-card group"
           >
             <div className="about-contact-card-glow" aria-hidden="true" />
@@ -46,15 +52,20 @@ export default function AboutContactSection() {
               AI enablement for teams who need fluency in the work they already
               do — not another deck.
             </p>
-            <span className="mt-8 inline-flex items-center gap-2 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-white/70 transition-colors group-hover:text-white">
-              Continue
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </span>
-          </Link>
+            <div className="mt-8 space-y-1">
+              <p className="text-[14px] font-medium text-white/85">
+                {PROGRAMMES_CONTACT.name}
+              </p>
+              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-white/45">
+                {PROGRAMMES_CONTACT.role}
+              </p>
+              <p className="font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.08em] text-white/70 transition-colors group-hover:text-white">
+                {PROGRAMMES_PHONE}
+              </p>
+            </div>
+          </a>
 
-          <Link href="/contact?intent=sales" className="about-contact-card group">
+          <a href={PROGRAMMES_PHONE_HREF} className="about-contact-card group">
             <div className="about-contact-card-glow" aria-hidden="true" />
             <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.16em] text-[#3b6ef5]">
               Path 02
@@ -66,22 +77,27 @@ export default function AboutContactSection() {
               Integration builds, products, or a programme that mixes both —
               start with a straight conversation.
             </p>
-            <span className="mt-8 inline-flex items-center gap-2 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-white/70 transition-colors group-hover:text-white">
-              Continue
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </span>
-          </Link>
+            <div className="mt-8 space-y-1">
+              <p className="text-[14px] font-medium text-white/85">
+                {PROGRAMMES_CONTACT.name}
+              </p>
+              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-white/45">
+                {PROGRAMMES_CONTACT.role}
+              </p>
+              <p className="font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.08em] text-white/70 transition-colors group-hover:text-white">
+                {PROGRAMMES_PHONE}
+              </p>
+            </div>
+          </a>
         </div>
 
         <p className="mt-8 text-[13px] text-white/35">
           Or email{" "}
           <a
-            href="mailto:hello@agilityai.in"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="text-white/60 underline-offset-2 transition-colors hover:text-white hover:underline"
           >
-            hello@agilityai.in
+            {CONTACT_EMAIL}
           </a>
         </p>
       </div>

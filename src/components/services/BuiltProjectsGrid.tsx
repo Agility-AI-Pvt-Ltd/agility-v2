@@ -40,7 +40,11 @@ const PROJECT_META = [
   },
 ] as const;
 
-function ProjectVisual({ kind }: { kind: (typeof PROJECT_META)[number]["visual"] }) {
+function ProjectVisual({
+  kind,
+}: {
+  kind: (typeof PROJECT_META)[number]["visual"];
+}) {
   if (kind === "mentorship") {
     return (
       <div
@@ -58,7 +62,9 @@ function ProjectVisual({ kind }: { kind: (typeof PROJECT_META)[number]["visual"]
           <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-white/70">
             Live cohort
           </p>
-          <p className="mt-1 text-[15px] font-medium text-white">Build real ventures</p>
+          <p className="mt-1 text-[15px] font-medium text-white">
+            Build real ventures
+          </p>
         </div>
       </div>
     );
@@ -71,7 +77,9 @@ function ProjectVisual({ kind }: { kind: (typeof PROJECT_META)[number]["visual"]
           <p className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.12em] text-neutral-400">
             Invoicely
           </p>
-          <p className="mt-1 text-[14px] font-semibold text-neutral-900">Payment cleared</p>
+          <p className="mt-1 text-[14px] font-semibold text-neutral-900">
+            Payment cleared
+          </p>
           <div className="mt-3 space-y-1.5">
             <div className="h-1.5 rounded-full bg-neutral-100" />
             <div className="h-1.5 w-3/4 rounded-full bg-neutral-100" />
@@ -110,7 +118,9 @@ function ProjectVisual({ kind }: { kind: (typeof PROJECT_META)[number]["visual"]
       <div className="flex h-full min-h-[120px] items-center gap-3 rounded-[1.25rem] bg-[#1e3a8a] p-4">
         <div className="h-[72%] w-[34%] rounded-lg border-4 border-white bg-[#fef9c3]" />
         <div className="flex-1 rounded-xl bg-white p-3">
-          <p className="text-[13px] font-semibold text-[#1e3a8a]">First read done</p>
+          <p className="text-[13px] font-semibold text-[#1e3a8a]">
+            First read done
+          </p>
           <div className="mt-2 h-1.5 rounded-full bg-neutral-100">
             <div className="h-full w-[72%] rounded-full bg-[#3b6ef5]" />
           </div>
@@ -140,7 +150,9 @@ type BuiltProjectsGridProps = {
   projects: readonly BuiltProject[];
 };
 
-export default function BuiltProjectsGrid({ projects }: BuiltProjectsGridProps) {
+export default function BuiltProjectsGrid({
+  projects,
+}: BuiltProjectsGridProps) {
   return (
     <section
       id="built-projects"
@@ -253,7 +265,9 @@ export default function BuiltProjectsGrid({ projects }: BuiltProjectsGridProps) 
                   <div
                     className={[
                       "mt-auto pt-5",
-                      isFeatured ? "min-h-[180px] sm:min-h-[220px]" : "min-h-[120px]",
+                      isFeatured
+                        ? "min-h-[180px] sm:min-h-[220px]"
+                        : "min-h-[120px]",
                     ].join(" ")}
                   >
                     <ProjectVisual kind={meta.visual} />

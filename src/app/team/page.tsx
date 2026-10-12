@@ -24,21 +24,21 @@ export const metadata: Metadata = {
 const founders = [
   {
     name: "Sharad Raj Utsav",
-    role: "Director and CEO",
-    image: "/image/sharad.png",
-    bio: "B.Tech, NSUT Delhi; MBA (Rural Management), IRMA Anand; advanced studies in Data Science and AI, BITS Pilani. Selected for the Stanford Seed programme at Stanford Graduate School of Business, one of 100 ventures chosen across South Asia. Leads vision, strategy, and institutional partnerships.",
+    role: "Founder & CEO",
+    image: "/assets/image/sharad.png",
+    bio: "B.Tech, NSUT Delhi. MBA (Rural Management), IRMA. M.Sc. Data Science and AI, BITS Pilani. Stanford Seed alumnus. Claude Certified Instructor.",
   },
   {
     name: "Shreya Sinha",
-    role: "Director and COO",
-    image: "/image/shreya.png",
-    bio: "B.Tech, NSUT Delhi; PGP in Digital Marketing and Strategic Marketing, MICA Ahmedabad. Nearly six years leading digital marketing and analytics at Piramal Pharma Solutions, and two years with the Piramal Foundation across rural government schools in Rajasthan. Leads operations, programme design, and stakeholder experience.",
+    role: "Co-Founder & COO",
+    image: "/assets/image/shreya.png",
+    bio: "B.Tech, NSUT Delhi. Women Startup Program, IIM Bangalore. PGP in Digital and Strategic Marketing, MICA Ahmedabad.",
   },
   {
     name: "Aryan Shukla",
-    role: "Co-Founder and CTO",
-    image: "/image/aryan.png",
-    bio: "Integrated B.Tech and M.Tech in Mathematics and Computing, IIT (BHU) Varanasi. Nearly three years as a Machine Learning Engineer at Samsung Research Institute, Delhi. Owns the technology stack, AI systems, and automation pipelines.",
+    role: "Co-Founder & CTO",
+    image: "/assets/image/aryan.png",
+    bio: "Integrated B.Tech and M.Tech, Mathematics and Computing, IIT (BHU) Varanasi.",
   },
 ] as const;
 
@@ -48,35 +48,42 @@ const advisors = [
     role: "Advisor",
     initials: "RR",
     image: "/image/advisory/R_Ramaseshan_sir.jpg",
-    bio: "Former IAS officer; former MD and CEO, NCDEX; former Chairman, National Commodity Clearing Ltd. Brings national level policy and governance experience to any engagement operating inside regulatory or institutional constraints.",
-  },
-  {
-    name: "Prof. Nakul Parameswar",
-    role: "Advisor",
-    initials: "NP",
-    image: null,
-    bio: "Assistant Professor, Strategic Management and Entrepreneurship, IIT Hyderabad. Research grounding in how organisations actually adopt new systems, not just deploy them.",
-  },
-  {
-    name: "Prof. Sumit Kumar Yadav",
-    role: "Advisor",
-    initials: "SY",
-    image: "/image/advisory/sumit.jpg",
-    bio: "Assistant Professor, IIT Roorkee; PhD, IIM Ahmedabad. Adds further academic rigor on the institutional and strategy side of our advisory work.",
-  },
-  {
-    name: "Prof. Aashish Argade",
-    role: "Advisor",
-    initials: "AA",
-    image: "/image/advisory/aashish.jpg",
-    bio: "Assistant Professor, IRMA Anand; PhD, IIM Ahmedabad. Expertise in rural and institutional systems broadly, relevant to any large, decentralised organisation, not one sector alone.",
+    bio: "Former IAS. Ex-MD & CEO, NCDEX. Chairman, National Commodity Clearing Ltd.",
   },
   {
     name: "Prof. Ashok R. Patil",
     role: "Advisor",
     initials: "AP",
     image: "/image/advisory/ashok.jpg",
-    bio: "Vice Chancellor, NUSRL Ranchi; former Professor, NLSIU Bengaluru. Legal and policy expertise relevant to governance and compliance conversations.",
+    bio: "Vice Chancellor, NUSRL Ranchi. Professor, NLSIU Bengaluru.",
+  },
+  {
+    name: "Prof. Nakul Parameswar",
+    role: "Advisor",
+    initials: "NP",
+    image: null,
+    bio: "IIT Hyderabad. PhD, IIT Delhi.",
+  },
+  {
+    name: "Prof. Sumit Kumar Yadav",
+    role: "Advisor",
+    initials: "SY",
+    image: "/image/advisory/sumit.jpg",
+    bio: "IIT Roorkee. PhD, IIM Ahmedabad. B.Tech, IIT Bombay.",
+  },
+  {
+    name: "Prof. Aashish Argade",
+    role: "Advisor",
+    initials: "AA",
+    image: "/image/advisory/aashish.jpg",
+    bio: "IRMA Anand. PhD, IIM Ahmedabad.",
+  },
+  {
+    name: "Cdr Praveen Kumar",
+    role: "Advisor",
+    initials: "PK",
+    image: null,
+    bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
 ] as const;
 
@@ -85,7 +92,7 @@ export default function TeamPage() {
     <SiteChrome>
       <PageHero
         eyebrow="Team and Advisors"
-        title="The people building this, and the people making sure we build it right."
+        title="The people building this and the people making sure we build it right."
         description="Meet the founding team and advisory board behind Agility AI — spanning AI engineering, rural management, public policy, law and entrepreneurship."
       />
 
@@ -102,13 +109,13 @@ export default function TeamPage() {
           <ul className="grid gap-10 lg:grid-cols-3 lg:gap-8">
             {founders.map((member) => (
               <li key={member.name} className="flex flex-col">
-                <div className="relative aspect-[4/5] overflow-hidden bg-neutral-200">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#eceae6]">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover object-top"
+                    className="object-contain object-bottom"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_50%)]" />
                   <div className="absolute inset-x-0 bottom-0 p-5">

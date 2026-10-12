@@ -4,6 +4,7 @@ import "./globals.css";
 import BookCallModal from "@/components/BookCallModal";
 import Chatbot from "@/components/Chatbot";
 import SmoothScroll from "@/components/SmoothScroll";
+import { COMPANY_SUBHEADING } from "@/lib/company";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +21,7 @@ export const metadata: Metadata = {
     default: "Agility AI | AI Enablement, Integration and Products",
     template: "%s | Agility AI",
   },
-  description:
-    "Agility AI helps organisations adopt, integrate and run AI in daily work, through AI enablement training, integration builds and ready to use AI products.",
+  description: COMPANY_SUBHEADING,
 };
 
 export default function RootLayout({

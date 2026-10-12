@@ -6,22 +6,20 @@ import IndustriesTeaser from "@/components/IndustriesTeaser";
 import InteractiveProof from "@/components/InteractiveProof";
 import Navbar from "@/components/Navbar";
 import Testimonials from "@/components/Testimonials";
+import { COMPANY_SUBHEADING } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Agility AI | AI Enablement, Integration and Products",
-  description:
-    "Agility AI helps organisations adopt, integrate and run AI in daily work, through AI enablement training, integration builds and ready to use AI products.",
+  description: COMPANY_SUBHEADING,
   openGraph: {
     title: "Agility AI | AI Enablement, Integration and Products",
-    description:
-      "Agility AI helps organisations adopt, integrate and run AI in daily work, through AI enablement training, integration builds and ready to use AI products.",
+    description: COMPANY_SUBHEADING,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Agility AI | AI Enablement, Integration and Products",
-    description:
-      "Agility AI helps organisations adopt, integrate and run AI in daily work, through AI enablement training, integration builds and ready to use AI products.",
+    description: COMPANY_SUBHEADING,
   },
 };
 

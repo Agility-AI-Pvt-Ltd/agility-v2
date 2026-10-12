@@ -13,15 +13,7 @@ type JobsListProps = {
 export default function JobsList({ jobs, fetchError }: JobsListProps) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
-  if (fetchError) {
-    return (
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
-        <p className="text-[14px] text-amber-900">{fetchError}</p>
-      </div>
-    );
-  }
-
-  if (jobs.length === 0) {
+  if (fetchError || jobs.length === 0) {
     return (
       <div className="rounded-2xl border border-neutral-200 bg-white p-8 text-center">
         <p className="text-[20px] font-semibold tracking-[-0.02em] text-neutral-900">

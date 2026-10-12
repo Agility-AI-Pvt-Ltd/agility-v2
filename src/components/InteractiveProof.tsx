@@ -103,7 +103,9 @@ function ManualPanel() {
                   <p className="text-[13px] font-medium text-neutral-800">
                     {source.label}
                   </p>
-                  <p className="text-[11px] text-neutral-400">{source.detail}</p>
+                  <p className="text-[11px] text-neutral-400">
+                    {source.detail}
+                  </p>
                 </div>
                 <span className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-amber-600">
                   Open
@@ -186,7 +188,9 @@ function AgilityPanel({ animate }: { animate: boolean }) {
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
                   <SourceIcon kind={source.id} />
-                  <span className="text-[11px] font-medium">{source.label}</span>
+                  <span className="text-[11px] font-medium">
+                    {source.label}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -259,7 +263,9 @@ function AgilityPanel({ animate }: { animate: boolean }) {
           <div
             className={[
               "mt-3 rounded-sm border border-emerald-200 bg-emerald-50 px-3 py-3 transition-all duration-500",
-              step >= 3 ? "translate-y-0 opacity-100" : "translate-y-2 opacity-30",
+              step >= 3
+                ? "translate-y-0 opacity-100"
+                : "translate-y-2 opacity-30",
             ].join(" ")}
           >
             <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-800">
@@ -269,8 +275,8 @@ function AgilityPanel({ animate }: { animate: boolean }) {
               12 customers need a follow-up
             </p>
             <p className="mt-1 text-[13px] text-neutral-600">
-              Start with these three — pulled from email, CRM, and your team&apos;s
-              notes.
+              Start with these three — pulled from email, CRM, and your
+              team&apos;s notes.
             </p>
           </div>
 
@@ -284,12 +290,16 @@ function AgilityPanel({ animate }: { animate: boolean }) {
                     ? "translate-y-0 opacity-100"
                     : "translate-y-2 opacity-25",
                 ].join(" ")}
-                style={{ transitionDelay: step >= 3 ? `${index * 100}ms` : "0ms" }}
+                style={{
+                  transitionDelay: step >= 3 ? `${index * 100}ms` : "0ms",
+                }}
               >
                 <p className="text-[13px] font-medium text-neutral-900">
                   {item.name}
                 </p>
-                <p className="mt-0.5 text-[12px] text-neutral-500">{item.note}</p>
+                <p className="mt-0.5 text-[12px] text-neutral-500">
+                  {item.note}
+                </p>
               </li>
             ))}
           </ul>
@@ -387,7 +397,11 @@ export default function InteractiveProof() {
         </div>
 
         <div className="mt-3 grid shrink-0 gap-2 sm:grid-cols-2 sm:gap-3">
-          <TimeBadge label="By hand" value="6 hours" active={mode === "manual"} />
+          <TimeBadge
+            label="By hand"
+            value="6 hours"
+            active={mode === "manual"}
+          />
           <TimeBadge
             label="With Agility AI"
             value="20 minutes"

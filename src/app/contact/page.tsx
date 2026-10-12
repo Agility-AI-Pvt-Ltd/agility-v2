@@ -1,13 +1,19 @@
 import ContactCTA from "@/components/ContactCTA";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
+import { COMPANY_SUBHEADING } from "@/lib/company";
 
 const details = [
-  { label: "Email", value: "hello@agilityai.in", href: "mailto:hello@agilityai.in" },
-  { label: "Entity", value: "Agility AI Pvt. Ltd." },
   {
-    label: "Focus",
-    value: "AI integration, adoption, and enablement",
+    label: "Email",
+    value: "agilityaibusiness@gmail.com",
+    href: "mailto:agilityaibusiness@gmail.com",
   },
+  {
+    label: "Programmes",
+    value: "Bhawna Khorwal · 7042149608",
+    href: "tel:+917042149608",
+  },
+  { label: "About", value: COMPANY_SUBHEADING },
   {
     label: "Recognition",
     value: "Startup India · DIPP205863 · IRMA ISEED",
