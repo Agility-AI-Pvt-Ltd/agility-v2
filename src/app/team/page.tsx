@@ -27,27 +27,23 @@ const founders = [
     role: "Founder & CEO",
     image: "/assets/image/sharad.png",
     bio: "B.Tech, NSUT Delhi. MBA (Rural Management), IRMA. M.Sc. Data Science and AI, BITS Pilani. Stanford Seed alumnus. Claude Certified Instructor.",
-    imageClassName:
-      "origin-bottom scale-[2.05] object-[center_bottom] -translate-x-14 translate-y-32",
   },
   {
     name: "Shreya Sinha",
     role: "Co-Founder & COO",
     image: "/assets/image/shreya.png",
     bio: "B.Tech, NSUT Delhi. Women Startup Program, IIM Bangalore. PGP in Digital and Strategic Marketing, MICA Ahmedabad.",
-    imageClassName: "",
   },
   {
     name: "Aryan Shukla",
     role: "Co-Founder & CTO",
     image: "/assets/image/aryan.png",
     bio: "Integrated B.Tech and M.Tech, Mathematics and Computing, IIT (BHU) Varanasi.",
-    imageClassName: "",
   },
 ] as const;
 
 /** Bust Next/Image + browser cache when public cutouts are replaced in-place. */
-const FOUNDER_IMAGE_VERSION = "20261012b";
+const FOUNDER_IMAGE_VERSION = "20261012e";
 
 const advisors = [
   {
@@ -122,12 +118,7 @@ export default function TeamPage() {
                     alt={member.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
-                    className={[
-                      "object-contain object-bottom",
-                      member.imageClassName,
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
+                    className="object-cover object-center"
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_50%)]" />
