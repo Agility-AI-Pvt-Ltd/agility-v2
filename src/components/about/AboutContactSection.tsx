@@ -1,4 +1,5 @@
-const CONTACT_EMAIL = "agilityaibusiness@gmail.com";
+import { CONTACT_EMAIL } from "@/lib/company";
+
 const PROGRAMMES_PHONE = "7042149608";
 const PROGRAMMES_PHONE_HREF = "tel:+917042149608";
 const PROGRAMMES_CONTACT = {

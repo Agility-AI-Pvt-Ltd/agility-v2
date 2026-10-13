@@ -1,3 +1,4 @@
+import { isGroqConfigured } from "@/lib/chatbot/config";
 import { getChatReply, type ChatTurn } from "@/lib/chatbot/reply";
 import { NextResponse } from "next/server";
 
@@ -40,6 +41,12 @@ export async function POST(request: Request) {
 
   if (!messages.every(isValidTurn)) {
     return NextResponse.json({ error: "Invalid message format." }, { status: 400 });
+  }
+
+  if (!isGroqConfigured() && process.env.NODE_ENV === "development") {
+    console.warn(
+      "[chat] GROQ_API_KEY is not set — using offline fallback replies. Add GROQ_API_KEY to .env for full answers.",
+    );
   }
 
   const result = await getChatReply(messages);

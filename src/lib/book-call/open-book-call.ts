@@ -1,7 +1,8 @@
 "use client";
 
-export const OPEN_BOOK_CALL_EVENT = "agility:open-book-call";
+import { BOOK_CALL_WHATSAPP_URL } from "@/lib/company";
 
 export function openBookCall() {
-  window.dispatchEvent(new CustomEvent(OPEN_BOOK_CALL_EVENT));
+  if (typeof window === "undefined") return;
+  window.open(BOOK_CALL_WHATSAPP_URL, "_blank", "noopener,noreferrer");
 }

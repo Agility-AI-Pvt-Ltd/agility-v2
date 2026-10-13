@@ -18,6 +18,7 @@ export default function SmoothScroll() {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
+      allowNestedScroll: true,
     });
 
     let rafId = 0;

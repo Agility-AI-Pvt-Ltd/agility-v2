@@ -30,9 +30,7 @@ export default function Home() {
       <main className="flex-1">
         <div className="relative">
           <Hero />
-          <div className="relative h-[200svh]">
-            <InteractiveProof />
-          </div>
+          <InteractiveProof />
           <div className="relative h-[200svh]">
             <Capabilities />
           </div>

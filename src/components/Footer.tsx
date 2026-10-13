@@ -31,21 +31,13 @@ export default function Footer({ hideCta = false }: FooterProps) {
                 Ready when you are
               </p>
               <p className="mt-2 max-w-md text-[14px] text-white/50">
-                Send a message above, or book a call—whichever is faster for
+                Book a call and we&apos;ll map adoption and implementation for
                 your team.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <a
-                href="/contact"
-                className="cta-cut inline-flex h-11 items-center justify-center bg-white px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-black transition-all hover:bg-white/90"
-              >
-                Open Form
-              </a>
-              <BookCallButton className="cta-cut inline-flex h-11 items-center justify-center border border-white/70 px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-black">
-                Book a Call
-              </BookCallButton>
-            </div>
+            <BookCallButton className="cta-cut inline-flex h-11 items-center justify-center bg-white px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-black transition-all hover:bg-white/90">
+              Book a Call
+            </BookCallButton>
           </div>
         </div>
       )}

@@ -3,9 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/about/Reveal";
 import BuiltProjectsGrid from "@/components/services/BuiltProjectsGrid";
 import OfferingsShowcase from "@/components/services/OfferingsShowcase";
-import ServiceTrackSection from "@/components/services/ServiceTrackSection";
 import ServicesHeroVisual from "@/components/services/ServicesHeroVisual";
-import SessionCounter from "@/components/services/SessionCounter";
 import TimeSavedCalculator from "@/components/services/TimeSavedCalculator";
 import SiteChrome from "@/components/SiteChrome";
 
@@ -26,34 +24,6 @@ export const metadata: Metadata = {
       "Explore Agility AI's three offerings: AI enablement training, AI integration builds and ready to use AI products, built for organisations across every industry.",
   },
 };
-
-const builtProjects = [
-  {
-    name: "FutureX Fellowship",
-    description:
-      "An AI mentorship platform that helps student entrepreneurs build real ventures, not just learn the theory.",
-  },
-  {
-    name: "Invoicely",
-    description:
-      "Handles a company's accounting questions in one place — invoices, payments, the works.",
-  },
-  {
-    name: "Edumaniax",
-    description:
-      "Turns learning into something closer to a game, so it actually sticks instead of getting forgotten by Monday.",
-  },
-  {
-    name: "Fairly Settled",
-    description:
-      "Helps legal professionals get through long documents faster, with AI doing the first read so people can focus on the judgment calls that actually need a human.",
-  },
-  {
-    name: "HRMS",
-    description:
-      "One place for hiring, attendance, and reimbursements, instead of three different logins nobody wants to open.",
-  },
-] as const;
 
 const trackRecord = [
   {
@@ -136,74 +106,6 @@ export default function ServicesPage() {
       <div className="relative">
         <OfferingsShowcase />
 
-        <ServiceTrackSection
-          id="enablement"
-          variant="enablement"
-          label="Offering 01"
-          title="AI Enablement"
-          summary="We teach your employees to use AI in the work they're already doing, not as a separate skill to pick up on the side, but folded into their actual day. Efficiency doesn't creep up slowly. It jumps."
-          extra={<SessionCounter />}
-          includes={[
-            "Live, hands on sessions built around your team's actual tools, not generic slideware or a canned demo.",
-            "Practice tied to real daily tasks, so the learning sticks past the last slide of the workshop.",
-            "A short follow up window after the session for questions, so people aren't left stuck the first time they try it alone.",
-          ]}
-          forWhom={[
-            "Teams where AI was technically rolled out but nobody's actually opened it twice.",
-            "Organisations about to launch an AI tool and wanting people ready before day one, not scrambling after.",
-            "Anyone tired of a training deck that got read once and forgotten.",
-          ]}
-          doneLooksLike={[
-            "Your team using AI inside their real workflow without being reminded to.",
-            "Fewer questions bouncing back to IT, or back to us.",
-            "A task that used to take an afternoon now taking twenty minutes, and everyone knowing why.",
-          ]}
-          cta={{
-            label: "Book a corporate training",
-            href: "/contact",
-          }}
-        />
-
-        <ServiceTrackSection
-          id="integration"
-          variant="integration"
-          label="Offering 02"
-          title="AI Integration"
-          summary="We don't hand you a new dashboard to check every morning. We wire AI into the systems you already use, so it works quietly in the background instead of becoming one more tab. That includes hands on workshops for your team and integration builds shaped around the systems you're already running, not a generic plug in."
-          includes={[
-            "An audit of what you're already running, so nothing gets ripped out that was actually working.",
-            "An integration plan built around your existing stack, not a rebuild disguised as an upgrade.",
-            "The actual build, tested against how your team really works, plus a runbook your own people can read without calling us.",
-          ]}
-          forWhom={[
-            "Organisations with real, working systems that AI needs to plug into, not a blank slate.",
-            "Teams who've been burned before by a vendor that dropped in a black box and disappeared the day it shipped.",
-          ]}
-          doneLooksLike={[
-            "AI running inside the tools your team already opens every day, with no new login anyone resents.",
-            "A system your own people can maintain and adjust, not one that only makes sense to the person who built it.",
-          ]}
-        />
-
-        <ServiceTrackSection
-          id="products"
-          variant="products"
-          label="Offering 03"
-          title="AI Products"
-          summary="We also build ready made tools, the kind you can start using without waiting on a custom project. But even these get shaped and customized to how your organization actually works, not handed over exactly as they are, off the shelf."
-          includes={[
-            "Direct access to a working product, not a pilot or a proof of concept.",
-            "Onboarding support so your team is using it inside days, not months.",
-            "Configuration to fit how your organisation actually operates, rather than forcing your process to match the software.",
-          ]}
-          forWhom={[
-            "Teams that need something working now, not in a quarter, and don't need a fully bespoke build to get real value.",
-          ]}
-          doneLooksLike={[
-            "A tool your team is actually using inside a week, not sitting in a folder marked to try later.",
-          ]}
-        />
-
         <div className="relative">
           <section className="border-t border-neutral-200 bg-[#f7f7f7] text-black">
             <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
@@ -249,7 +151,7 @@ export default function ServicesPage() {
             </div>
           </section>
 
-          <BuiltProjectsGrid projects={builtProjects} />
+          <BuiltProjectsGrid />
 
           <Reveal>
             <TimeSavedCalculator />

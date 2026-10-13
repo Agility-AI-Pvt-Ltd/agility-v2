@@ -18,7 +18,7 @@ type Message = {
 const WELCOME: Message = {
   id: "welcome",
   from: "bot",
-  text: "Hi — ask me anything about Agility AI: services, team, careers, industries, products, the maturity check, or how to get in touch.",
+  text: "Hi — I know this site inside out: services, team, careers, industries, products, and the AI maturity check.\n\nAsk anything. When you want a human next step, use Book a call or Contact below.",
 };
 
 export default function Chatbot() {
@@ -66,15 +66,9 @@ export default function Chatbot() {
       openBookCall();
       return;
     }
-
     if (action === "contact") {
       setOpen(false);
-      const contact = document.getElementById("contact");
-      if (contact) {
-        contact.scrollIntoView({ behavior: "smooth" });
-        return;
-      }
-      window.location.href = "/contact#contact";
+      window.location.href = "/contact";
     }
   }
 
@@ -139,11 +133,13 @@ export default function Chatbot() {
   }
 
   function chooseBookCall() {
-    void sendText("I'd like to book a call");
+    setOpen(false);
+    openBookCall();
   }
 
-  function chooseMessage() {
-    void sendText("I'd like to send a message");
+  function chooseContact() {
+    setOpen(false);
+    window.location.href = "/contact";
   }
 
   return (
@@ -242,11 +238,11 @@ export default function Chatbot() {
                 </button>
                 <button
                   type="button"
-                  onClick={chooseMessage}
+                  onClick={chooseContact}
                   disabled={loading}
                   className="inline-flex h-8 items-center justify-center border border-neutral-300 px-3 font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.08em] text-neutral-700 transition-colors hover:border-neutral-500 hover:text-neutral-950 disabled:opacity-50"
                 >
-                  Contact us
+                  Contact
                 </button>
               </div>
 

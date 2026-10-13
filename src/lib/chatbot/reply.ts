@@ -1,3 +1,4 @@
+import { getGroqConfig } from "@/lib/chatbot/config";
 import { buildChatSystemPrompt, buildSiteKnowledgeBase } from "@/lib/chatbot/knowledge";
 import { FAQ_ITEMS } from "@/lib/faq";
 
@@ -11,10 +12,10 @@ export type ChatAction = "book_call" | "contact";
 export type ChatReply = {
   reply: string;
   action?: ChatAction;
+  source?: "groq" | "fallback";
 };
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_MODEL = "llama-3.3-70b-versatile";
 const SITE_KNOWLEDGE = buildSiteKnowledgeBase();
 
 function normalize(text: string) {
@@ -111,7 +112,19 @@ function detectAction(query: string): ChatAction | undefined {
       "schedule a meeting",
       "talk to someone",
       "speak to someone",
+      "speak with someone",
+      "talk with someone",
       "demo",
+      "how much",
+      "pricing",
+      "price",
+      "cost",
+      "quote",
+      "proposal",
+      "start a project",
+      "hire you",
+      "work with you",
+      "engagement",
     ])
   ) {
     return "book_call";
@@ -119,17 +132,31 @@ function detectAction(query: string): ChatAction | undefined {
 
   if (
     includesAny(query, [
-      "contact",
-      "email you",
-      "send a message",
-      "reach out",
+      "contact page",
+      "contact details",
+      "email address",
+      "phone number",
+      "your email",
+      "your phone",
+      "reach you",
       "get in touch",
-      "agilityaibusiness@gmail",
-      "hello@agilityai",
-      "contact form",
+      "organization@agilityai.in",
+      "organization@agilityai",
+      "7042149608",
+      "bhawna",
     ])
   ) {
     return "contact";
+  }
+
+  if (
+    includesAny(query, [
+      "contact",
+      "email you",
+      "reach out",
+    ])
+  ) {
+    return "book_call";
   }
 
   return undefined;
@@ -174,20 +201,20 @@ function extractKnowledgeSnippet(query: string) {
 }
 
 async function getGroqReply(messages: ChatTurn[]): Promise<string | null> {
-  const apiKey = process.env.GROQ_API_KEY?.trim();
-  if (!apiKey) return null;
+  const config = getGroqConfig();
+  if (!config) return null;
 
   try {
     const res = await fetch(GROQ_API_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${config.apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: GROQ_MODEL,
-        temperature: 0.4,
-        max_tokens: 600,
+        model: config.model,
+        temperature: 0.35,
+        max_tokens: 700,
         messages: [
           { role: "system", content: buildChatSystemPrompt() },
           ...messages.map((message) => ({
@@ -223,16 +250,18 @@ async function getGroqReply(messages: ChatTurn[]): Promise<string | null> {
 function getFallbackReply(messages: ChatTurn[]): string {
   const lastUser = [...messages].reverse().find((m) => m.role === "user");
   if (!lastUser) {
-    return "Hi — ask me about our services, team, careers, industries, the AI maturity check, or how to get in touch.";
+    return "Hi — ask me about services, team, careers, industries, products, the AI maturity check, or how to get in touch.\n\nWhen you're ready, use Book a call below to message Bhawna on WhatsApp, or visit /contact for email and phone.";
   }
 
   const query = normalize(lastUser.content);
+  const cta =
+    "\n\nNext step: tap Book a call in this chat to message Bhawna on WhatsApp, or visit /contact (organization@agilityai.in · 7042149608).";
 
   const faqMatch = FAQ_ITEMS.find((item) => {
     const question = normalize(item.question);
     return tokenize(lastUser.content).some((word) => question.includes(word));
   });
-  if (faqMatch) return faqMatch.answer;
+  if (faqMatch) return faqMatch.answer + cta;
 
   const snippet = extractKnowledgeSnippet(lastUser.content);
   if (snippet) {
@@ -243,24 +272,30 @@ function getFallbackReply(messages: ChatTurn[]): string {
 
     const summary = lines.slice(0, 4).join(" ");
     if (summary) {
-      return `${summary} Visit the relevant page on agilityai.in or say "book a call" for more detail.`;
+      return `${summary}\n\nSee the matching page on the site, or book a call for a tailored answer.${cta}`;
     }
   }
 
   if (scoreKnowledgeMatch(lastUser.content) > 0) {
-    return "I can help with that — try asking about enablement, integration, products, team, careers, industries, or the AI maturity check. Or say \"book a call\" to speak with the team.";
+    return (
+      "I can help with enablement, integration, products, team, careers, industries, or the AI maturity check." +
+      cta
+    );
   }
 
-  return "I'm not sure I have a precise answer for that. Say \"book a call\", visit /contact, or ask about our services, team, or careers.";
+  return (
+    "I'm not sure I have a precise answer for that on the site." +
+    cta
+  );
 }
 
 export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
   const lastUser = [...messages].reverse().find((m) => m.role === "user");
   const action = lastUser ? detectAction(normalize(lastUser.content)) : undefined;
 
-  const reply = sanitizeReply(
-    (await getGroqReply(messages)) ?? getFallbackReply(messages),
-  );
+  const groqReply = await getGroqReply(messages);
+  const source = groqReply ? ("groq" as const) : ("fallback" as const);
+  const reply = sanitizeReply(groqReply ?? getFallbackReply(messages));
 
-  return action ? { reply, action } : { reply };
+  return action ? { reply, action, source } : { reply, source };
 }

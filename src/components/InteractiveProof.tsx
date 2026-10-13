@@ -1,368 +1,449 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import Image from "next/image";
+import { useId, useMemo, useState } from "react";
 
 type Mode = "manual" | "agility";
 
+const ASSET = "/assets/proof";
+
 const SOURCES = [
-  { id: "email", label: "Email", detail: "47 unread threads" },
-  { id: "sheet", label: "Spreadsheet", detail: "3 tabs, outdated" },
-  { id: "crm", label: "CRM", detail: "Notes in 4 places" },
-  { id: "chat", label: "Team chat", detail: "Scattered updates" },
+  {
+    id: "email",
+    label: "Email",
+    detail: "47 unread threads",
+    iconBase: "source-email",
+  },
+  {
+    id: "spreadsheet",
+    label: "Spreadsheet",
+    detail: "3 tabs, outdated",
+    iconBase: "source-spreadsheet",
+  },
+  {
+    id: "crm",
+    label: "CRM",
+    detail: "Notes in 4 places",
+    iconBase: "source-crm",
+  },
+  {
+    id: "chat",
+    label: "Team chat",
+    detail: "Scattered updates",
+    iconBase: "source-chat",
+  },
+] as const;
+
+const BRANDS = [
+  { id: "gmail", label: "Gmail", iconBase: "brand-gmail", rotate: "-8deg" },
+  { id: "sheets", label: "Sheets", iconBase: "brand-sheets", rotate: "-3deg" },
+  {
+    id: "salesforce",
+    label: "Salesforce",
+    iconBase: "brand-salesforce",
+    rotate: "3deg",
+  },
+  { id: "slack", label: "Slack", iconBase: "brand-slack", rotate: "8deg" },
 ] as const;
 
 const FOLLOW_UPS = [
-  { name: "Northfield Ops", note: "Contract renewal due Friday" },
-  { name: "Harbor Finance", note: "Asked twice, no reply yet" },
-  { name: "Summit Legal", note: "Waiting on signed scope" },
+  {
+    initials: "NO",
+    name: "Northfield Ops",
+    note: "Contract renewal due Friday",
+    source: "Email",
+    sourceTone: "bg-[#ede9fe] text-[#6d28d9]",
+    date: "May 3",
+  },
+  {
+    initials: "HF",
+    name: "Harbor Finance",
+    note: "Asked twice, no reply yet",
+    source: "CRM",
+    sourceTone: "bg-[#fee2e2] text-[#b91c1c]",
+    date: "May 4",
+  },
+  {
+    initials: "SL",
+    name: "Summit Legal",
+    note: "Waiting on signed scope",
+    source: "Spreadsheet",
+    sourceTone: "bg-[#dcfce7] text-[#15803d]",
+    date: "May 5",
+  },
+  {
+    initials: "BG",
+    name: "BrightGrowth",
+    note: "Interested in expansion plan",
+    source: "Team chat",
+    sourceTone: "bg-[#ede9fe] text-[#6d28d9]",
+    date: "May 6",
+  },
 ] as const;
 
-function TimeBadge({
-  label,
-  value,
-  active,
+const PROOF_IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"] as const;
+
+/** Alternate basenames (e.g. sparkle.png vs bundled decoration art). */
+const PROOF_ASSET_ALIASES: Partial<Record<string, readonly string[]>> = {
+  sparkle: ["sparkle", "27_sparkle_decorations"],
+};
+
+function proofAssetCandidates(base: string, rasterOnly: boolean): string[] {
+  const bases = PROOF_ASSET_ALIASES[base] ?? [base];
+  const exts = rasterOnly
+    ? PROOF_IMAGE_EXTENSIONS
+    : ([...PROOF_IMAGE_EXTENSIONS, ".svg"] as const);
+
+  return bases.flatMap((name) =>
+    exts.map((ext) => `${ASSET}/${name}${ext}`),
+  );
+}
+
+function ProofAsset({
+  base,
+  alt,
+  className,
+  rasterOnly = false,
 }: {
-  label: string;
-  value: string;
-  active: boolean;
+  base: string;
+  alt: string;
+  className?: string;
+  /** When true, never loads bundled .svg (use for brand PNGs). */
+  rasterOnly?: boolean;
 }) {
+  const candidates = useMemo(
+    () => proofAssetCandidates(base, rasterOnly),
+    [base, rasterOnly],
+  );
+  const [index, setIndex] = useState(0);
+  const src = candidates[index];
+  const exhausted = index >= candidates.length;
+
+  if (exhausted || !src) {
+    return (
+      <span
+        className={["inline-flex shrink-0 bg-neutral-100/80", className].join(" ")}
+        aria-hidden={alt === ""}
+      />
+    );
+  }
+
   return (
-    <div
+    <span className={["relative inline-flex shrink-0", className].join(" ")}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        unoptimized
+        className="object-contain"
+        onError={() => setIndex((i) => i + 1)}
+      />
+    </span>
+  );
+}
+
+function SparkleIcon({ className = "size-3.5" }: { className?: string }) {
+  return <ProofAsset base="sparkle" alt="" className={className} rasterOnly />;
+}
+
+function ManualCard({ active }: { active: boolean }) {
+  return (
+    <article
       className={[
-        "flex items-center justify-between gap-3 border px-3 py-2 transition-colors duration-300 sm:block sm:px-3.5 sm:py-2.5",
+        "relative flex h-full flex-col rounded-[1.75rem] border bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition-all duration-500 sm:p-6 lg:z-0",
         active
-          ? "border-neutral-900 bg-neutral-950 text-white"
-          : "border-neutral-200 bg-white text-neutral-400",
+          ? "border-neutral-200 opacity-100"
+          : "border-neutral-100 opacity-75 lg:translate-y-2 lg:scale-[0.98]",
       ].join(" ")}
     >
-      <p className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.14em] sm:text-[10px]">
-        {label}
-      </p>
-      <p
-        className={[
-          "font-[family-name:var(--font-geist-mono)] text-[16px] font-light tracking-[-0.04em] sm:mt-0.5 sm:text-[18px]",
-          active ? "text-white" : "text-neutral-400",
-        ].join(" ")}
-      >
-        {value}
-      </p>
-    </div>
-  );
-}
+      <div className="flex items-start gap-3">
+        <ProofAsset
+          base="clock"
+          alt=""
+          className="mt-0.5 size-9 shrink-0"
+        />
+        <div>
+          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-[#ea580c]">
+            By hand
+          </p>
+          <p className="mt-0.5 font-[family-name:var(--font-serif)] text-[clamp(1.7rem,2.4vw,2.1rem)] leading-none tracking-[-0.02em] text-neutral-950">
+            6 hours
+          </p>
+          <p className="mt-1.5 text-[13px] text-neutral-500">
+            Dig through multiple tools and tabs
+          </p>
+        </div>
+      </div>
 
-function SourceIcon({ kind }: { kind: (typeof SOURCES)[number]["id"] }) {
-  const paths: Record<(typeof SOURCES)[number]["id"], string> = {
-    email: "M4 6h12v8H4V6zm0 0l6 4 6-4",
-    sheet: "M6 4h8l4 4v10H6V4zm8 0v4h4",
-    crm: "M8 8a3 3 0 116 0 3 3 0 01-6 0zm-5 10a5 5 0 0110 0",
-    chat: "M5 6h10v6H9l-2 2v-2H5V6z",
-  };
-
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      className="size-5 shrink-0"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      aria-hidden="true"
-    >
-      <path d={paths[kind]} strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ManualPanel() {
-  return (
-    <div className="flex h-full min-h-0 flex-col gap-4">
-      <div className="shrink-0 rounded-sm border border-amber-200 bg-amber-50 px-3 py-2.5 sm:px-4">
-        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-amber-800">
+      <div className="mt-5 rounded-2xl bg-[#fff7ed] px-4 py-3.5">
+        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.14em] text-[#ea580c]">
           The question
         </p>
-        <p className="mt-1 text-[14px] font-medium tracking-[-0.01em] text-neutral-900 sm:text-[15px]">
+        <p className="mt-1.5 text-[15px] font-semibold tracking-[-0.01em] text-neutral-950 sm:text-[16px]">
           Who needs a follow-up this week?
         </p>
       </div>
 
-      <div className="grid min-h-0 flex-1 gap-3 sm:grid-cols-2">
-        <div className="flex min-h-0 flex-col border border-neutral-200 bg-white p-3 sm:p-4">
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-            Checking by hand
-          </p>
-          <ul className="mt-3 space-y-2">
-            {SOURCES.map((source, index) => (
-              <li
-                key={source.id}
-                className="proof-manual-source flex items-center gap-3 border border-neutral-200 bg-[#fafafa] px-3 py-2.5"
-                style={{ animationDelay: `${index * 120}ms` }}
-              >
-                <span className="text-neutral-400">
-                  <SourceIcon kind={source.id} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[13px] font-medium text-neutral-800">
-                    {source.label}
-                  </p>
-                  <p className="text-[11px] text-neutral-400">
-                    {source.detail}
-                  </p>
-                </div>
-                <span className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-amber-600">
-                  Open
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-auto pt-3 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-neutral-400">
-            One tab at a time · copy · paste · repeat
-          </p>
-        </div>
-
-        <div className="flex min-h-0 flex-col items-center justify-center border border-dashed border-neutral-300 bg-[#f7f7f7] p-4 text-center">
-          <div
-            className="proof-manual-spin flex size-14 items-center justify-center rounded-full border-2 border-dashed border-neutral-300 bg-white"
-            aria-hidden="true"
-          >
-            <span className="font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-neutral-400">
-              ?
-            </span>
-          </div>
-          <p className="mt-4 max-w-[24ch] text-[14px] leading-relaxed text-neutral-600">
-            Still hunting through inboxes and spreadsheets. No clear list yet.
-          </p>
-          <p className="mt-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-400">
-            Answer · not ready
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AgilityPanel({ animate }: { animate: boolean }) {
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    if (!animate) {
-      setStep(3);
-      return;
-    }
-
-    setStep(0);
-    const timers = [
-      window.setTimeout(() => setStep(1), 400),
-      window.setTimeout(() => setStep(2), 1200),
-      window.setTimeout(() => setStep(3), 2000),
-    ];
-    return () => timers.forEach((id) => window.clearTimeout(id));
-  }, [animate]);
-
-  return (
-    <div className="flex h-full min-h-0 flex-col gap-4">
-      <div className="shrink-0 rounded-sm border border-emerald-200 bg-emerald-50 px-3 py-2.5 sm:px-4">
-        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-800">
-          The question
+      <div className="mt-5 flex min-h-0 flex-1 flex-col">
+        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+          Checking multiple sources
         </p>
-        <p className="mt-1 text-[14px] font-medium tracking-[-0.01em] text-neutral-900 sm:text-[15px]">
-          Who needs a follow-up this week?
-        </p>
-      </div>
-
-      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[1fr_1.1fr]">
-        <div className="relative flex min-h-0 flex-col border border-neutral-200 bg-neutral-950 p-3 text-white sm:p-4">
-          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-white/45">
-            All your sources, at once
-          </p>
-
-          <div className="relative mt-4 flex min-h-0 flex-1 flex-col justify-between gap-3">
-            <ul className="grid grid-cols-2 gap-2">
-              {SOURCES.map((source, index) => (
-                <li
-                  key={source.id}
-                  className={[
-                    "flex items-center gap-2 border px-2.5 py-2 transition-all duration-500",
-                    step >= 1
-                      ? "border-emerald-400/40 bg-emerald-400/10 text-white"
-                      : "border-white/10 text-white/40",
-                  ].join(" ")}
-                  style={{ transitionDelay: `${index * 80}ms` }}
-                >
-                  <SourceIcon kind={source.id} />
-                  <span className="text-[11px] font-medium">
-                    {source.label}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="relative flex flex-1 items-center justify-center py-2">
-              <svg
-                className="absolute inset-0 h-full w-full"
-                viewBox="0 0 200 120"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                {[30, 70, 130, 170].map((x, index) => (
-                  <line
-                    key={x}
-                    x1={x}
-                    y1="20"
-                    x2="100"
-                    y2="95"
-                    stroke="rgba(52,211,153,0.45)"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 4"
-                    className={[
-                      "proof-agility-line transition-opacity duration-500",
-                      step >= 1 ? "opacity-100" : "opacity-0",
-                    ].join(" ")}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  />
-                ))}
-              </svg>
-
-              <div
-                className={[
-                  "relative z-10 flex size-14 items-center justify-center rounded-full border transition-all duration-500",
-                  step >= 2
-                    ? "border-emerald-300 bg-emerald-400/20 scale-100 opacity-100"
-                    : "border-white/20 bg-white/5 scale-90 opacity-50",
-                ].join(" ")}
-              >
-                <span className="font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.1em] text-emerald-200">
-                  AI
-                </span>
-              </div>
-            </div>
-
-            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-white/35">
-              {step < 2
-                ? "Connecting sources…"
-                : step < 3
-                  ? "Finding patterns…"
-                  : "Done"}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex min-h-0 flex-col border border-neutral-200 bg-white p-3 sm:p-4">
-          <div className="flex items-center justify-between">
-            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-              Your answer
-            </p>
-            <p
-              className={[
-                "font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] transition-colors duration-500",
-                step >= 3 ? "text-emerald-700" : "text-neutral-300",
-              ].join(" ")}
+        <ul className="mt-3 space-y-2">
+          {SOURCES.map((source, index) => (
+            <li
+              key={source.id}
+              className="proof-manual-source flex items-center gap-3 rounded-xl border border-neutral-200 bg-[#fafafa] px-3 py-2.5"
+              style={{ animationDelay: `${index * 120}ms` }}
             >
-              {step >= 3 ? "Ready" : "Building"}
-            </p>
-          </div>
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-neutral-500 shadow-sm">
+                <ProofAsset
+                  base={source.iconBase}
+                  alt=""
+                  className="size-4"
+                />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[13px] font-semibold text-neutral-900">
+                  {source.label}
+                </p>
+                <p className="text-[11px] text-neutral-400">{source.detail}</p>
+              </div>
+              <span className="font-[family-name:var(--font-geist-mono)] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#ea580c]">
+                Open
+              </span>
+            </li>
+          ))}
+        </ul>
 
-          <div
-            className={[
-              "mt-3 rounded-sm border border-emerald-200 bg-emerald-50 px-3 py-3 transition-all duration-500",
-              step >= 3
-                ? "translate-y-0 opacity-100"
-                : "translate-y-2 opacity-30",
-            ].join(" ")}
-          >
-            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-emerald-800">
-              This week
-            </p>
-            <p className="mt-1 font-[family-name:var(--font-serif)] text-[1.35rem] leading-tight tracking-[-0.02em] text-neutral-950">
-              12 customers need a follow-up
-            </p>
-            <p className="mt-1 text-[13px] text-neutral-600">
-              Start with these three — pulled from email, CRM, and your
-              team&apos;s notes.
-            </p>
-          </div>
-
-          <ul className="mt-3 min-h-0 flex-1 space-y-2 overflow-hidden">
-            {FOLLOW_UPS.map((item, index) => (
-              <li
-                key={item.name}
-                className={[
-                  "border border-neutral-200 bg-[#fafafa] px-3 py-2.5 transition-all duration-500",
-                  step >= 3
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-25",
-                ].join(" ")}
+        <div className="mt-auto pt-6">
+          <div className="relative mx-auto flex h-16 max-w-[260px] items-end justify-center gap-2">
+            {BRANDS.map((brand, index) => (
+              <div
+                key={brand.id}
+                className="relative size-11 shrink-0 overflow-hidden rounded-2xl bg-white shadow-[0_8px_20px_rgba(15,23,42,0.12)] ring-1 ring-black/5"
                 style={{
-                  transitionDelay: step >= 3 ? `${index * 100}ms` : "0ms",
+                  transform: `rotate(${brand.rotate}) translateY(${index % 2 === 0 ? "6px" : "0px"})`,
                 }}
               >
-                <p className="text-[13px] font-medium text-neutral-900">
-                  {item.name}
-                </p>
-                <p className="mt-0.5 text-[12px] text-neutral-500">
-                  {item.note}
-                </p>
-              </li>
+                <ProofAsset
+                  base={brand.iconBase}
+                  alt={brand.label}
+                  className="size-full p-1.5"
+                  rasterOnly
+                />
+              </div>
             ))}
-          </ul>
+          </div>
+          <p className="mt-3 text-center font-[family-name:var(--font-cursive)] text-[1.15rem] leading-tight text-neutral-500">
+            Jumping between tools, trying to piece it together...
+          </p>
         </div>
       </div>
+    </article>
+  );
+}
+
+function AgilityCard({ active }: { active: boolean }) {
+  return (
+    <article
+      className={[
+        "relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border bg-[#f8f6ff] p-5 shadow-[0_22px_60px_rgba(124,58,237,0.14)] transition-all duration-500 sm:p-6 lg:z-10",
+        active
+          ? "border-[#c4b5fd] opacity-100 lg:-translate-y-2 lg:scale-[1.01]"
+          : "border-[#ddd6fe]/70 opacity-80",
+      ].join(" ")}
+    >
+      <div className="pointer-events-none absolute -right-1 -top-2 z-10 hidden w-[120px] sm:block lg:w-[130px]">
+        <Image
+          src={`${ASSET}/robot.png`}
+          alt=""
+          width={130}
+          height={130}
+          className="h-auto w-full object-contain drop-shadow-[0_12px_24px_rgba(124,58,237,0.25)]"
+        />
+        <div className="absolute -left-[4.5rem] top-10 hidden rotate-[-8deg] lg:block">
+          <svg
+            viewBox="0 0 72 36"
+            className="h-8 w-16 text-[#7c3aed]"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 28c18-18 36-22 60-18"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeDasharray="3 3"
+            />
+            <path
+              d="M56 6l10 4-8 6"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <p className="mt-0.5 max-w-[9ch] font-[family-name:var(--font-cursive)] text-[1.05rem] leading-tight text-[#7c3aed]">
+            Clear answer with sources
+          </p>
+        </div>
+      </div>
+
+      <div className="relative z-0 flex items-start gap-3 pr-16 sm:pr-24">
+        <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-[#ddd6fe]">
+          <ProofAsset
+            base="bolt"
+            alt=""
+            className="size-5"
+          />
+        </span>
+        <div>
+          <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-[#7c3aed]">
+            With Agility AI
+          </p>
+          <p className="mt-0.5 font-[family-name:var(--font-serif)] text-[clamp(1.7rem,2.4vw,2.1rem)] leading-none tracking-[-0.02em] text-neutral-950">
+            20 minutes
+          </p>
+          <p className="mt-1.5 text-[13px] text-neutral-500">
+            One clear answer, with sources
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-5 flex min-h-0 flex-1 flex-col rounded-2xl border border-[#e9e4ff] bg-white/80 p-4 backdrop-blur-sm">
+        <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+          The answer
+        </p>
+
+        <div className="mt-3 flex gap-3 rounded-2xl bg-[#ecfdf5] px-3.5 py-3">
+          <ProofAsset
+            base="check"
+            alt=""
+            className="mt-0.5 size-5 shrink-0"
+          />
+          <div>
+            <p className="text-[14px] font-semibold tracking-[-0.01em] text-neutral-950 sm:text-[15px]">
+              12 customers need a follow-up this week
+            </p>
+            <p className="mt-1 text-[12px] leading-relaxed text-neutral-500">
+              Here are the key ones, pulled from email, CRM and your team&apos;s
+              notes.
+            </p>
+          </div>
+        </div>
+
+        <ul className="mt-3 space-y-2">
+          {FOLLOW_UPS.map((item) => (
+            <li
+              key={item.name}
+              className="flex items-center gap-3 rounded-xl border border-neutral-100 bg-[#fafafa] px-3 py-2.5"
+            >
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ede9fe] text-[11px] font-semibold text-[#6d28d9]">
+                {item.initials}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[13px] font-semibold text-neutral-900">
+                  {item.name}
+                </p>
+                <p className="truncate text-[11px] text-neutral-400">
+                  {item.note}
+                </p>
+              </div>
+              <span
+                className={`hidden rounded-full px-2 py-0.5 text-[10px] font-medium sm:inline-flex ${item.sourceTone}`}
+              >
+                {item.source}
+              </span>
+              <span className="shrink-0 font-[family-name:var(--font-geist-mono)] text-[10px] text-neutral-400">
+                {item.date}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-4 text-center font-[family-name:var(--font-cursive)] text-[1.15rem] leading-tight text-[#7c3aed]">
+          Minutes, not hours — with sources attached.
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function TransitionArrow() {
+  return (
+    <div
+      className="pointer-events-none absolute left-1/2 top-[44%] z-20 hidden -translate-x-1/2 -translate-y-1/2 lg:block"
+      aria-hidden="true"
+    >
+      <svg
+        viewBox="0 0 88 64"
+        className="h-14 w-20 text-[#7c3aed] drop-shadow-sm"
+        fill="none"
+      >
+        <path
+          d="M8 40c18-26 42-34 72-28"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M66 8l16 6-10 12"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </div>
   );
 }
 
 export default function InteractiveProof() {
   const labelId = useId();
-  const [mode, setMode] = useState<Mode>("manual");
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(media.matches);
-    const onChange = () => setReduceMotion(media.matches);
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || paused) return;
-
-    const id = window.setInterval(() => {
-      setMode((current) => (current === "manual" ? "agility" : "manual"));
-    }, 5000);
-
-    return () => window.clearInterval(id);
-  }, [reduceMotion, paused]);
+  const [mode, setMode] = useState<Mode>("agility");
 
   return (
     <section
       id="proof"
       aria-labelledby={labelId}
-      className="sticky top-0 z-10 flex h-svh flex-col overflow-hidden border-b border-neutral-200 bg-[#f4f4f4]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
+      className="relative z-10 overflow-hidden border-b border-neutral-200 bg-[#f5f5f7] text-black"
     >
-      <div className="mx-auto flex h-full w-full max-w-[1100px] min-h-0 flex-col px-5 py-5 sm:px-6 sm:py-6 md:py-7">
-        <div className="mx-auto w-full max-w-[42rem] shrink-0 text-center">
+      <div className="mx-auto max-w-[1180px] px-5 py-14 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[40rem] text-center">
+          <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#7c3aed]">
+            Same question. Two very different afternoons.
+          </p>
           <h2
             id={labelId}
-            className="font-[family-name:var(--font-serif)] text-[clamp(1.25rem,2.8vw,1.85rem)] leading-[1.15] tracking-[-0.02em] text-neutral-950"
+            className="mt-4 font-[family-name:var(--font-serif)] text-[clamp(1.85rem,4vw,3rem)] leading-[1.12] tracking-[-0.03em] text-neutral-950"
           >
-            Same question. Two very different afternoons.
+            A simple business question. Two very different{" "}
+            <span className="relative inline-block whitespace-nowrap">
+              afternoons.
+              <svg
+                viewBox="0 0 160 10"
+                className="absolute -bottom-1 left-0 h-2.5 w-full text-[#7c3aed]"
+                aria-hidden="true"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M2 7c30-5 60 3 90-2s48-3 66 2"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
           </h2>
-          <p className="mx-auto mt-2 max-w-[44ch] text-[13px] leading-relaxed text-neutral-500 sm:text-[14px]">
-            A simple business question — answered by digging through tabs, or
-            answered in one clear list.
+          <p className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-relaxed text-neutral-500 sm:text-[15px]">
+            See how the same question goes from hours of digging to a clear
+            answer in minutes with Agility AI.
           </p>
         </div>
 
         <div
-          className="mx-auto mt-3 flex w-full max-w-md shrink-0 rounded-none border border-neutral-300 bg-white p-0.5 sm:mt-4"
+          className="mx-auto mt-7 flex w-full max-w-[340px] rounded-full border border-neutral-200 bg-white p-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)] sm:mt-8"
           role="tablist"
           aria-label="Compare approaches"
         >
@@ -372,13 +453,13 @@ export default function InteractiveProof() {
             aria-selected={mode === "manual"}
             onClick={() => setMode("manual")}
             className={[
-              "flex-1 px-3 py-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] transition-colors sm:text-[11px]",
+              "flex-1 rounded-full px-4 py-2.5 text-[13px] font-medium transition-all",
               mode === "manual"
-                ? "bg-neutral-950 text-white"
-                : "text-neutral-500 hover:text-neutral-900",
+                ? "bg-white text-neutral-950 shadow-[0_2px_10px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200"
+                : "text-neutral-500 hover:text-neutral-800",
             ].join(" ")}
           >
-            By hand
+            By Hand
           </button>
           <button
             type="button"
@@ -386,39 +467,40 @@ export default function InteractiveProof() {
             aria-selected={mode === "agility"}
             onClick={() => setMode("agility")}
             className={[
-              "flex-1 px-3 py-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] transition-colors sm:text-[11px]",
+              "inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-[13px] font-medium transition-all",
               mode === "agility"
-                ? "bg-neutral-950 text-white"
-                : "text-neutral-500 hover:text-neutral-900",
+                ? "bg-[#1e1b4b] text-white shadow-[0_8px_20px_rgba(30,27,75,0.28)]"
+                : "text-neutral-500 hover:text-neutral-800",
             ].join(" ")}
           >
+            {mode === "agility" ? (
+              <SparkleIcon className="size-3.5 brightness-0 invert" />
+            ) : (
+              <SparkleIcon className="size-3.5 opacity-70" />
+            )}
             With Agility AI
           </button>
         </div>
 
-        <div className="mt-3 grid shrink-0 gap-2 sm:grid-cols-2 sm:gap-3">
-          <TimeBadge
-            label="By hand"
-            value="6 hours"
-            active={mode === "manual"}
-          />
-          <TimeBadge
-            label="With Agility AI"
-            value="20 minutes"
-            active={mode === "agility"}
-          />
-        </div>
+        <div className="relative mt-10 lg:mt-12">
+          <TransitionArrow />
 
-        <div
-          className="mt-3 min-h-0 flex-1 sm:mt-4"
-          role="tabpanel"
-          aria-live="polite"
-        >
-          {mode === "manual" ? (
-            <ManualPanel />
-          ) : (
-            <AgilityPanel animate={!reduceMotion} />
-          )}
+          <div className="grid gap-5 lg:grid-cols-2 lg:items-stretch lg:gap-7">
+            <div
+              className={mode === "manual" ? "block" : "hidden lg:block"}
+              role="tabpanel"
+              aria-hidden={mode !== "manual"}
+            >
+              <ManualCard active={mode === "manual"} />
+            </div>
+            <div
+              className={mode === "agility" ? "block" : "hidden lg:block"}
+              role="tabpanel"
+              aria-hidden={mode !== "agility"}
+            >
+              <AgilityCard active={mode === "agility"} />
+            </div>
+          </div>
         </div>
       </div>
     </section>

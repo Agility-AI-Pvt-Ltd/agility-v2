@@ -1,12 +1,12 @@
 import ContactCTA from "@/components/ContactCTA";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
-import { COMPANY_SUBHEADING } from "@/lib/company";
+import { COMPANY_SUBHEADING, CONTACT_EMAIL } from "@/lib/company";
 
 const details = [
   {
     label: "Email",
-    value: "agilityaibusiness@gmail.com",
-    href: "mailto:agilityaibusiness@gmail.com",
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
   {
     label: "Programmes",
@@ -25,8 +25,8 @@ export default function ContactPage() {
     <SiteChrome>
       <PageHero
         eyebrow="Contact"
-        title="Start with a brief—or book a call"
-        description="Form is the primary path. Book-a-call is secondary but always visible. Share where AI should create leverage and we’ll respond with a clear next step."
+        title="Book a call—or reach us directly"
+        description="Share where AI should create leverage. Book a call opens WhatsApp with Bhawna, or use email and phone below for a fast reply."
       />
 
       <section className="border-b border-white/10 bg-black">

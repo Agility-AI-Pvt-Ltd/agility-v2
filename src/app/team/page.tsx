@@ -43,7 +43,7 @@ const founders = [
 ] as const;
 
 /** Bust Next/Image + browser cache when public cutouts are replaced in-place. */
-const FOUNDER_IMAGE_VERSION = "20261012e";
+const FOUNDER_IMAGE_VERSION = "20261012h";
 
 const advisors = [
   {
