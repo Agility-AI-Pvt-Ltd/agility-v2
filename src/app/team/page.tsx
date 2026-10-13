@@ -199,7 +199,7 @@ export default function TeamPage() {
         <div className="mx-auto flex max-w-[1100px] flex-col gap-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-10 sm:py-14">
           <div className="max-w-xl">
             <p className="font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.16em] text-[#3b6ef5]">
-              Next
+              Explore
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-serif)] text-[clamp(1.4rem,2.8vw,1.85rem)] leading-[1.15] tracking-[-0.02em]">
               Want to work with us — or join the team?

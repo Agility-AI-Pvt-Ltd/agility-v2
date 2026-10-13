@@ -74,7 +74,7 @@ export default function ServicesPage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-5 max-w-[48ch] text-[15px] leading-relaxed text-white/60 sm:text-[16px] sm:leading-[1.7]">
-                AI enablement training, AI integration builds, and ready to use
+                AI enablement training, AI integration builds, and ready-to-use
                 AI products — built for organisations across every industry.
               </p>
             </Reveal>
@@ -113,7 +113,7 @@ export default function ServicesPage() {
                 <div className="mb-5 flex items-center gap-3">
                   <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
                   <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                    Industries we&apos;ve worked with
+                    Track record
                   </p>
                 </div>
               </Reveal>
@@ -145,7 +145,9 @@ export default function ServicesPage() {
                 <p className="mt-6 max-w-[70ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
                   Institutional engagements include NDDB, the Foundation for
                   Innovation and Action (FIA), the Entrepreneurship Development
-                  Institute of India (EDII), NCDFI, KMF and IDMC.
+                  Institute of India (EDII), the National Cooperative Dairy
+                  Federation of India (NCDFI), Karnataka Cooperative Milk
+                  Federation (KMF) and Indian Dairy Machinery Company (IDMC).
                 </p>
               </Reveal>
             </div>

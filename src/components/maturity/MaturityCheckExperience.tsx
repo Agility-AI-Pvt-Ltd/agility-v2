@@ -189,6 +189,7 @@ export default function MaturityCheckExperience() {
       onNext={handleNext}
       onSelect={phase === "result" ? handleRetake : confirmCurrentOption}
       onRetake={handleRetake}
+      onPickOption={setSelectedOptionIndex}
     />
   );
 }

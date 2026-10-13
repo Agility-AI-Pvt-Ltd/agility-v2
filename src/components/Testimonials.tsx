@@ -23,7 +23,7 @@ const voices = [
 
 const digDeeper = [
   { label: "AI Maturity Check", href: "/ai-maturity-check" },
-  { label: "Team and advisors", href: "/team" },
+  { label: "Team", href: "/team" },
   { label: "Careers", href: "/careers" },
   { label: "FAQ", href: "/about#faq" },
 ] as const;

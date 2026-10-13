@@ -342,7 +342,7 @@ export default function BuiltProjectsGrid(_props: BuiltProjectsGridProps) {
 
             <Reveal delay={140}>
               <p className="mt-5 max-w-[48ch] text-[15px] leading-relaxed text-neutral-600 sm:text-[16px]">
-                Each platform has over{" "}
+                Each platform serves{" "}
                 <span className="font-semibold text-neutral-900">2,000+ users</span>
                 — mentorship, finance, learning, legal, and operations tools
                 people use every day.

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { BookCallButton } from "@/components/BookCallModal";
 import {
   useCallback,
   useEffect,
@@ -621,6 +622,17 @@ function OfferingCard({
           View details
           <span aria-hidden="true">→</span>
         </button>
+        <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+          <BookCallButton className="inline-flex h-10 flex-1 items-center justify-center rounded-full bg-neutral-900 px-4 text-[12px] font-medium text-white transition-colors hover:bg-neutral-800">
+            Book a call
+          </BookCallButton>
+          <Link
+            href="/ai-maturity-check"
+            className="inline-flex h-10 flex-1 items-center justify-center rounded-full border border-neutral-200 bg-white px-4 text-[12px] font-medium text-neutral-800 transition-colors hover:border-neutral-300"
+          >
+            Maturity check
+          </Link>
+        </div>
       </div>
     </article>
   );

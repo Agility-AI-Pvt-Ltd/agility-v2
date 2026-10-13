@@ -32,7 +32,7 @@ export function buildSiteKnowledgeBase() {
 - What they deliver: The working system, plus internal muscle memory to run it, govern it, and change it without calling Agility AI every time.
 - Email: organization@agilityai.in
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
-- Credentials (/about#credentials): incubated via NSRCEL IIM Bangalore (Women Startup Program), IIT Allahabad, IRMA ISEED; recognition including Top 15 startups in South Asia, Stanford Seed, Stanford GSB, DPIIT Startup India (DIPP205863); NVIDIA Inception, Sarvam AI Startup Programme, Claude Partner Program; NDDB onboarding for training; UP government financial incentive felicitation.
+- Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
 
 ## FOUR CAPABILITY PILLARS
 - Strategy: Figure out where AI actually pays for itself, and where it's just noise.

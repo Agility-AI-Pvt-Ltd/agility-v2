@@ -265,12 +265,18 @@ export default function Capabilities() {
               </div>
               <TraceBars />
               <div className="grid grid-cols-3 gap-px border-t border-neutral-200 bg-neutral-200">
-                {["Run", "Own", "Extend"].map((label) => (
-                  <div
-                    key={label}
-                    className="bg-white px-2 py-2.5 text-center font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-neutral-600"
-                  >
-                    {label}
+                {[
+                  { label: "Run", hint: "Daily use in real workflows" },
+                  { label: "Own", hint: "Your team maintains it" },
+                  { label: "Extend", hint: "Improve without us" },
+                ].map(({ label, hint }) => (
+                  <div key={label} className="bg-white px-2 py-2.5 text-center">
+                    <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.1em] text-neutral-800">
+                      {label}
+                    </p>
+                    <p className="mt-1 text-[9px] leading-snug text-neutral-500">
+                      {hint}
+                    </p>
                   </div>
                 ))}
               </div>

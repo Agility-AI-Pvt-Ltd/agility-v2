@@ -20,10 +20,7 @@ export default function FaqAccordion({ items }: FaqAccordionProps) {
         return (
           <li
             key={item.question}
-            className={[
-              "faq-item",
-              isOpen ? "faq-item-open" : "",
-            ].join(" ")}
+            className={["faq-item", isOpen ? "faq-item-open" : ""].join(" ")}
           >
             <button
               type="button"
@@ -47,10 +44,16 @@ export default function FaqAccordion({ items }: FaqAccordionProps) {
               id={panelId}
               role="region"
               aria-labelledby={buttonId}
-              className="faq-panel"
-              hidden={!isOpen}
+              className={[
+                "grid transition-[grid-template-rows] duration-300 ease-out",
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+              ].join(" ")}
             >
-              <p className="faq-answer">{item.answer}</p>
+              <div className="min-h-0 overflow-hidden">
+                <div className="faq-panel">
+                  <p className="faq-answer">{item.answer}</p>
+                </div>
+              </div>
             </div>
           </li>
         );

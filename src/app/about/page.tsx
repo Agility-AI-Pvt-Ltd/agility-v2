@@ -7,6 +7,7 @@ import {
   StagesPipelineViz,
 } from "@/components/about/AboutIllustrations";
 import CredentialsSection from "@/components/about/CredentialsSection";
+import ParentCompanySection from "@/components/about/ParentCompanySection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
 import SiteChrome from "@/components/SiteChrome";
@@ -195,6 +196,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <ParentCompanySection />
       <CredentialsSection />
 
       {/* FAQ */}
@@ -232,7 +234,7 @@ export default function AboutPage() {
                   <div className="faq-visual-ring faq-visual-ring-3" />
                   <div className="faq-visual-core" />
                   <p className="faq-visual-label">
-                    {FAQ_ITEMS.length} questions · FAQPage schema
+                    {FAQ_ITEMS.length} questions answered
                   </p>
                 </div>
               </Reveal>

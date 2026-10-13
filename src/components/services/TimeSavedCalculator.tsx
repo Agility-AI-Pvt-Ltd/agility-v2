@@ -50,7 +50,8 @@ export default function TimeSavedCalculator() {
         <p className="mt-4 max-w-[58ch] text-[15px] leading-relaxed text-neutral-600 sm:text-[16px]">
           Estimate hours reclaimed from repetitive work. Assumes a{" "}
           {Math.round(REDUCTION_RATE * 100)}% reduction in time spent on those
-          tasks — a placeholder estimate, not a published client outcome.
+          tasks — a planning estimate for conversation, not a guaranteed client
+          outcome.
         </p>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12">

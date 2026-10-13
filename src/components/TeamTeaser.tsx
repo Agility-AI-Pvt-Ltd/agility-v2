@@ -29,8 +29,8 @@ export default function TeamTeaser() {
               Practitioners who ship systems and build capability
             </h2>
             <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-white/55 sm:text-[16px]">
-              Placeholder profiles for now—swap in real photos and bios on the
-              full Team page.
+              Founders and advisors who ship systems and build capability — see
+              full bios and the advisory board on the Team page.
             </p>
           </div>
 

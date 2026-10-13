@@ -208,8 +208,11 @@ function ManualCard({ active }: { active: boolean }) {
                 </p>
                 <p className="text-[11px] text-neutral-400">{source.detail}</p>
               </div>
-              <span className="font-[family-name:var(--font-geist-mono)] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#ea580c]">
-                Open
+              <span
+                className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.12em] text-[#ea580c]/50"
+                aria-hidden="true"
+              >
+                ···
               </span>
             </li>
           ))}

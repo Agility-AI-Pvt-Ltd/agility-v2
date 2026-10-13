@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import HomeClientStrip from "@/components/HomeClientStrip";
+import HomeStatsBand from "@/components/HomeStatsBand";
 import IndustriesTeaser from "@/components/IndustriesTeaser";
 import InteractiveProof from "@/components/InteractiveProof";
 import Navbar from "@/components/Navbar";
@@ -30,6 +32,8 @@ export default function Home() {
       <main className="flex-1">
         <div className="relative">
           <Hero />
+          <HomeStatsBand />
+          <HomeClientStrip />
           <InteractiveProof />
           <div className="relative h-[200svh]">
             <Capabilities />

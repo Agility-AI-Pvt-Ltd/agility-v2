@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import ContactCTA from "@/components/ContactCTA";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
-import { COMPANY_SUBHEADING, CONTACT_EMAIL } from "@/lib/company";
+import {
+  BOOK_CALL_WHATSAPP_URL,
+  COMPANY_SUBHEADING,
+  CONTACT_EMAIL,
+  PROGRAMMES_CONTACT,
+} from "@/lib/company";
+
+export const metadata: Metadata = {
+  title: { absolute: "Contact Agility AI | Book a Call or Email" },
+  description:
+    "Tell us where AI should create leverage. Book a call on WhatsApp, email organization@agilityai.in, or reach our programmes team directly.",
+  openGraph: {
+    title: "Contact Agility AI | Book a Call or Email",
+    description:
+      "Book a call on WhatsApp or email organization@agilityai.in for enablement, integration and products.",
+  },
+};
 
 const details = [
   {
@@ -9,9 +26,9 @@ const details = [
     href: `mailto:${CONTACT_EMAIL}`,
   },
   {
-    label: "Programmes",
-    value: "Bhawna Khorwal · 7042149608",
-    href: "tel:+917042149608",
+    label: "Book a call (WhatsApp)",
+    value: `${PROGRAMMES_CONTACT.name} · ${PROGRAMMES_CONTACT.phoneDisplay}`,
+    href: BOOK_CALL_WHATSAPP_URL,
   },
   { label: "About", value: COMPANY_SUBHEADING },
   {
@@ -26,7 +43,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Book a call—or reach us directly"
-        description="Share where AI should create leverage. Book a call opens WhatsApp with Bhawna, or use email and phone below for a fast reply."
+        description="Tell us what you need. We reply within one working day — book a call on WhatsApp with Bhawna or use email below."
       />
 
       <section className="border-b border-white/10 bg-black">
@@ -39,6 +56,12 @@ export default function ContactPage() {
               {"href" in item && item.href ? (
                 <a
                   href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    item.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   className="mt-2 block text-[14px] text-white/80 transition-colors hover:text-white"
                 >
                   {item.value}

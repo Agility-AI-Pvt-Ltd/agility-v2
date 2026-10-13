@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
+import TextTestimonials from "@/components/testimonials/TextTestimonials";
 import TestimonialVideoGrid, {
   type TestimonialVideo,
 } from "@/components/testimonials/TestimonialVideoGrid";
@@ -82,15 +83,27 @@ export default function TestimonialsPage() {
       <PageHero
         eyebrow="Testimonials"
         title="Hear it straight from the people who sat through these sessions."
-        description="Real video testimonials recorded from actual AI enablement sessions — in their own words."
+        description="Written feedback from programme leads and session clips from enablement workshops."
       />
+
+      <section className="border-b border-neutral-200 bg-white text-black">
+        <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
+            <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
+              In their words
+            </p>
+          </div>
+          <TextTestimonials />
+        </div>
+      </section>
 
       <section className="border-b border-neutral-200 bg-[#f6f6f6] text-black">
         <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
           <div className="mb-8 flex items-center gap-3">
             <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
             <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-              Video grid
+              Session clips
             </p>
           </div>
 

@@ -55,7 +55,7 @@ export default function SessionCounter() {
     >
       We&apos;ve run{" "}
       <span className="font-[family-name:var(--font-geist-mono)] text-[1.25em] font-semibold tabular-nums text-neutral-950">
-        {count}+
+        {started ? count : TARGET}+
       </span>{" "}
       AI enablement sessions across industries, helping people actually adapt to
       working with AI, not just hear about it.

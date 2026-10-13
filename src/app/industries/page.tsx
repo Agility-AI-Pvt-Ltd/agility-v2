@@ -1,7 +1,30 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
 
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "AI Training for Government, Cooperatives and Enterprises | Agility AI",
+  },
+  description:
+    "Sector-specific AI enablement and integration for government, dairy cooperatives, education and enterprise — adapted to how your industry actually decides and delivers.",
+  openGraph: {
+    title:
+      "AI Training for Government, Cooperatives and Enterprises | Agility AI",
+    description:
+      "Sector-specific AI enablement and integration for government, dairy cooperatives, education and enterprise.",
+  },
+};
+
 const industries = [
+  {
+    name: "Government / Public sector",
+    problem:
+      "Large programmes move slowly when field data, training academies and HQ systems do not share a common rhythm — and AI pilots stall without adoption.",
+    approach:
+      "We work with departments, PSUs and training bodies (including NDDB-type federations and academy partners) on enablement plus practical automation that respects decision rights and audit trails.",
+  },
   {
     name: "Dairy / Cooperative",
     problem:
@@ -22,13 +45,6 @@ const industries = [
       "Pilots multiply across functions while production systems, accountability, and operating rhythms stay thin.",
     approach:
       "We align adoption and implementation across business and tech—prioritising use cases, shipping into real stacks, and installing owners who can extend what ships.",
-  },
-  {
-    name: "Flexible / Emerging",
-    problem:
-      "New or hybrid sectors need AI leverage without inherited enterprise playbooks that ignore their constraints.",
-    approach:
-      "We start from how your organisation decides and delivers, then shape a dual-track programme that fits your pace, risk profile, and operating model.",
   },
 ] as const;
 

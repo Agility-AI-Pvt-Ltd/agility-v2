@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { openChatbot } from "@/components/Chatbot";
 
 function hash2(x: number, y: number) {
   const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
@@ -462,13 +461,12 @@ export default function Hero() {
           >
             See how it works
           </a>
-          <button
-            type="button"
-            onClick={() => openChatbot()}
+          <a
+            href="/contact"
             className="cta-cut inline-flex h-11 items-center justify-center border border-white/80 bg-transparent px-7 font-[family-name:var(--font-geist-mono)] text-[13px] font-medium uppercase tracking-[0.06em] text-white transition-all duration-300 hover:bg-white hover:text-black active:scale-[0.98] sm:h-10"
           >
             Talk to us
-          </button>
+          </a>
         </div>
       </div>
 

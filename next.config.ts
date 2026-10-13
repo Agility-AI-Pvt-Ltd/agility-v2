@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/lyfshilp",
+        destination: "https://lyfshilp.com",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

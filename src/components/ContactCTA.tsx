@@ -1,7 +1,7 @@
 "use client";
 
 import { BookCallButton } from "@/components/BookCallModal";
-import { CONTACT_EMAIL } from "@/lib/company";
+import { BOOK_CALL_WHATSAPP_URL, CONTACT_EMAIL } from "@/lib/company";
 
 type ContactCTAProps = {
   id?: string;
@@ -9,7 +9,6 @@ type ContactCTAProps = {
 };
 
 const PROGRAMMES_PHONE = "7042149608";
-const PROGRAMMES_PHONE_HREF = "tel:+917042149608";
 
 export default function ContactCTA({
   id = "contact",
@@ -37,8 +36,8 @@ export default function ContactCTA({
               isDark ? "text-white/55" : "text-neutral-500",
             ].join(" ")}
           >
-            Book a call and we&apos;ll walk through adoption and implementation
-            for your context — no forms, just a straight conversation.
+            Tell us what you need. We reply within one working day — book a call
+            on WhatsApp or email us directly.
           </p>
 
           <BookCallButton
@@ -71,9 +70,11 @@ export default function ContactCTA({
               </a>
             </p>
             <p>
-              Programmes &amp; sales — Bhawna Khorwal, Head of Programmes{" "}
+              WhatsApp — Bhawna Khorwal, Head of Programmes{" "}
               <a
-                href={PROGRAMMES_PHONE_HREF}
+                href={BOOK_CALL_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={[
                   "underline-offset-2 transition-colors hover:underline",
                   isDark ? "text-white/80 hover:text-white" : "text-neutral-900",

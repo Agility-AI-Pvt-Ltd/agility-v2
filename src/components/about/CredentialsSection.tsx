@@ -3,10 +3,9 @@ import Reveal from "@/components/about/Reveal";
 
 const ASSET = "/assets/credentials";
 
-type Logo = {
-  src: string;
-  alt: string;
-};
+type PartnerMark =
+  | { id: string; type: "image"; src: string; alt: string }
+  | { id: string; type: "text"; label: string };
 
 type CredentialBlock = {
   number: string;
@@ -14,31 +13,68 @@ type CredentialBlock = {
   photo: string;
   photoAlt: string;
   description: string;
-  logos: Logo[];
+  logos: PartnerMark[];
 };
 
-const partnerLogos: Logo[] = [
-  { src: `${ASSET}/01_nsrcel_iim_bangalore.png`, alt: "NSRCEL, IIM Bangalore" },
-  { src: `${ASSET}/02_iim_bangalore.png`, alt: "IIM Bangalore" },
-  { src: `${ASSET}/03_iit_allahabad.png`, alt: "IIT Allahabad" },
+const partnerMarks: PartnerMark[] = [
   {
+    id: "nsrcel-iim",
+    type: "image",
+    src: `${ASSET}/01_nsrcel_iim_bangalore.png`,
+    alt: "NSRCEL, IIM Bangalore",
+  },
+  {
+    id: "iim-bangalore",
+    type: "image",
+    src: `${ASSET}/02_iim_bangalore.png`,
+    alt: "IIM Bangalore",
+  },
+  { id: "iiit-allahabad", type: "text", label: "IIIT Allahabad" },
+  {
+    id: "irma-iseed",
+    type: "image",
     src: `${ASSET}/04_irma_iseed_foundation.png`,
     alt: "IRMA ISEED Foundation",
   },
-  { src: `${ASSET}/05_stanford_seed.png`, alt: "Stanford Seed" },
   {
+    id: "stanford-seed",
+    type: "image",
+    src: `${ASSET}/05_stanford_seed.png`,
+    alt: "Stanford Seed",
+  },
+  {
+    id: "stanford-gsb",
+    type: "image",
     src: `${ASSET}/06_stanford_graduate_school_business.png`,
     alt: "Stanford Graduate School of Business",
   },
-  { src: `${ASSET}/07_dpiit_startup_india.png`, alt: "DPIIT Startup India" },
   {
+    id: "dpiit",
+    type: "image",
+    src: `${ASSET}/07_dpiit_startup_india.png`,
+    alt: "DPIIT Startup India",
+  },
+  {
+    id: "nvidia",
+    type: "image",
     src: `${ASSET}/08_nvidia_inception.png`,
     alt: "NVIDIA Inception Program",
   },
-  { src: `${ASSET}/09_sarvam_ai.png`, alt: "Sarvam AI" },
-  { src: `${ASSET}/10_claude.png`, alt: "Claude Partner Program" },
-  { src: `${ASSET}/11_nddb.png`, alt: "NDDB" },
   {
+    id: "sarvam",
+    type: "image",
+    src: `${ASSET}/09_sarvam_ai.png`,
+    alt: "Sarvam AI",
+  },
+  {
+    id: "nddb",
+    type: "image",
+    src: `${ASSET}/11_nddb.png`,
+    alt: "NDDB",
+  },
+  {
+    id: "up-govt",
+    type: "image",
     src: `${ASSET}/12_government_uttar_pradesh.png`,
     alt: "Government of Uttar Pradesh",
   },
@@ -51,8 +87,8 @@ const credentialBlocks: CredentialBlock[] = [
     photo: `${ASSET}/nsrcel.png`,
     photoAlt: "NSRCEL at IIM Bangalore",
     description:
-      "NSRCEL, IIM Bangalore (Women Startup Program); IIT Allahabad; IRMA ISEED Foundation",
-    logos: partnerLogos.slice(0, 4),
+      "Lyfshilp Academy: NSRCEL Women Startup Program (IIM Bangalore); incubated at IIIT Allahabad. Agility AI: IRMA ISEED Foundation.",
+    logos: partnerMarks.slice(0, 4),
   },
   {
     number: "02",
@@ -60,8 +96,8 @@ const credentialBlocks: CredentialBlock[] = [
     photo: `${ASSET}/seed.png`,
     photoAlt: "Stanford Seed recognition award",
     description:
-      "Top 15 startups in South Asia; Stanford Seed; Stanford Graduate School of Business; DPIIT-recognised startup under Startup India (DIPP205863)",
-    logos: partnerLogos.slice(4, 7),
+      "Lyfshilp Academy: among South Asia's top 15 startups (Stanford Seed, Stanford GSB). Group: DPIIT-recognised under Startup India (DIPP205863) — Lyfshilp Academy and Agility AI.",
+    logos: partnerMarks.slice(4, 7),
   },
   {
     number: "03",
@@ -69,8 +105,8 @@ const credentialBlocks: CredentialBlock[] = [
     photo: `${ASSET}/nvidia.png`,
     photoAlt: "NVIDIA Inception workspace",
     description:
-      "NVIDIA Inception Program; Sarvam AI Startup Programme; Claude Partner Program",
-    logos: partnerLogos.slice(7, 10),
+      "Agility AI: NVIDIA Inception Program; Sarvam AI Startup Programme.",
+    logos: partnerMarks.slice(7, 9),
   },
   {
     number: "04",
@@ -79,16 +115,16 @@ const credentialBlocks: CredentialBlock[] = [
     photoAlt: "NDDB training session",
     description:
       "Onboarded by NDDB to train officers and staff across its work locations; Financial incentive felicitation by Govt. of UP, by Hon'ble CM",
-    logos: partnerLogos.slice(10, 12),
+    logos: partnerMarks.slice(9, 11),
   },
 ];
 
-function CredentialLogo({
-  logo,
+function CredentialMark({
+  mark,
   className,
   maxHeightClass = "max-h-11 sm:max-h-12",
 }: {
-  logo: Logo;
+  mark: PartnerMark;
   className?: string;
   maxHeightClass?: string;
 }) {
@@ -99,14 +135,20 @@ function CredentialLogo({
         className,
       ].join(" ")}
     >
-      <Image
-        src={logo.src}
-        alt={logo.alt}
-        width={520}
-        height={240}
-        sizes="(max-width: 640px) 40vw, 180px"
-        className={`h-auto w-auto max-w-full object-contain object-center ${maxHeightClass}`}
-      />
+      {mark.type === "text" ? (
+        <p className="text-center font-[family-name:var(--font-geist-mono)] text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-neutral-700 sm:text-[11px]">
+          {mark.label}
+        </p>
+      ) : (
+        <Image
+          src={mark.src}
+          alt={mark.alt}
+          width={520}
+          height={240}
+          sizes="(max-width: 640px) 40vw, 180px"
+          className={`h-auto w-auto max-w-full object-contain object-center ${maxHeightClass}`}
+        />
+      )}
     </div>
   );
 }
@@ -148,12 +190,12 @@ function CredentialCard({ block }: { block: CredentialBlock }) {
               logoStripCols(block.logos.length),
             ].join(" ")}
           >
-            {block.logos.map((logo) => (
+            {block.logos.map((mark) => (
               <li
-                key={logo.src}
+                key={mark.id}
                 className="flex min-h-[64px] items-center justify-center bg-[#fafafa] sm:min-h-[72px]"
               >
-                <CredentialLogo logo={logo} />
+                <CredentialMark mark={mark} />
               </li>
             ))}
           </ul>
@@ -183,6 +225,10 @@ export default function CredentialsSection() {
           <h2 className="max-w-[22ch] font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
             Recognised. Incubated. Accountable.
           </h2>
+          <p className="mt-4 max-w-[58ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px]">
+            Agility AI and its parent, Lyfshilp Academy, are backed by these
+            institutions — tagged by entity in each card below.
+          </p>
         </Reveal>
 
         <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start lg:gap-14 xl:gap-16">
@@ -222,14 +268,14 @@ export default function CredentialsSection() {
                   </p>
                 </div>
 
-                <ul className="grid grid-cols-2 gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-3">
-                  {partnerLogos.map((logo) => (
+                <ul className="flex flex-wrap gap-px border border-neutral-200 bg-neutral-200">
+                  {partnerMarks.map((mark) => (
                     <li
-                      key={logo.src}
-                      className="flex min-h-[88px] items-center justify-center bg-white px-3 py-4 sm:min-h-[96px] sm:px-4"
+                      key={mark.id}
+                      className="flex min-h-[88px] min-w-[calc(50%-1px)] flex-1 items-center justify-center bg-white px-3 py-4 sm:min-h-[96px] sm:min-w-[calc(33.333%-1px)] sm:max-w-[calc(33.333%-1px)] sm:px-4"
                     >
-                      <CredentialLogo
-                        logo={logo}
+                      <CredentialMark
+                        mark={mark}
                         maxHeightClass="max-h-12 sm:max-h-14"
                       />
                     </li>

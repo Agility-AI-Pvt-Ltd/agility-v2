@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import MaturityResultEmail from "@/components/maturity/MaturityResultEmail";
 import {
   QUIZ_QUESTIONS,
   RUNGS,
@@ -23,6 +24,7 @@ type MaturityDeviceProps = {
   onNext: () => void;
   onSelect: () => void;
   onRetake: () => void;
+  onPickOption: (index: number) => void;
 };
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
@@ -113,6 +115,8 @@ function DeviceScreen({
   selectedOptionIndex,
   answers,
   resultLevel,
+  onStart,
+  onPickOption,
 }: Pick<
   MaturityDeviceProps,
   | "phase"
@@ -121,7 +125,8 @@ function DeviceScreen({
   | "selectedOptionIndex"
   | "answers"
   | "resultLevel"
->) {
+  | "onPickOption"
+> & { onStart: () => void }) {
   if (phase === "intro") {
     return (
       <div className="maturity-screen-content maturity-screen-enter">
@@ -134,7 +139,16 @@ function DeviceScreen({
           Not just AI powered. AI fluent. Five questions. One minute. Find your
           rung on the ladder.
         </p>
-        <p className="maturity-screen-hint">Press ▶ to start the story</p>
+        <button
+          type="button"
+          onClick={onStart}
+          className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-[#e85d04] px-4 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.08em] text-black sm:w-auto"
+        >
+          Start check
+        </button>
+        <p className="maturity-screen-hint">
+          Or use ▶ on the console · keyboard ◀ ▶ optional
+        </p>
         <div className="maturity-screen-bar">
           <span style={{ width: "0%" }} />
         </div>
@@ -193,8 +207,16 @@ function DeviceScreen({
                 key={option.label}
                 role="option"
                 aria-selected={isSelected}
+                tabIndex={0}
+                onClick={() => onPickOption(index)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onPickOption(index);
+                  }
+                }}
                 className={[
-                  "maturity-screen-option",
+                  "maturity-screen-option cursor-pointer",
                   isSelected ? "maturity-screen-option-selected" : "",
                   isSaved && !isSelected ? "maturity-screen-option-saved" : "",
                 ].join(" ")}
@@ -253,6 +275,7 @@ export default function MaturityDevice({
   onNext,
   onSelect,
   onRetake,
+  onPickOption,
 }: MaturityDeviceProps) {
   const currentQuestion = QUIZ_QUESTIONS[questionIndex];
 
@@ -290,8 +313,8 @@ export default function MaturityDevice({
             AI Maturity Check
           </h1>
           <p className="mx-auto mt-3 max-w-[48ch] text-[14px] leading-relaxed text-white/50 sm:text-[15px]">
-            Use the controls on the console. Questions and choices appear on the
-            screen — navigate with ◀ ▶, confirm with SELECT.
+            Tap an answer on the screen or use the console. Confirm with SELECT
+            when you are ready.
           </p>
         </div>
 
@@ -331,6 +354,8 @@ export default function MaturityDevice({
                       selectedOptionIndex={selectedOptionIndex}
                       answers={answers}
                       resultLevel={resultLevel}
+                      onStart={onSelect}
+                      onPickOption={onPickOption}
                     />
                   </div>
                 </div>
@@ -434,6 +459,9 @@ export default function MaturityDevice({
                 Retake check
               </button>
             </div>
+            {resultLevel !== null && (
+              <MaturityResultEmail level={resultLevel} />
+            )}
           </div>
         )}
 
