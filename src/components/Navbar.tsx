@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Industries", href: "/industries" },
   { label: "AI Maturity Check", href: "/ai-maturity-check" },
   { label: "Team", href: "/team" },
+  { label: "Testimonials", href: "/testimonials" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

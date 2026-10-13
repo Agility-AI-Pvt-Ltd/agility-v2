@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     template: "%s | Agility AI",
   },
   description: COMPANY_SUBHEADING,
+  icons: {
+    icon: [{ url: "/new_logo.png", type: "image/png" }],
+    apple: [{ url: "/new_logo.png", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({

@@ -4,10 +4,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HomeClientStrip from "@/components/HomeClientStrip";
 import HomeStatsBand from "@/components/HomeStatsBand";
-import IndustriesTeaser from "@/components/IndustriesTeaser";
 import InteractiveProof from "@/components/InteractiveProof";
 import Navbar from "@/components/Navbar";
-import Testimonials from "@/components/Testimonials";
 import { COMPANY_SUBHEADING } from "@/lib/company";
 
 export const metadata: Metadata = {
@@ -35,16 +33,7 @@ export default function Home() {
           <HomeStatsBand />
           <HomeClientStrip />
           <InteractiveProof />
-          <div className="relative h-[200svh]">
-            <Capabilities />
-          </div>
-          <div className="relative z-30 bg-white">
-            {/* <Credentials /> */}
-            {/* <Problem /> */}
-            <Testimonials />
-            {/* <IndustriesTeaser /> */}
-            {/* <TeamTeaser /> */}
-          </div>
+          <Capabilities />
         </div>
       </main>
       <Footer />

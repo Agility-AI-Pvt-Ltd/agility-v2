@@ -14,6 +14,9 @@ export type TestimonialVideo = {
   /** Unlisted YouTube video ID. */
   youtubeId?: string;
   thumbnailUrl?: string;
+  /** Still photo (gallery) — opens lightbox instead of a video player. */
+  imageUrl?: string;
+  kind?: "video" | "photo";
   aspect?: "portrait" | "landscape";
 };
 
@@ -39,11 +42,20 @@ function PlayIcon() {
 
 function isPortrait(video: TestimonialVideo) {
   if (video.aspect) return video.aspect === "portrait";
+  if (video.kind === "photo" || video.imageUrl) return false;
   return Boolean((video.src || video.driveFileId) && !video.youtubeId);
+}
+
+function isPhoto(video: TestimonialVideo) {
+  return video.kind === "photo" || Boolean(video.imageUrl);
 }
 
 function hasPlayableVideo(video: TestimonialVideo) {
   return Boolean(video.src || video.driveFileId || video.youtubeId);
+}
+
+function canOpen(video: TestimonialVideo) {
+  return hasPlayableVideo(video) || isPhoto(video);
 }
 
 function VideoCard({
@@ -55,18 +67,25 @@ function VideoCard({
   index: number;
   onPlay: () => void;
 }) {
+  const photo = isPhoto(video);
   const hasVideo = hasPlayableVideo(video);
+  const openable = canOpen(video);
   const portrait = isPortrait(video);
   const thumbnail =
     video.thumbnailUrl ||
+    video.imageUrl ||
     (video.driveFileId
       ? driveThumbnailUrl(video.driveFileId)
       : video.youtubeId
         ? `https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`
         : undefined);
-  const label = video.name
-    ? `Play testimonial from ${video.name}`
-    : `Play testimonial ${index + 1}`;
+  const label = photo
+    ? video.caption
+      ? `View photo — ${video.caption}`
+      : `View photo ${index + 1}`
+    : video.name
+      ? `Play testimonial from ${video.name}`
+      : `Play testimonial ${index + 1}`;
 
   return (
     <article className="flex flex-col border border-neutral-200 bg-white">
@@ -78,12 +97,12 @@ function VideoCard({
       >
         <button
           type="button"
-          onClick={() => hasVideo && onPlay()}
-          disabled={!hasVideo}
+          onClick={() => openable && onPlay()}
+          disabled={!openable}
           className="group absolute inset-0 flex w-full items-center justify-center text-left"
-          aria-label={hasVideo ? label : "Video coming soon"}
+          aria-label={openable ? label : "Media coming soon"}
         >
-          {video.src ? (
+          {video.src && !photo ? (
             <video
               src={`${video.src}#t=0.1`}
               preload="metadata"
@@ -96,9 +115,14 @@ function VideoCard({
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={thumbnail}
-              alt=""
+              alt={video.caption ?? video.name ?? ""}
               referrerPolicy="no-referrer"
-              className="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-90"
+              className={[
+                "absolute inset-0 h-full w-full object-cover transition-opacity",
+                photo
+                  ? "opacity-100 group-hover:opacity-95"
+                  : "opacity-80 group-hover:opacity-90",
+              ].join(" ")}
             />
           ) : (
             <div
@@ -107,23 +131,18 @@ function VideoCard({
             />
           )}
 
-          <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/40" />
+          {!photo && (
+            <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/40" />
+          )}
 
-          <span
-            className={[
-              "relative z-10 flex size-14 items-center justify-center rounded-full transition-transform duration-300",
-              hasVideo
-                ? "bg-white text-black shadow-[0_8px_24px_rgba(0,0,0,0.35)] group-hover:scale-105"
-                : "border border-white/25 bg-white/10 text-white/70",
-            ].join(" ")}
-          >
-            <PlayIcon />
-          </span>
-
-          {!hasVideo && (
-            <span className="absolute bottom-3 left-3 z-10 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-white/55">
-              Video coming soon
+          {hasVideo && (
+            <span className="relative z-10 flex size-14 items-center justify-center rounded-full bg-white text-black shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-105">
+              <PlayIcon />
             </span>
+          )}
+
+          {photo && (
+            <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
           )}
         </button>
       </div>
@@ -210,7 +229,14 @@ function PlayerDialog({
           </button>
         </div>
 
-        {video.src ? (
+        {isPhoto(video) && (video.imageUrl || video.thumbnailUrl) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={video.imageUrl || video.thumbnailUrl}
+            alt={video.caption ?? video.name ?? "Testimonial photo"}
+            className="max-h-[min(82vh,900px)] w-auto max-w-[min(100vw-2rem,1100px)] object-contain"
+          />
+        ) : video.src ? (
           <video
             key={video.src}
             src={video.src}
@@ -283,7 +309,7 @@ export default function TestimonialVideoGrid({ videos }: VideoGridProps) {
         ))}
       </ul>
 
-      {active && hasPlayableVideo(active) && (
+      {active && canOpen(active) && (
         <PlayerDialog video={active} onClose={() => setActiveId(null)} />
       )}
     </>

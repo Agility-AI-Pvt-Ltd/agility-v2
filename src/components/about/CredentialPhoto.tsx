@@ -17,13 +17,13 @@ export default function CredentialPhoto({
   const [current, setCurrent] = useState(src);
 
   return (
-    <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-neutral-100 sm:aspect-auto sm:h-full sm:w-[132px] sm:min-h-[148px] md:w-[148px]">
+    <div className="relative min-h-[220px] w-full overflow-hidden bg-neutral-100 lg:min-h-0 lg:h-full">
       <Image
         src={current}
         alt={alt}
         fill
-        sizes="(max-width: 640px) 100vw, 148px"
-        className="object-cover"
+        sizes="(max-width: 1024px) 100vw, 320px"
+        className="object-cover object-center"
         onError={() => {
           if (current !== fallback) setCurrent(fallback);
         }}

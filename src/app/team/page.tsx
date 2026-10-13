@@ -25,7 +25,7 @@ const founders = [
   {
     name: "Sharad Raj Utsav",
     role: "Founder & CEO",
-    image: "/assets/image/sharad.png",
+    image: "/assets/image/sharad.jpeg",
     bio: "B.Tech, NSUT Delhi. MBA (Rural Management), IRMA. M.Sc. Data Science and AI, BITS Pilani. Stanford Seed alumnus. Claude Certified Instructor.",
   },
   {
@@ -43,7 +43,7 @@ const founders = [
 ] as const;
 
 /** Bust Next/Image + browser cache when public cutouts are replaced in-place. */
-const FOUNDER_IMAGE_VERSION = "20261012h";
+const FOUNDER_IMAGE_VERSION = "20261013a";
 
 const advisors = [
   {
@@ -64,7 +64,7 @@ const advisors = [
     name: "Prof. Nakul Parameswar",
     role: "Advisor",
     initials: "NP",
-    image: null,
+    image: "/image/advisory/nakul.jpeg",
     bio: "IIT Hyderabad. PhD, IIT Delhi.",
   },
   {
@@ -85,7 +85,7 @@ const advisors = [
     name: "Cdr Praveen Kumar",
     role: "Advisor",
     initials: "PK",
-    image: null,
+    image: "/image/advisory/cdr_praveen.jpeg",
     bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
 ] as const;

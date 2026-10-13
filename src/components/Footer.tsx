@@ -13,6 +13,7 @@ const footerLinks = [
   { label: "Industries", href: "/industries" },
   { label: "AI Maturity Check", href: "/ai-maturity-check" },
   { label: "Team", href: "/team" },
+  { label: "Testimonials", href: "/testimonials" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ] as const;

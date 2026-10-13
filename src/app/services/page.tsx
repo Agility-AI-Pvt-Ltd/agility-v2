@@ -40,7 +40,7 @@ const trackRecord = [
     label: "rated the sessions excellent",
   },
   {
-    value: "4-6 hrs",
+    value: "5-7 hrs",
     label: "saved per week on routine documentation",
   },
 ] as const;
