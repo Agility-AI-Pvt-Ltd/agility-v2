@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/lyfshilp",
-        destination: "https://lyfshilp.com",
+        destination: "https://www.lyfshilp.com/",
         permanent: false,
       },
     ];

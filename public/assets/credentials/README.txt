@@ -1,6 +1,10 @@
-Agility AI — generated logo mockup pack
+Agility AI — credentials assets
 
-Contents:
+Folders:
+- group/ — lyfshilp.png, agility-ai.png (About page parent/subsidiary diagram)
+- photos/ — 01_incubation.jpg, 02_recognition.jpg, 03_ai_programmes.jpg, 04_government.jpg (row photos; fallbacks use nsrcel.png, seed.png, nvidia.png, nddb.png until added)
+
+Root PNGs:
 12 individual transparent-background PNG crops from an AI-generated logo sheet.
 
 Important:

@@ -7,7 +7,6 @@ import {
   StagesPipelineViz,
 } from "@/components/about/AboutIllustrations";
 import CredentialsSection from "@/components/about/CredentialsSection";
-import ParentCompanySection from "@/components/about/ParentCompanySection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
 import SiteChrome from "@/components/SiteChrome";
@@ -196,7 +195,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <ParentCompanySection />
       <CredentialsSection />
 
       {/* FAQ */}

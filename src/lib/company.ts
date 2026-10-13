@@ -6,9 +6,12 @@ export const COMPANY_LEGAL_NAME = "Agility AI Pvt. Ltd.";
 
 export const LYFSHILP_ACADEMY_NAME = "Lyfshilp Academy";
 
-/** Set NEXT_PUBLIC_LYFSHILP_URL when the parent site URL is confirmed. */
+/** Override with NEXT_PUBLIC_LYFSHILP_URL if needed. */
 export const LYFSHILP_ACADEMY_URL =
-  process.env.NEXT_PUBLIC_LYFSHILP_URL?.trim() || "https://lyfshilp.com";
+  process.env.NEXT_PUBLIC_LYFSHILP_URL?.trim() || "https://www.lyfshilp.com/";
+
+/** Parent company logo (About credentials diagram, footer lock-up). */
+export const LYFSHILP_ACADEMY_LOGO = "/assets/credentials/group/lyfshilp.png";
 
 export const PARENT_COMPANY_BLURB =
   "Agility AI is the AI automation arm of Lyfshilp Academy, an AI enablement company working with government, corporates, institutions, schools and social enterprises. Lyfshilp trains people to use AI; Agility AI builds the systems they use it in.";
