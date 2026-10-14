@@ -17,7 +17,7 @@ const navLinks = [
 
 function Logo() {
   return (
-    <a
+    <Link
       href="/"
       aria-label="Home"
       className="relative z-50 flex shrink-0 items-center overflow-hidden rounded-sm transition-transform duration-300 hover:scale-[1.03] active:scale-95"
@@ -31,7 +31,7 @@ function Logo() {
         unoptimized
         className="size-11 object-contain sm:size-12"
       />
-    </a>
+    </Link>
   );
 }
 
