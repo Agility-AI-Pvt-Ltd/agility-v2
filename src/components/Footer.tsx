@@ -2,7 +2,6 @@ import Link from "next/link";
 import { BookCallButton } from "@/components/BookCallModal";
 import {
   COMPANY_LEGAL_NAME,
-  COMPANY_SUBHEADING,
   LYFSHILP_ACADEMY_NAME,
   LYFSHILP_ACADEMY_URL,
 } from "@/lib/company";
@@ -48,9 +47,6 @@ export default function Footer({ hideCta = false }: FooterProps) {
         <div>
           <p className="font-[family-name:var(--font-cursive)] text-4xl text-white">
             Agility AI
-          </p>
-          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-white/45">
-            {COMPANY_SUBHEADING}
           </p>
           <p className="mt-4 max-w-sm text-[12px] leading-relaxed text-white/40">
             {COMPANY_LEGAL_NAME} is a subsidiary of{" "}
