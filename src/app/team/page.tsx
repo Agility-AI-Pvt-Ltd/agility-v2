@@ -88,7 +88,7 @@ const advisors = [
     image: "/image/advisory/cdr_praveen.jpeg",
     bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
-] as const;
+];
 
 export default function TeamPage() {
   return (
