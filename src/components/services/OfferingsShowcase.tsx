@@ -12,7 +12,6 @@ import {
   type ReactNode,
 } from "react";
 import Reveal from "@/components/about/Reveal";
-import { usePageScrollLock } from "@/hooks/usePageScrollLock";
 
 type Theme = "purple" | "blue" | "green";
 
@@ -492,7 +491,13 @@ function OfferingModal({
 }) {
   const titleId = useId();
   const theme = THEME[offering.theme];
-  usePageScrollLock(true);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {

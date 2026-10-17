@@ -69,7 +69,7 @@ export default function TestimonialsShowcase({
 
   return (
     <section
-      id="testimonial"
+      id="testimonials"
       aria-labelledby="testimonials-heading"
       className={["border-b border-neutral-200 bg-white text-black", className].join(
         " ",

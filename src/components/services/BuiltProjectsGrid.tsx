@@ -281,16 +281,7 @@ function CompactProjectCard({ project }: { project: (typeof PROJECTS)[number] })
   );
 }
 
-export type BuiltProject = {
-  name: string;
-  description: string;
-};
-
-type BuiltProjectsGridProps = {
-  projects?: readonly BuiltProject[];
-};
-
-export default function BuiltProjectsGrid(_props: BuiltProjectsGridProps) {
+export default function BuiltProjectsGrid() {
   const topRow = PROJECTS.filter((p) => p.wide);
   const bottomRow = PROJECTS.filter((p) => !p.wide);
 

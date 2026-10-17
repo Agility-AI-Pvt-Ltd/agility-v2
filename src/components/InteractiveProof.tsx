@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useMemo, useState } from "react";
+import { useId, useState } from "react";
 
 type Mode = "manual" | "agility";
 
@@ -81,53 +81,15 @@ const FOLLOW_UPS = [
   },
 ] as const;
 
-const PROOF_IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"] as const;
-
-/** Alternate basenames (e.g. sparkle.png vs bundled decoration art). */
-const PROOF_ASSET_ALIASES: Partial<Record<string, readonly string[]>> = {
-  sparkle: ["sparkle", "27_sparkle_decorations"],
-};
-
-function proofAssetCandidates(base: string, rasterOnly: boolean): string[] {
-  const bases = PROOF_ASSET_ALIASES[base] ?? [base];
-  const exts = rasterOnly
-    ? PROOF_IMAGE_EXTENSIONS
-    : ([...PROOF_IMAGE_EXTENSIONS, ".svg"] as const);
-
-  return bases.flatMap((name) =>
-    exts.map((ext) => `${ASSET}/${name}${ext}`),
-  );
-}
-
-function ProofAsset({
-  base,
+function ProofImage({
+  src,
   alt,
   className,
-  rasterOnly = false,
 }: {
-  base: string;
+  src: string;
   alt: string;
   className?: string;
-  /** When true, never loads bundled .svg (use for brand PNGs). */
-  rasterOnly?: boolean;
 }) {
-  const candidates = useMemo(
-    () => proofAssetCandidates(base, rasterOnly),
-    [base, rasterOnly],
-  );
-  const [index, setIndex] = useState(0);
-  const src = candidates[index];
-  const exhausted = index >= candidates.length;
-
-  if (exhausted || !src) {
-    return (
-      <span
-        className={["inline-flex shrink-0 bg-neutral-100/80", className].join(" ")}
-        aria-hidden={alt === ""}
-      />
-    );
-  }
-
   return (
     <span className={["relative inline-flex shrink-0", className].join(" ")}>
       <Image
@@ -136,14 +98,19 @@ function ProofAsset({
         fill
         unoptimized
         className="object-contain"
-        onError={() => setIndex((i) => i + 1)}
       />
     </span>
   );
 }
 
 function SparkleIcon({ className = "size-3.5" }: { className?: string }) {
-  return <ProofAsset base="sparkle" alt="" className={className} rasterOnly />;
+  return (
+    <ProofImage
+      src={`${ASSET}/27_sparkle_decorations.png`}
+      alt=""
+      className={className}
+    />
+  );
 }
 
 function ManualCard({ active }: { active: boolean }) {
@@ -157,8 +124,8 @@ function ManualCard({ active }: { active: boolean }) {
       ].join(" ")}
     >
       <div className="flex items-start gap-3">
-        <ProofAsset
-          base="clock"
+        <ProofImage
+          src={`${ASSET}/clock.svg`}
           alt=""
           className="mt-0.5 size-9 shrink-0"
         />
@@ -196,8 +163,8 @@ function ManualCard({ active }: { active: boolean }) {
               style={{ animationDelay: `${index * 120}ms` }}
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-neutral-500 shadow-sm">
-                <ProofAsset
-                  base={source.iconBase}
+                <ProofImage
+                  src={`${ASSET}/${source.iconBase}.svg`}
                   alt=""
                   className="size-4"
                 />
@@ -228,11 +195,10 @@ function ManualCard({ active }: { active: boolean }) {
                   transform: `rotate(${brand.rotate}) translateY(${index % 2 === 0 ? "6px" : "0px"})`,
                 }}
               >
-                <ProofAsset
-                  base={brand.iconBase}
+                <ProofImage
+                  src={`${ASSET}/${brand.iconBase}.png`}
                   alt={brand.label}
                   className="size-full p-1.5"
-                  rasterOnly
                 />
               </div>
             ))}
@@ -294,8 +260,8 @@ function AgilityCard({ active }: { active: boolean }) {
 
       <div className="relative z-0 flex items-start gap-3 pr-16 sm:pr-24">
         <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-[#ddd6fe]">
-          <ProofAsset
-            base="bolt"
+          <ProofImage
+            src={`${ASSET}/bolt.svg`}
             alt=""
             className="size-5"
           />
@@ -319,8 +285,8 @@ function AgilityCard({ active }: { active: boolean }) {
         </p>
 
         <div className="mt-3 flex gap-3 rounded-2xl bg-[#ecfdf5] px-3.5 py-3">
-          <ProofAsset
-            base="check"
+          <ProofImage
+            src={`${ASSET}/check.svg`}
             alt=""
             className="mt-0.5 size-5 shrink-0"
           />

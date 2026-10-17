@@ -46,12 +46,12 @@ function Divider() {
 
 function NavLinkItem({ label, href }: { label: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
       className="px-0.5 text-[12px] font-medium uppercase tracking-[0.04em] text-white/90 transition-colors duration-200 hover:text-white xl:px-1 xl:text-[13px]"
     >
       {label}
-    </a>
+    </Link>
   );
 }
 
@@ -199,13 +199,13 @@ export default function Navbar() {
                       : "translate-y-3 opacity-0",
                   ].join(" ")}
                 >
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className="block py-3.5 text-[15px] font-medium uppercase tracking-[0.06em] text-white transition-colors hover:text-white/60"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

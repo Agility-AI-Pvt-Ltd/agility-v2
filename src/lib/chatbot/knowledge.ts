@@ -86,9 +86,9 @@ export function buildSiteKnowledgeBase() {
   - Dairy/Cooperative: enablement + automation in procurement, quality, member services, planning.
   - Education: AI literacy + systems for learning support, knowledge work, admin load with governance.
   - Enterprise/Corporate: align adoption and implementation; prioritise use cases; ship into real stacks.
-  - Flexible/Emerging: dual-track programme shaped to pace and risk.
+  - Flexible/Emerging: programme shaped to pace and risk across enablement, integration, and products.
 - Also relevant: financial services, healthcare, manufacturing, public sector, professional services, retail & commerce.
-- Don't see your sector? Dual-track model still applies — they'll tailor framing with you.
+- Don't see your sector? Enablement, integration, and products still apply — they'll tailor the framing with you.
 
 ## TEAM
 
@@ -124,7 +124,7 @@ export function buildSiteKnowledgeBase() {
   - Unaware/Curious → AI Enablement (/services#enablement)
   - Piloting → AI Enablement + optional Integration
   - Adopted → AI Integration (/services#integration)
-  - Fluent → AI Products (/contact)
+  - Fluent → AI Products (/services#products)
 
 ## TESTIMONIALS (/testimonials)
 - Real portrait video testimonials recorded after AI enablement sessions. Clips play from public Google Drive folders; the site stores file IDs only.

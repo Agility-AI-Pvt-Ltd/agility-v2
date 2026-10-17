@@ -92,8 +92,8 @@ export default function IndustriesPage() {
 
           <div className="mt-12 flex flex-col gap-4 border-t border-neutral-200 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-lg text-[14px] text-neutral-500">
-              Don&apos;t see your sector listed? The dual-track model still
-              applies—we&apos;ll tailor the framing with you.
+              Don&apos;t see your sector listed? Enablement, integration, and
+              products still apply — we&apos;ll tailor the framing with you.
             </p>
             <Link
               href="/contact"

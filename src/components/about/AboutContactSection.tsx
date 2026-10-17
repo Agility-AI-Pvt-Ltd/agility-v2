@@ -1,11 +1,6 @@
-import { CONTACT_EMAIL } from "@/lib/company";
+import { CONTACT_EMAIL, PROGRAMMES_CONTACT } from "@/lib/company";
 
-const PROGRAMMES_PHONE = "7042149608";
-const PROGRAMMES_PHONE_HREF = "tel:+917042149608";
-const PROGRAMMES_CONTACT = {
-  name: "Bhawna Khorwal",
-  role: "Head of Programmes",
-} as const;
+const PROGRAMMES_PHONE_HREF = `tel:+${PROGRAMMES_CONTACT.phoneE164}`;
 
 export default function AboutContactSection() {
   return (
@@ -61,7 +56,7 @@ export default function AboutContactSection() {
                 {PROGRAMMES_CONTACT.role}
               </p>
               <p className="font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.08em] text-white/70 transition-colors group-hover:text-white">
-                {PROGRAMMES_PHONE}
+                {PROGRAMMES_CONTACT.phoneDisplay}
               </p>
             </div>
           </a>
@@ -86,7 +81,7 @@ export default function AboutContactSection() {
                 {PROGRAMMES_CONTACT.role}
               </p>
               <p className="font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.08em] text-white/70 transition-colors group-hover:text-white">
-                {PROGRAMMES_PHONE}
+                {PROGRAMMES_CONTACT.phoneDisplay}
               </p>
             </div>
           </a>

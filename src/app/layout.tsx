@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://agilityai.co.in"),
   title: {
     default: "Agility AI | AI Enablement, Integration and Products",
     template: "%s | Agility AI",

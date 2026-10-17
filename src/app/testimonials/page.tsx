@@ -4,17 +4,17 @@ import TestimonialsShowcase from "@/components/testimonials/TestimonialsShowcase
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Client Voices | Agility AI AI Enablement Testimonials",
+    absolute: "Client Voices | Agility AI Enablement Testimonials",
   },
   description:
     "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
   openGraph: {
-    title: "Client Voices | Agility AI AI Enablement Testimonials",
+    title: "Client Voices | Agility AI Enablement Testimonials",
     description:
       "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
   },
   twitter: {
-    title: "Client Voices | Agility AI AI Enablement Testimonials",
+    title: "Client Voices | Agility AI Enablement Testimonials",
     description:
       "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
   },

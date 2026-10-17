@@ -57,8 +57,7 @@ export default function Footer({ hideCta = false }: FooterProps) {
               className="text-white/60 underline-offset-2 transition-colors hover:text-white hover:underline"
             >
               {LYFSHILP_ACADEMY_NAME}
-            </Link>
-            . A {LYFSHILP_ACADEMY_NAME} company.
+            </Link>.
           </p>
         </div>
 

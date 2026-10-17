@@ -253,7 +253,6 @@ function getFallbackReply(messages: ChatTurn[]): string {
     return "Hi — ask me about services, team, careers, industries, products, the AI maturity check, or how to get in touch.\n\nWhen you're ready, use Book a call below to message Bhawna on WhatsApp, or visit /contact for email and phone.";
   }
 
-  const query = normalize(lastUser.content);
   const cta =
     "\n\nNext step: tap Book a call in this chat to message Bhawna on WhatsApp, or visit /contact (organization@agilityai.in · 7042149608).";
 

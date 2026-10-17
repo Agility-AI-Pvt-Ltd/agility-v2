@@ -195,7 +195,7 @@ export const RESULTS: ResultContent[] = [
     title: "Fluent",
     body: "You've actually arrived. AI is folded into daily work, and your own people can run and extend it without calling anyone. From here, the conversation isn't about catching up — it's about what you build next, and whether a ready-made product could save you from building something from scratch.",
     ctaLabel: "AI Products",
-    ctaHref: "/contact",
+    ctaHref: "/services#products",
   },
 ];
 
