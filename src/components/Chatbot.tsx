@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { openBookCall } from "@/lib/book-call/open-book-call";
 
 export const OPEN_CHAT_EVENT = "agility:open-chat";
@@ -22,6 +23,8 @@ const WELCOME: Message = {
 };
 
 export default function Chatbot() {
+  const router = useRouter();
+  const idSeq = useRef(0);
   const titleId = useId();
   const inputId = useId();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -30,6 +33,11 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
+  const [suggestedReplies, setSuggestedReplies] = useState<string[]>([
+    "AI Enablement",
+    "AI Integration",
+    "Book a call",
+  ]);
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
@@ -68,7 +76,7 @@ export default function Chatbot() {
     }
     if (action === "contact") {
       setOpen(false);
-      window.location.href = "/contact";
+      router.push("/contact");
     }
   }
 
@@ -76,8 +84,9 @@ export default function Chatbot() {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
 
+    idSeq.current += 1;
     const userMessage: Message = {
-      id: `u-${Date.now()}`,
+      id: `u-${idSeq.current}`,
       from: "user",
       text: trimmed,
     };
@@ -97,6 +106,7 @@ export default function Chatbot() {
       const body = (await res.json()) as {
         reply?: string;
         action?: "book_call" | "contact";
+        suggestedReplies?: string[];
         error?: string;
       };
 
@@ -104,19 +114,24 @@ export default function Chatbot() {
         throw new Error(body.error ?? "Request failed");
       }
 
+      idSeq.current += 1;
       const botMessage: Message = {
-        id: `b-${Date.now()}`,
+        id: `b-${idSeq.current}`,
         from: "bot",
         text: body.reply ?? "Sorry — I couldn't reply just then. Try again in a moment.",
       };
 
       setMessages((prev) => [...prev, botMessage]);
+      if (body.suggestedReplies) {
+        setSuggestedReplies(body.suggestedReplies);
+      }
       handleAction(body.action);
     } catch {
+      idSeq.current += 1;
       setMessages((prev) => [
         ...prev,
         {
-          id: `b-${Date.now()}`,
+          id: `b-${idSeq.current}`,
           from: "bot",
           text: "Something went wrong on my end. Try again, or use Book a call below.",
         },
@@ -139,7 +154,7 @@ export default function Chatbot() {
 
   function chooseContact() {
     setOpen(false);
-    window.location.href = "/contact";
+    router.push("/contact");
   }
 
   return (
@@ -227,6 +242,22 @@ export default function Chatbot() {
             </div>
 
             <div className="border-t border-neutral-200 bg-white p-3">
+              {suggestedReplies.length > 0 && (
+                <div className="mb-2 flex flex-wrap gap-1.5">
+                  {suggestedReplies.map((chip) => (
+                    <button
+                      key={chip}
+                      type="button"
+                      onClick={() => void sendText(chip)}
+                      disabled={loading}
+                      className="inline-flex h-6 items-center justify-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 font-[family-name:var(--font-geist-mono)] text-[9px] uppercase tracking-[0.06em] text-neutral-600 transition-colors hover:border-neutral-400 hover:text-black disabled:opacity-50"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <div className="mb-2 flex flex-wrap gap-2">
                 <button
                   type="button"

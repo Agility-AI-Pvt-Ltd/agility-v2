@@ -156,6 +156,102 @@ ${faqBlock}
 `.trim();
 }
 
+export const KNOWLEDGE_SLICES: Record<string, string> = {
+  company: `## COMPANY OVERVIEW
+- Entity: Agility AI Pvt. Ltd. (subsidiary of Lyfshilp Academy).
+- Philosophy: "Not just AI powered. AI fluent." Adoption and implementation solved together.
+- Philosophy: Most organisations don't need another vendor — they need to stop needing one.
+- Credentials: NSRCEL IIM Bangalore, IIIT Allahabad, IRMA ISEED, Top 15 South Asia (Stanford Seed, Stanford GSB), DPIIT Startup India (DIPP205863), NVIDIA Inception, Sarvam AI.
+- Contacts: organization@agilityai.in | Bhawna Khorwal (Head of Programmes) 7042149608.`,
+
+  enablement: `## AI ENABLEMENT (TRAINING)
+- What it is: Hands-on AI training for non-tech and enterprise teams folded into their real daily work.
+- Length: Half a day to one full day. Short follow-up window after the workshop.
+- Outcomes: Team actually uses AI by Monday; 5-7 hours saved per week on routine documentation.
+- Track record: 5,200+ trained across government, PSUs, corporates; 600+ trained at NDDB; 92%+ rated excellent.
+- Next step: Book a 20-min call on WhatsApp or visit /services#enablement.`,
+
+  integration: `## AI INTEGRATION (CUSTOM BUILDS)
+- What it is: Wiring AI into existing enterprise software and databases (not a new dashboard or separate login).
+- Includes: Current systems audit, integration build, testing against actual workflows, runbook team can own.
+- Governance: Data privacy and auditability built-in.
+- Next step: Book a call for an architecture discussion or visit /services#integration.`,
+
+  products: `## READY-MADE AI PRODUCTS
+- Built products ready to deploy without bespoke builds:
+  1. FutureX Fellowship: AI mentorship for student entrepreneurs building ventures.
+  2. Invoicely: Centralized accounting, invoices, and expenses.
+  3. Edumaniax: Gamified learning platform that drives retention.
+  4. Fairly Settled: AI assistant doing first-pass review for legal documents.
+  5. HRMS Suite: Hiring, attendance, and reimbursements in one place.
+- Next step: Book a demo on WhatsApp or visit /services#products.`,
+
+  team: `## FOUNDERS & ADVISORS
+- Founding Team:
+  - Sharad Raj Utsav (Founder & CEO): NSUT Delhi, MBA IRMA, M.Sc. Data Science & AI BITS Pilani, Stanford Seed, Claude Certified Instructor.
+  - Shreya Sinha (Co-Founder & COO): NSUT Delhi, Women Startup Program IIM Bangalore, PGP MICA Ahmedabad.
+  - Aryan Shukla (Co-Founder & CTO): Integrated B.Tech & M.Tech, Mathematics & Computing, IIT (BHU) Varanasi.
+- Advisory Board: Sri R. Ramaseshan (Ex-MD NCDEX), Prof. Ashok R. Patil (VC NUSRL Ranchi), Prof. Nakul Parameswar (IIT Hyderabad), Prof. Sumit Kumar Yadav (IIT Roorkee, IIM-A), Prof. Aashish Argade (IRMA), Cdr Praveen Kumar (CIO Nykaa).
+- Page: /team`,
+
+  careers: `## CAREERS & CULTURE
+- Culture: Small team, real ownership, what you build goes live next month. Work directly with founders.
+- 4-step process: (1) Intro message, (2) 20-min call, (3) trial task, (4) decision within a week.
+- How to apply: View open roles on /careers (#open-roles) and apply directly through our HRMS.`,
+
+  maturity_check: `## AI MATURITY CHECK
+- 5-rung diagnostic (/ai-maturity-check):
+  1. Unaware -> Next step: Enablement workshop
+  2. Curious -> Next step: Team enablement session
+  3. Piloting -> Next step: Enablement + Integration
+  4. Adopted -> Next step: Integration & Handover
+  5. Fluent -> Next step: Products & Scaling
+- Takes ~1 minute to assess where your organisation sits.`,
+
+  pricing: `## PRICING
+- No flat price sheet. Pricing depends on team size, scope, and whether it is a single session or ongoing integration.
+- Strictly direct user to book a 20-minute call for a tailored quote. Never quote made-up numbers.`,
+
+  faq: `## FREQUENT QUESTIONS
+- Coding required? No. Enablement is designed for non-technical teams.
+- Data safety? Yes, full governance and privacy audit trails.
+- Disruption? No, sessions run half-day to 1-day, not weeks away from desks.
+- What if people stop using it? We provide post-session follow-up window to lock in adoption.`,
+};
+
+export function getKnowledgeSlice(keys?: string[]): string {
+  if (!keys || keys.length === 0) {
+    return [KNOWLEDGE_SLICES.company, KNOWLEDGE_SLICES.enablement, KNOWLEDGE_SLICES.faq].join("\n\n");
+  }
+
+  const selected = keys
+    .map((k) => KNOWLEDGE_SLICES[k])
+    .filter(Boolean);
+
+  if (selected.length === 0) {
+    return KNOWLEDGE_SLICES.company;
+  }
+
+  return selected.join("\n\n");
+}
+
+export function buildMicroPrompt(sliceKeys?: string[]) {
+  const context = getKnowledgeSlice(sliceKeys);
+
+  return `You are the Talk to us assistant on the Agility AI website (Agility AI Pvt. Ltd. - subsidiary of Lyfshilp Academy).
+You answer visitor questions with concise, accurate, and professional guidance.
+
+Rules:
+- Ground your answer strictly in the provided context below. Do NOT invent pricing numbers, quotes, or commitments.
+- Be concise (2-4 short sentences or bullets).
+- Do not use markdown bold, headings, or asterisks.
+- When relevant, link to site pages: /services, /about, /team, /careers, /ai-maturity-check, or /contact.
+- Suggest "Book a call" for custom scopes, pricing, or training dates.
+
+CONTEXT:
+${context}`;
+}
+
 export function buildChatSystemPrompt() {
   return `You are the Talk to us assistant on the Agility AI website (Agility AI Pvt. Ltd. - a subsidiary of Lyfshilp Academy, an AI Enablement and Automation Company). You have the full public site context below. Answer visitor questions accurately and helpfully.
 
@@ -170,8 +266,9 @@ Rules:
   - Or "/contact" for email organization@agilityai.in and Bhawna Khorwal (Head of Programmes) on 7042149608.
 - If the user asks how to apply: send them to /careers (#open-roles).
 - If the question is outside the knowledge base: say so briefly, then point to Book a call or /contact.
-- Do not mention Groq, Llama, or that you are a language model. You represent Agility AI.
+- Do not mention Groq, OpenRouter, Jev, or that you are an AI model. You represent Agility AI.
 
 KNOWLEDGE BASE:
 ${buildSiteKnowledgeBase()}`;
 }
+
