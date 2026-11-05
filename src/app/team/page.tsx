@@ -88,6 +88,13 @@ const advisors = [
     image: "/image/advisory/cdr_praveen.jpeg",
     bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
+  {
+    name: "Prof. Srinivasan Radhakrishnan",
+    role: "Advisor",
+    initials: "SR",
+    image: "/image/advisory/shrinivasan.jpeg",
+    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A).",
+  },
 ];
 
 export default function TeamPage() {
@@ -159,7 +166,7 @@ export default function TeamPage() {
             {advisors.map((advisor) => (
               <li
                 key={advisor.name}
-                className="flex gap-4 border border-neutral-200 bg-white p-5 sm:gap-5 sm:p-6"
+                className="flex gap-4 border border-neutral-200 bg-white p-5 sm:gap-5 sm:p-6 sm:last:odd:col-span-2 sm:last:odd:w-full sm:last:odd:max-w-[calc(50%-0.5rem)] sm:last:odd:justify-self-center"
               >
                 <div className="relative size-20 shrink-0 overflow-hidden bg-neutral-800 sm:size-24">
                   {advisor.image ? (
