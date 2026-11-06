@@ -30,6 +30,7 @@ export function buildSiteKnowledgeBase() {
 - Positioning: AI adoption and AI implementation are two different problems, solved together.
 - Philosophy: Most organisations don't need another vendor — they need to stop needing one.
 - What they deliver: The working system, plus internal muscle memory to run it, govern it, and change it without calling Agility AI every time.
+- Strategic partnership: Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
 - Email: organization@agilityai.in
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
 - Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
@@ -78,6 +79,10 @@ export function buildSiteKnowledgeBase() {
 2. Build or train — scoped to something your team can absorb, not a six-month roadmap nobody reads.
 3. Handover — documentation your own people can use; defined point where you stop needing Agility AI day-to-day.
 
+## CLIENTS
+- Homepage and About show an Our Clients marquee before the footer.
+- Clients: Ministry of External Affairs (MEA); Sushma Swaraj Institute of Foreign Service (SSIFS, MEA); Haryana Institute of Public Administration (HIPA); National Dairy Development Board (NDDB); Ministry of Fisheries, Animal Husbandry and Dairying; Karnataka Milk Federation (KMF); Indian Dairy Machinery Company Limited (IDMC); National Cooperative Dairy Federation of India (NCDFI); Entrepreneurship Development Institute of India (EDII).
+
 ## INDUSTRIES SERVED
 - On /services, the "Industries we've worked with" block shows Our Track Record stats and institutional engagements: NDDB, FIA, EDII, NCDFI, KMF, IDMC.
 - Explicitly worked with: dairy, FMCG, education, legal, auditing, among others.
@@ -105,6 +110,7 @@ export function buildSiteKnowledgeBase() {
 - Prof. Aashish Argade — IRMA Anand. PhD, IIM Ahmedabad.
 - Cdr Praveen Kumar — CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.
 - Prof. Srinivasan Radhakrishnan — Faculty, Indian Institute of Management Ahmedabad (IIM-A).
+- Manzoor UI Akram — Faculty, BITS Pilani Dubai.
 
 ## CAREERS / HIRING
 - Culture: Small team, real ownership. What you build goes live. Work directly with founders. Things shipped this month are usually live next month.

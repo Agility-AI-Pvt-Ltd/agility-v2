@@ -1801,4 +1801,27 @@ html.lenis body {
     -webkit-background-clip: unset;
     background-clip: unset;
   }
+
+  .clients-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@keyframes clients-marquee-ltr {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.clients-marquee-track {
+  animation: clients-marquee-ltr 48s linear infinite;
+  will-change: transform;
+}
+
+.clients-marquee:hover .clients-marquee-track {
+  animation-play-state: paused;
 }

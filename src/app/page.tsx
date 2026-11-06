@@ -6,6 +6,8 @@ import HomeClientStrip from "@/components/HomeClientStrip";
 import HomeStatsBand from "@/components/HomeStatsBand";
 import InteractiveProof from "@/components/InteractiveProof";
 import Navbar from "@/components/Navbar";
+import OurClients from "@/components/OurClients";
+import StrategicPartnership from "@/components/StrategicPartnership";
 import { COMPANY_SUBHEADING } from "@/lib/company";
 
 export const metadata: Metadata = {
@@ -32,8 +34,10 @@ export default function Home() {
           <Hero />
           <HomeStatsBand />
           <HomeClientStrip />
+          <StrategicPartnership />
           <InteractiveProof />
           <Capabilities />
+          <OurClients />
         </div>
       </main>
       <Footer />

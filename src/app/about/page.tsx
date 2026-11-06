@@ -9,6 +9,7 @@ import {
 import CredentialsSection from "@/components/about/CredentialsSection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
+import OurClients from "@/components/OurClients";
 import SiteChrome from "@/components/SiteChrome";
 import { COMPANY_SUBHEADING } from "@/lib/company";
 import { FAQ_ITEMS, buildFaqPageSchema } from "@/lib/faq";
@@ -245,6 +246,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <OurClients />
       <AboutContactSection />
 
       <script

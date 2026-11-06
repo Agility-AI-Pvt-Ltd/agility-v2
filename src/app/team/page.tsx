@@ -95,6 +95,13 @@ const advisors = [
     image: "/image/advisory/shrinivasan.jpeg",
     bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A).",
   },
+  {
+    name: "Manzoor UI Akram",
+    role: "Advisor",
+    initials: "MA",
+    image: "/image/advisory/manzoor.jpeg",
+    bio: "Faculty, BITS Pilani Dubai.",
+  },
 ];
 
 export default function TeamPage() {
