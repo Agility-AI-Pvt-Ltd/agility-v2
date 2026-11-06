@@ -32,7 +32,7 @@ const credentialBlocks: CredentialBlock[] = [
     title: "INCUBATION",
     headline: "Incubated by leading institutions.",
     description:
-      "Incubated at IIIT Allahabad, NSRCEL (IIM Bangalore) under Women Startup Program, and IRMA ISEED Foundation.",
+      "Incubated at IIIT Allahabad, IIT Kanpur, NSRCEL (IIM Bangalore) under Women Startup Program, and IRMA ISEED Foundation.",
     photo: `${ASSET}/photos/01_incubation.jpg`,
     photoAlt: "IIIT Allahabad campus entrance",
     logos: [
@@ -41,6 +41,12 @@ const credentialBlocks: CredentialBlock[] = [
         alt: "IIIT Allahabad",
         entity: "lyfshilp",
         textLabel: "IIIT Allahabad",
+      },
+      {
+        id: "iit-kanpur",
+        alt: "IIT Kanpur",
+        entity: "lyfshilp",
+        textLabel: "IIT Kanpur",
       },
       {
         id: "nsrcel-row",

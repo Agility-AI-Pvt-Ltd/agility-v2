@@ -33,7 +33,7 @@ export function buildSiteKnowledgeBase() {
 - Strategic partnership: Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
 - Email: organization@agilityai.in
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
-- Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
+- Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IIT Kanpur, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
 
 ## FOUR CAPABILITY PILLARS
 - Strategy: Figure out where AI actually pays for itself, and where it's just noise.
@@ -168,7 +168,7 @@ export const KNOWLEDGE_SLICES: Record<string, string> = {
 - Entity: Agility AI Pvt. Ltd. (subsidiary of Lyfshilp Academy).
 - Philosophy: "Not just AI powered. AI fluent." Adoption and implementation solved together.
 - Philosophy: Most organisations don't need another vendor — they need to stop needing one.
-- Credentials: NSRCEL IIM Bangalore, IIIT Allahabad, IRMA ISEED, Top 15 South Asia (Stanford Seed, Stanford GSB), DPIIT Startup India (DIPP205863), NVIDIA Inception, Sarvam AI.
+- Credentials: NSRCEL IIM Bangalore, IIIT Allahabad, IIT Kanpur, IRMA ISEED, Top 15 South Asia (Stanford Seed, Stanford GSB), DPIIT Startup India (DIPP205863), NVIDIA Inception, Sarvam AI.
 - Contacts: organization@agilityai.in | Bhawna Khorwal (Head of Programmes) 7042149608.`,
 
   enablement: `## AI ENABLEMENT (TRAINING)
