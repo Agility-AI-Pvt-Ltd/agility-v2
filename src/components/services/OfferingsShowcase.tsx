@@ -7,7 +7,6 @@ import {
   useCallback,
   useEffect,
   useId,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -28,7 +27,6 @@ type Offering = {
   image: string;
   title: string;
   description: string;
-  showSessionHighlight?: boolean;
   banner?: { icon: ReactNode; text: string };
   cta?: { label: string; href: string };
   details: DetailBlock[];
@@ -191,200 +189,138 @@ function IconBolt({ className }: { className?: string }) {
   );
 }
 
-function IconTraining({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <circle cx="8" cy="8" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="16" cy="8" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <path
-        d="M4 18c0-2.2 1.8-4 4-4M20 18c0-2.2-1.8-4-4-4M12 11v7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function SessionHighlight() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStarted(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-
-    const target = 120;
-    const duration = 2200;
-    let frame = 0;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - (1 - progress) ** 3;
-      setCount(Math.round(target * eased));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [started]);
-
-  return (
-    <div
-      ref={ref}
-      className="flex items-center gap-4 rounded-2xl bg-[#f5f3ff] px-4 py-4 sm:px-5"
-    >
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#ede9fe] text-[#7c3aed]">
-        <IconTraining className="size-6" />
-      </span>
-      <div className="min-w-0">
-        <p className="font-[family-name:var(--font-serif)] text-[clamp(1.75rem,4vw,2.25rem)] leading-none tracking-[-0.02em] text-[#0f172a]">
-          {count}+
-        </p>
-        <p className="mt-1.5 text-[13px] leading-snug text-[#475569] sm:text-[14px]">
-          AI enablement sessions across industries, helping people adapt to
-          working with AI — not just hear about it.
-        </p>
-      </div>
-    </div>
-  );
-}
-
 const OFFERINGS: Offering[] = [
   {
-    id: "enablement",
-    number: "01",
-    theme: "purple",
-    image: "/assets/offerings/01_ai_enablement.jpg",
-    title: "AI Enablement",
-    description:
-      "We teach your employees to use AI in the work they're already doing — folded into their actual day, not as a separate skill on the side. Efficiency doesn't creep up slowly. It jumps.",
-    showSessionHighlight: true,
-    cta: { label: "Book a corporate training", href: "/contact" },
-    details: [
-      {
-        title: "What's included",
-        icon: <IconBook className="size-5" />,
-        items: [
-          "Live, hands-on sessions built around your team's actual tools, not generic slideware or a canned demo.",
-          "Practice tied to real daily tasks, so the learning sticks past the last slide of the workshop.",
-          "A short follow-up window after the session for questions, so people aren't left stuck the first time they try it alone.",
-        ],
-      },
-      {
-        title: "Who it's for",
-        icon: <IconPeople className="size-5" />,
-        items: [
-          "Teams where AI was technically rolled out but nobody's actually opened it twice.",
-          "Organisations about to launch an AI tool and wanting people ready before day one, not scrambling after.",
-          "Anyone tired of a training deck that got read once and forgotten.",
-        ],
-      },
-      {
-        title: "What done looks like",
-        icon: <IconTarget className="size-5" />,
-        items: [
-          "Your team using AI inside their real workflow without being reminded to.",
-          "Fewer questions bouncing back to IT, or back to us.",
-          "A task that used to take an afternoon now taking twenty minutes, and everyone knowing why.",
-        ],
-      },
-    ],
-  },
-  {
     id: "integration",
-    number: "02",
+    number: "01",
     theme: "blue",
     image: "/assets/offerings/02_ai_integration.jpg",
     title: "AI Integration",
     description:
-      "We don't hand you a new dashboard to check every morning. We wire AI into the systems you already use, so it works quietly in the background instead of becoming one more tab.",
+      "We connect AI to the tools your teams already use, so routine work runs on its own and people approve what matters.",
     banner: {
       icon: <IconPlug className="size-5" />,
       text: "No new dashboards. Promise.",
     },
     details: [
       {
-        title: "What's included",
+        title: "Automation Sprint",
+        icon: <IconBolt className="size-5" />,
+        items: [
+          "One workflow, mapped, automated and handed over.",
+          "You leave with a working automation and a team that can run it.",
+        ],
+      },
+      {
+        title: "Custom AI Assistant",
         icon: <IconWrench className="size-5" />,
         items: [
-          "An audit of what you're already running, so nothing gets ripped out that was actually working.",
-          "An integration plan built around your existing stack, not a rebuild disguised as an upgrade.",
-          "The actual build, tested against how your team really works, plus a runbook your own people can read without calling us.",
-        ],
-      },
-      {
-        title: "Who it's for",
-        icon: <IconPeople className="size-5" />,
-        items: [
-          "Organisations with real, working systems that AI needs to plug into, not a blank slate.",
-          "Teams who've been burned before by a vendor that dropped in a black box and disappeared the day it shipped.",
-        ],
-      },
-      {
-        title: "What done looks like",
-        icon: <IconTarget className="size-5" />,
-        items: [
-          "AI running inside the tools your team already opens every day, with no new login anyone resents.",
-          "A system your own people can maintain and adjust, not one that only makes sense to the person who built it.",
+          "An assistant built on your documents and processes, for your staff or your public.",
+          "Every answer shows its source.",
         ],
       },
     ],
   },
   {
     id: "products",
-    number: "03",
+    number: "02",
     theme: "green",
     image: "/assets/offerings/03_ai_products.jpg",
     title: "AI Products",
     description:
-      "Ready-made tools you can start using without waiting on a custom project — shaped and customized to how your organization actually works, not handed over exactly as they are off the shelf.",
+      "Ready-made tools you can start using without waiting on a custom project, shaped to how your organisation actually works.",
     banner: {
       icon: <IconBolt className="size-5" />,
       text: "Start using it this week!",
     },
     details: [
       {
-        title: "What's included",
+        title: "Invoicely",
         icon: <IconCube className="size-5" />,
         items: [
-          "Direct access to a working product, not a pilot or a proof of concept.",
-          "Onboarding support so your team is using it inside days, not months.",
-          "Configuration to fit how your organisation actually operates, rather than forcing your process to match the software.",
+          "Handles a company's accounting questions in one place: invoices, payments, and the works. Status: Live.",
         ],
       },
       {
-        title: "Who it's for",
+        title: "AI Sales Agent",
+        icon: <IconCube className="size-5" />,
+        items: [
+          "Finds and follows up leads, and drafts replies for your sales team to approve. Status: Live.",
+        ],
+      },
+      {
+        title: "HRMS",
+        icon: <IconCube className="size-5" />,
+        items: [
+          "HR records, leave and attendance in one place, instead of three different logins nobody wants to open. Status: Live.",
+        ],
+      },
+      {
+        title: "Multilingual Voice Translator",
+        icon: <IconCube className="size-5" />,
+        items: ["Speak in one language, be heard in another. Status: Live."],
+      },
+      {
+        title: "FutureX Fellowship platform",
+        icon: <IconCube className="size-5" />,
+        items: [
+          "The learning platform behind the FutureX student programme, built for our parent company, Lyfshilp Academy. Status: Live.",
+        ],
+      },
+      {
+        title: "Edumaniax",
+        icon: <IconCube className="size-5" />,
+        items: [
+          "Turns learning into something closer to a game, so it actually sticks instead of getting forgotten by Monday. Status: Live.",
+        ],
+      },
+      {
+        title: "Fairly Settled",
+        icon: <IconCube className="size-5" />,
+        items: [
+          "Helps legal professionals get through long documents faster, with AI doing the first read so people can focus on the judgment calls that actually need a human. Status: Live.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "enablement",
+    number: "03",
+    theme: "purple",
+    image: "/assets/offerings/01_ai_enablement.jpg",
+    title: "AI Enablement",
+    description:
+      "Hands-on training so your teams use what we build, and keep improving it.",
+    cta: { label: "Book a corporate training", href: "/contact" },
+    details: [
+      {
+        title: "AI Foundations Workshop",
+        icon: <IconBook className="size-5" />,
+        items: [
+          "Start here.",
+          "One day. Participants practise AI on their own work and leave with tasks they can repeat the next day.",
+        ],
+      },
+      {
+        title: "Role-based AI Programme or FDP",
         icon: <IconPeople className="size-5" />,
         items: [
-          "Teams that need something working now, not in a quarter, and don't need a fully bespoke build to get real value.",
+          "Designed around one role or department.",
+          "Participants leave with prompts, templates and one finished piece of real work.",
         ],
       },
       {
-        title: "What done looks like",
+        title: "AI Champions",
         icon: <IconTarget className="size-5" />,
         items: [
-          "A tool your team is actually using inside a week, not sitting in a folder marked to try later.",
+          "We train a small internal group to train everyone else, so adoption does not depend on us.",
+        ],
+      },
+      {
+        title: "Annual Enablement Partnership",
+        icon: <IconBook className="size-5" />,
+        items: [
+          "A year of training, new automations and support, reviewed every quarter against agreed measures.",
         ],
       },
     ],
@@ -399,12 +335,6 @@ function OfferingDetailsBody({ offering }: { offering: Offering }) {
       <p className="text-[14px] leading-relaxed text-neutral-600 sm:text-[15px]">
         {offering.description}
       </p>
-
-      {offering.showSessionHighlight && (
-        <div className="mt-5">
-          <SessionHighlight />
-        </div>
-      )}
 
       {offering.banner && (
         <div

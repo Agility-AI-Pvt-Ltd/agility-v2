@@ -4,12 +4,9 @@ import { useMemo, useState } from "react";
 import TestimonialVideoGrid from "@/components/testimonials/TestimonialVideoGrid";
 import TextTestimonials from "@/components/testimonials/TextTestimonials";
 import {
-  MAIN_FILTERS,
   WORKSHOP_MEDIA_FILTERS,
-  getFuturexVideos,
   getWorkshopImages,
   getWorkshopVideos,
-  type MainFilterId,
   type WorkshopMediaId,
 } from "@/lib/testimonials";
 
@@ -50,22 +47,16 @@ export default function TestimonialsShowcase({
   limit,
   className = "",
 }: TestimonialsShowcaseProps) {
-  const [mainFilter, setMainFilter] = useState<MainFilterId>("futurex");
   const [workshopMedia, setWorkshopMedia] = useState<WorkshopMediaId>("video");
 
   const items = useMemo(() => {
     const list =
-      mainFilter === "futurex"
-        ? getFuturexVideos()
-        : workshopMedia === "video"
-          ? getWorkshopVideos()
-          : getWorkshopImages();
+      workshopMedia === "video" ? getWorkshopVideos() : getWorkshopImages();
 
     return typeof limit === "number" ? list.slice(0, limit) : list;
-  }, [mainFilter, workshopMedia, limit]);
+  }, [workshopMedia, limit]);
 
-  const showWorkshopQuotes =
-    mainFilter === "workshops" && workshopMedia === "video";
+  const showWorkshopQuotes = workshopMedia === "video";
 
   return (
     <section
@@ -108,45 +99,24 @@ export default function TestimonialsShowcase({
         </h2>
 
         <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-neutral-500 sm:text-[16px] sm:leading-[1.7]">
-          From students and founders to institutional partners, hear how Agility
-          AI is creating real impact in learning, business, and public sector
-          efforts.
+          Leaders and teams from government, corporates, institutions and social
+          enterprises, in their own words.
         </p>
 
         <div
           role="tablist"
-          aria-label="Filter testimonials"
+          aria-label="Workshop media type"
           className="mt-8 flex flex-wrap gap-2"
         >
-          {MAIN_FILTERS.map((item) => (
+          {WORKSHOP_MEDIA_FILTERS.map((item) => (
             <FilterPill
               key={item.id}
               label={item.label}
-              active={mainFilter === item.id}
-              onClick={() => {
-                setMainFilter(item.id);
-                if (item.id === "workshops") setWorkshopMedia("video");
-              }}
+              active={workshopMedia === item.id}
+              onClick={() => setWorkshopMedia(item.id)}
             />
           ))}
         </div>
-
-        {mainFilter === "workshops" && (
-          <div
-            role="tablist"
-            aria-label="Workshop media type"
-            className="mt-3 flex flex-wrap gap-2"
-          >
-            {WORKSHOP_MEDIA_FILTERS.map((item) => (
-              <FilterPill
-                key={item.id}
-                label={item.label}
-                active={workshopMedia === item.id}
-                onClick={() => setWorkshopMedia(item.id)}
-              />
-            ))}
-          </div>
-        )}
 
         {showWorkshopQuotes && (
           <div className="mt-10">

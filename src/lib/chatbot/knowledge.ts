@@ -24,15 +24,14 @@ export function buildSiteKnowledgeBase() {
 
   return `
 ## COMPANY OVERVIEW
-- Legal entity: Agility AI Pvt. Ltd.
-- Subheading: Agility AI Pvt. Ltd. - a subsidiary of Lyfshilp Academy, an AI Enablement and Automation Company.
-- Tagline: "Not just AI powered. AI fluent."
+- Legal entity: Agility AI Private Limited (CIN U62099UP2025PTC215093, GSTIN 09ABBCA9983H1Z5, registered office Ghaziabad, Uttar Pradesh).
+- Value proposition: We build AI into your workflows, then train your people to run it.
+- Meta description: We build AI automations and assistants into your workflows and train your teams to run them. For government, corporates, institutions and social enterprises. (5,200+ omitted from meta until verified.)
 - Positioning: AI adoption and AI implementation are two different problems, solved together.
-- Philosophy: Most organisations don't need another vendor — they need to stop needing one.
 - What they deliver: The working system, plus internal muscle memory to run it, govern it, and change it without calling Agility AI every time.
-- Strategic partnership: Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
-- Email: organization@agilityai.in
-- Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
+- UAE partner (About): Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
+- Email: agilityaibusiness@gmail.com
+- Programs contact: Bhawna Khorwal, Head of Programs - 7042149608 (corporate training and sales)
 - Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IIT Kanpur, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
 
 ## FOUR CAPABILITY PILLARS
@@ -98,9 +97,10 @@ export function buildSiteKnowledgeBase() {
 ## TEAM
 
 ### Founding team
-- Sharad Raj Utsav — Founder & CEO. B.Tech NSUT Delhi; MBA (Rural Management) IRMA; M.Sc. Data Science and AI BITS Pilani; Stanford Seed alumnus; Claude Certified Instructor.
-- Shreya Sinha — Co-Founder & COO. B.Tech NSUT Delhi; Women Startup Program IIM Bangalore; PGP in Digital and Strategic Marketing MICA Ahmedabad.
-- Aryan Shukla — Co-Founder & CTO. Integrated B.Tech and M.Tech, Mathematics and Computing, IIT (BHU) Varanasi.
+- Sharad Raaj Utsav — Founder & CEO. Leads strategy and partnerships. MBA, IRMA. Lead facilitator of NDDB's two-day AI Productivity Programme.
+- Shreya Sinha — Co-Founder & COO. Leads sales, product design and delivery. B.Tech, NSUT Delhi; PGP, MICA Ahmedabad. About eight years at Piramal Group; Gandhi Fellow in Rajasthan.
+- Aryan Shukla — Co-Founder & CTO. Leads engineering. IIT BHU. Former ML Engineer, Samsung Research.
+- Bhawna Khorwal — Head of Programs. Runs programme delivery and client coordination.
 
 ### Advisory board
 - Sri R. Ramaseshan — Former IAS. Ex-MD & CEO, NCDEX. Chairman, National Commodity Clearing Ltd.
@@ -135,11 +135,11 @@ export function buildSiteKnowledgeBase() {
 
 ## TESTIMONIALS (/testimonials)
 - Real portrait video testimonials recorded after AI enablement sessions. Clips play from public Google Drive folders; the site stores file IDs only.
-- Page sections: workshop testimonials video grid, then a dashed divider, then Futurex Testimonials (student voices from Futurex programmes).
-- Do not invent participant quotes. Names/schools shown for Futurex come from the recording filenames.
+- Page sections: workshop testimonials video/images only. Futurex student testimonials are commented out and belong on the FutureX / Lyfshilp site.
+- Do not invent participant quotes.
 
 ## CONTACT & BOOKING
-- Email: organization@agilityai.in
+- Email: agilityaibusiness@gmail.com
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
 - Contact page (/contact): book-a-call plus email and phone — no message form.
 - Book a call opens WhatsApp chat with Bhawna Khorwal (Head of Programmes) on 7042149608 for training, sales, integration, or products.
@@ -169,7 +169,7 @@ export const KNOWLEDGE_SLICES: Record<string, string> = {
 - Philosophy: "Not just AI powered. AI fluent." Adoption and implementation solved together.
 - Philosophy: Most organisations don't need another vendor — they need to stop needing one.
 - Credentials: NSRCEL IIM Bangalore, IIIT Allahabad, IIT Kanpur, IRMA ISEED, Top 15 South Asia (Stanford Seed, Stanford GSB), DPIIT Startup India (DIPP205863), NVIDIA Inception, Sarvam AI.
-- Contacts: organization@agilityai.in | Bhawna Khorwal (Head of Programmes) 7042149608.`,
+- Contacts: agilityaibusiness@gmail.com | Bhawna Khorwal (Head of Programs) 7042149608.`,
 
   enablement: `## AI ENABLEMENT (TRAINING)
 - What it is: Hands-on AI training for non-tech and enterprise teams folded into their real daily work.
@@ -270,7 +270,7 @@ Rules:
 - For pricing or scope: say it depends on team size and format; never quote a number — suggest booking a call.
 - After answering (except for a pure thank-you), end with ONE clear next step:
   - Prefer "Book a call" in this chat for sales, training, integration, demos, or custom scope.
-  - Or "/contact" for email organization@agilityai.in and Bhawna Khorwal (Head of Programmes) on 7042149608.
+  - Or "/contact" for email agilityaibusiness@gmail.com and Bhawna Khorwal (Head of Programs) on 7042149608.
 - If the user asks how to apply: send them to /careers (#open-roles).
 - If the question is outside the knowledge base: say so briefly, then point to Book a call or /contact.
 - Do not mention Groq, OpenRouter, Jev, or that you are an AI model. You represent Agility AI.

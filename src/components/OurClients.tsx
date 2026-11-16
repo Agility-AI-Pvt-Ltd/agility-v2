@@ -4,8 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 import Reveal from "@/components/about/Reveal";
 
-/** Drop logo files into `public/assets/clients/` using these filenames. */
-const CLIENTS = [
+type Client = {
+  id: string;
+  name: string;
+  short: string;
+  /** Null when no logo file is available — name/short is shown instead. */
+  image: string | null;
+};
+
+const CLIENTS: Client[] = [
   {
     id: "mea",
     name: "Ministry of External Affairs",
@@ -16,25 +23,26 @@ const CLIENTS = [
     id: "ssifs",
     name: "Sushma Swaraj Institute of Foreign Service",
     short: "SSIFS, MEA",
-    image: "/assets/clients/ssifs.png",
+    image: "/assets/clients/Sushma_Swaraj_Institute_of_Foreign_Service.jpg",
   },
   {
     id: "hipa",
     name: "Haryana Institute of Public Administration",
     short: "HIPA",
-    image: "/assets/clients/hipa.png",
+    image: "/assets/clients/hipa.jpg",
   },
   {
     id: "nddb",
     name: "National Dairy Development Board",
     short: "NDDB",
-    image: "/assets/clients/nddb.png",
+    image: "/assets/clients/nddb.jpg",
   },
   {
     id: "mofahd",
     name: "Ministry of Fisheries, Animal Husbandry and Dairying",
     short: "MoFAHD",
-    image: "/assets/clients/ministry_of_fishery.png",
+    image:
+      "/assets/clients/goi-ministry-of-fisheries-animal-husbandry-and-dairying.png",
   },
   {
     id: "kmf",
@@ -46,21 +54,27 @@ const CLIENTS = [
     id: "idmc",
     name: "Indian Dairy Machinery Company Limited",
     short: "IDMC Limited",
-    image: "/assets/clients/idmc.png",
+    image: "/assets/clients/IDMC_log_with_R.jpg",
   },
   {
     id: "ncdfi",
     name: "National Cooperative Dairy Federation of India",
     short: "NCDFI",
-    image: "/assets/clients/ncdfi.png",
+    image: "/assets/clients/ncdfi.jpg",
   },
   {
     id: "edii",
     name: "Entrepreneurship Development Institute of India",
     short: "EDII",
-    image: "/assets/clients/edii.png",
+    image: "/assets/clients/EDII.jpg",
   },
-] as const;
+  {
+    id: "fia",
+    name: "Foundation for Innovation and Action",
+    short: "FIA",
+    image: "/assets/clients/fia.jpg",
+  },
+];
 
 const ROW_A = CLIENTS.slice(0, 5);
 const ROW_B = CLIENTS.slice(5);
@@ -70,16 +84,20 @@ function ClientLogo({
   label,
   name,
 }: {
-  src: string;
+  src: string | null;
   label: string;
   name: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const showText = !src || failed;
 
-  if (failed) {
+  if (showText) {
     return (
-      <span className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-[#f3e8ff] font-[family-name:var(--font-geist-mono)] text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6d28d9]">
-        {label.slice(0, 3)}
+      <span
+        className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-[#f3e8ff] px-1 text-center font-[family-name:var(--font-geist-mono)] text-[9px] font-semibold uppercase leading-tight tracking-[0.06em] text-[#6d28d9]"
+        title={name}
+      >
+        {label}
       </span>
     );
   }
@@ -98,11 +116,7 @@ function ClientLogo({
   );
 }
 
-function ClientCard({
-  client,
-}: {
-  client: (typeof CLIENTS)[number];
-}) {
+function ClientCard({ client }: { client: Client }) {
   return (
     <article className="relative flex w-[min(100%,20.5rem)] shrink-0 items-center gap-3 overflow-hidden rounded-[1.15rem] border border-[#ebe4ff] bg-white px-4 py-3.5 shadow-[0_12px_32px_rgba(91,33,182,0.07)] sm:w-[22rem] sm:gap-3.5 sm:px-5 sm:py-4">
       <ClientLogo src={client.image} label={client.short} name={client.name} />
@@ -113,7 +127,6 @@ function ClientCard({
           <span className="font-medium text-neutral-500">({client.short})</span>
         </p>
       </div>
-      {/* Decorative wave */}
       <svg
         aria-hidden="true"
         viewBox="0 0 120 48"
@@ -132,10 +145,9 @@ function MarqueeRow({
   clients,
   duration = "42s",
 }: {
-  clients: readonly (typeof CLIENTS)[number][];
+  clients: Client[];
   duration?: string;
 }) {
-  // Four copies so translateX(-50%) → 0 loops cleanly left-to-right.
   const loop = [...clients, ...clients, ...clients, ...clients];
 
   return (
@@ -180,9 +192,9 @@ export default function OurClients() {
               id="our-clients-heading"
               className="mt-6 font-[family-name:var(--font-serif)] text-[clamp(1.85rem,4.2vw,2.85rem)] leading-[1.12] tracking-[-0.03em] text-neutral-950"
             >
-              Trusted by Leading Government Institutions &{" "}
+              Institutions we have trained and{" "}
               <span className="relative inline-block whitespace-nowrap">
-                Organizations
+                worked with
                 <svg
                   viewBox="0 0 180 10"
                   className="absolute -bottom-1 left-0 h-2.5 w-full text-[#7c3aed]"
@@ -203,8 +215,7 @@ export default function OurClients() {
 
           <Reveal delay={140}>
             <p className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-relaxed text-neutral-500 sm:text-[15px]">
-              We proudly support premier government bodies, institutes, and
-              industry leaders across India.
+              Advised by a former IAS officer and faculty from IIT and IRMA.
             </p>
           </Reveal>
         </div>

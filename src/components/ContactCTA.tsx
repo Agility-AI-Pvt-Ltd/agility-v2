@@ -28,7 +28,7 @@ export default function ContactCTA({
             id={`${id}-heading`}
             className="font-[family-name:var(--font-serif)] text-[clamp(1.85rem,3.8vw,2.75rem)] leading-[1.12] tracking-[-0.02em]"
           >
-            Tell us where AI should create leverage
+            Talk to us
           </h2>
           <p
             className={[
@@ -36,7 +36,7 @@ export default function ContactCTA({
               isDark ? "text-white/55" : "text-neutral-500",
             ].join(" ")}
           >
-            Tell us what you need. We reply within one working day — book a call
+            Tell us what you want to build or who you want to train. Book a call
             on WhatsApp or email us directly.
           </p>
 
@@ -70,7 +70,7 @@ export default function ContactCTA({
               </a>
             </p>
             <p>
-              WhatsApp — Bhawna Khorwal, Head of Programmes{" "}
+              WhatsApp - Bhawna Khorwal, Head of Programs{" "}
               <a
                 href={BOOK_CALL_WHATSAPP_URL}
                 target="_blank"

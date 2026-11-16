@@ -9,8 +9,15 @@ import {
 import CredentialsSection from "@/components/about/CredentialsSection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
+import UaePartnerSection from "@/components/about/UaePartnerSection";
 import OurClients from "@/components/OurClients";
 import SiteChrome from "@/components/SiteChrome";
+import {
+  COMPANY_CIN,
+  COMPANY_GSTIN,
+  COMPANY_LEGAL_NAME,
+  COMPANY_REGISTERED_OFFICE,
+} from "@/lib/company";
 import { COMPANY_SUBHEADING } from "@/lib/company";
 import { FAQ_ITEMS, buildFaqPageSchema } from "@/lib/faq";
 
@@ -59,38 +66,44 @@ export default function AboutPage() {
               <div className="mb-5 flex items-center gap-3">
                 <span className="h-[3px] w-8 bg-[#3b6ef5]" aria-hidden="true" />
                 <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-white/50">
-                  About
+                  About Agility AI
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={80}>
               <h1 className="font-[family-name:var(--font-serif)] text-[clamp(2.1rem,5vw,3.5rem)] leading-[1.08] tracking-[-0.02em] text-white">
-                We didn&apos;t start Agility AI to{" "}
-                <span className="about-text-shimmer">sell you AI.</span>
+                About{" "}
+                <span className="about-text-shimmer">Agility AI</span>
               </h1>
             </Reveal>
 
             <Reveal delay={160}>
               <div className="mt-8 space-y-5 text-[15px] leading-relaxed text-white/60 sm:text-[16px] sm:leading-[1.75]">
                 <p>
-                  Plenty of people already do that. We started it because most
-                  organisations don&apos;t need another vendor. They need to
-                  stop needing one.
+                  Agility AI Private Limited builds AI automations and
+                  assistants for government, corporates, institutions and social
+                  enterprises, and trains the people who use them. We are a
+                  subsidiary of Lyfshilp Academy, which runs the FutureX AI
+                  programmes for students.
                 </p>
                 <p>
-                  The people behind Agility AI came into this from different
-                  directions. One side of the founding team spent years inside
-                  rural management and institutional systems, watching well
-                  funded initiatives stall not because the technology failed,
-                  but because nobody built the habit of actually using it.
-                  Another side came from digital marketing and analytics,
-                  watching the same pattern play out in corporate teams instead
-                  of cooperatives. A third side is pure engineering, the people
-                  who actually build the systems everyone else is trying to
-                  adopt. That mix is why the company exists the way it does:
-                  adoption and engineering, treated as one problem instead of
-                  two separate vendors handing off to each other.
+                  DPIIT-recognised startup (DIPP205863). Incubated at IRMA ISEED
+                  Foundation. Member of NVIDIA Inception. Part of the Sarvam AI
+                  startup program.
+                </p>
+                <p>
+                  Want to speak to a past client in your sector? Ask us, and we
+                  will arrange it with their consent.
+                </p>
+                <p>
+                  If you need a full ERP rebuild or large-scale data
+                  engineering, we will say so and point you to a partner who
+                  does it well.
+                </p>
+                <p className="font-[family-name:var(--font-geist-mono)] text-[12px] uppercase tracking-[0.08em] text-white/40">
+                  {COMPANY_LEGAL_NAME}. CIN {COMPANY_CIN}. GSTIN {COMPANY_GSTIN}.
+                  Registered office: {COMPANY_REGISTERED_OFFICE}.
                 </p>
               </div>
             </Reveal>
@@ -246,6 +259,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <UaePartnerSection />
       <OurClients />
       <AboutContactSection />
 

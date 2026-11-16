@@ -1,15 +1,16 @@
 import type { TestimonialVideo } from "@/components/testimonials/TestimonialVideoGrid";
 
-export type MainFilterId = "futurex" | "workshops";
+// Futurex filter commented out — student testimonials moved off this site.
+export type MainFilterId = /* "futurex" | */ "workshops";
 
 export type WorkshopMediaId = "video" | "images";
 
 export type CategorisedTestimonial = TestimonialVideo & {
-  category: MainFilterId | "founder-on-stage" | "anand-workshop";
+  category: MainFilterId | "founder-on-stage" | "anand-workshop" /* | "futurex" */;
 };
 
 export const MAIN_FILTERS = [
-  { id: "futurex" as const, label: "Futurex" },
+  // { id: "futurex" as const, label: "Futurex" },
   { id: "workshops" as const, label: "Workshops" },
 ] as const;
 
@@ -34,48 +35,49 @@ const workshopVideos: CategorisedTestimonial[] = [
   thumbnailUrl: `/testimonials/thumbs/${video.id}.jpg`,
 }));
 
-const futurexVideos: CategorisedTestimonial[] = [
-  {
-    id: "adhiraj-singh",
-    driveFileId: "19MucXrIJ2Z3UMMDGu8tA2IJaIrLOk0n7",
-    name: "Adhiraj Singh",
-    organization: "DPS Sec-45, Gurugram · Class 8",
-  },
-  {
-    id: "nivaan-johri",
-    driveFileId: "1FMilsOfNAjXUZCVB8iDeda0fsCBScl18",
-    name: "Nivaan Johri",
-    organization: "Delhi Public School · Class VII",
-  },
-  {
-    id: "punav-sangram",
-    driveFileId: "1zwL-cgjtnGhUTT_LdgU-gpTIb0imY6QR",
-    name: "Punav Sangram Jagdale",
-  },
-  {
-    id: "swara-agarwal",
-    driveFileId: "16-o43-007l3WogOeqLgf76NIEgCrMBAH",
-    name: "Swara Agarwal",
-    organization: "DPS Gurgaon · Class 7",
-  },
-  {
-    id: "vedang-pandey",
-    driveFileId: "1dG2-RHUVoEG2Ok5xHIl1eNaUbEnN9iTn",
-    name: "Vedang Pandey",
-    organization: "DPS Gurugram Sec-45",
-  },
-  {
-    id: "wrishik-ghosh",
-    driveFileId: "14wP9BFfToxNmzoM1phxaDU4u1P4EdVEr",
-    name: "Wrishik Ghosh",
-  },
-].map((video) => ({
-  ...video,
-  category: "futurex" as const,
-  kind: "video" as const,
-  aspect: "portrait" as const,
-  thumbnailUrl: `/testimonials/thumbs/futurex/${video.id}.jpg`,
-}));
+// Futurex student testimonials commented out — move to FutureX / Lyfshilp site.
+// const futurexVideos: CategorisedTestimonial[] = [
+//   {
+//     id: "adhiraj-singh",
+//     driveFileId: "19MucXrIJ2Z3UMMDGu8tA2IJaIrLOk0n7",
+//     name: "Adhiraj Singh",
+//     organization: "DPS Sec-45, Gurugram · Class 8",
+//   },
+//   {
+//     id: "nivaan-johri",
+//     driveFileId: "1FMilsOfNAjXUZCVB8iDeda0fsCBScl18",
+//     name: "Nivaan Johri",
+//     organization: "Delhi Public School · Class VII",
+//   },
+//   {
+//     id: "punav-sangram",
+//     driveFileId: "1zwL-cgjtnGhUTT_LdgU-gpTIb0imY6QR",
+//     name: "Punav Sangram Jagdale",
+//   },
+//   {
+//     id: "swara-agarwal",
+//     driveFileId: "16-o43-007l3WogOeqLgf76NIEgCrMBAH",
+//     name: "Swara Agarwal",
+//     organization: "DPS Gurgaon · Class 7",
+//   },
+//   {
+//     id: "vedang-pandey",
+//     driveFileId: "1dG2-RHUVoEG2Ok5xHIl1eNaUbEnN9iTn",
+//     name: "Vedang Pandey",
+//     organization: "DPS Gurugram Sec-45",
+//   },
+//   {
+//     id: "wrishik-ghosh",
+//     driveFileId: "14wP9BFfToxNmzoM1phxaDU4u1P4EdVEr",
+//     name: "Wrishik Ghosh",
+//   },
+// ].map((video) => ({
+//   ...video,
+//   category: "futurex" as const,
+//   kind: "video" as const,
+//   aspect: "portrait" as const,
+//   thumbnailUrl: `/testimonials/thumbs/futurex/${video.id}.jpg`,
+// }));
 
 const FOUNDER_PHOTOS = [
   "IMG_2498.jpg",
@@ -131,9 +133,9 @@ const anandWorkshopPhotos: CategorisedTestimonial[] = ANAND_PHOTOS.map(
   },
 );
 
-export function getFuturexVideos(): CategorisedTestimonial[] {
-  return futurexVideos;
-}
+// export function getFuturexVideos(): CategorisedTestimonial[] {
+//   return futurexVideos;
+// }
 
 export function getWorkshopVideos(): CategorisedTestimonial[] {
   return workshopVideos;

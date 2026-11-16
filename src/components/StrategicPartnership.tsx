@@ -96,7 +96,7 @@ export default function StrategicPartnership() {
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-[#ddd6fe] bg-white/80 px-4 py-1.5 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#5b21b6] shadow-[0_8px_24px_rgba(124,58,237,0.08)]">
               <UaeFlag className="h-3 w-[18px] shrink-0 overflow-hidden rounded-[2px] shadow-sm ring-1 ring-black/10" />
-              Strategic partnership
+              Client voices
             </p>
           </Reveal>
 
@@ -105,26 +105,23 @@ export default function StrategicPartnership() {
               id="strategic-partnership-heading"
               className="mt-6 font-[family-name:var(--font-serif)] text-[clamp(1.85rem,4.2vw,2.85rem)] leading-[1.12] tracking-[-0.03em] text-neutral-950"
             >
-              Agility AI and 108 Meridian Partner to Implement AI in the{" "}
-              <span className="relative inline-flex items-baseline gap-2 whitespace-nowrap">
-                <UaeFlag className="relative top-[0.12em] h-[0.72em] w-[1.1em] shrink-0 overflow-hidden rounded-[3px] shadow-sm ring-1 ring-black/10" />
-                <span className="relative">
-                  UAE
-                  <svg
-                    viewBox="0 0 80 10"
-                    className="absolute -bottom-1 left-0 h-2.5 w-full text-[#7c3aed]"
-                    aria-hidden="true"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 7c16-5 32 3 48-2s22-3 28 2"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
+              In our clients&apos;{" "}
+              <span className="relative inline-block whitespace-nowrap">
+                words
+                <svg
+                  viewBox="0 0 80 10"
+                  className="absolute -bottom-1 left-0 h-2.5 w-full text-[#7c3aed]"
+                  aria-hidden="true"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M2 7c16-5 32 3 48-2s22-3 28 2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </span>
             </h2>
           </Reveal>

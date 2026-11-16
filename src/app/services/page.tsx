@@ -66,24 +66,26 @@ export default function ServicesPage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="font-[family-name:var(--font-serif)] text-[clamp(2.1rem,5vw,3.5rem)] leading-[1.08] tracking-[-0.02em]">
-                Three ways in.{" "}
-                <span className="about-text-shimmer">
-                  Pick where you&apos;re stuck.
-                </span>
+                What we build, and how we make it stick
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-5 max-w-[48ch] text-[15px] leading-relaxed text-white/60 sm:text-[16px] sm:leading-[1.7]">
-                AI enablement training, AI integration builds, and ready-to-use
-                AI products — built for organisations across every industry.
+              <p className="mt-5 max-w-[52ch] text-[15px] leading-relaxed text-white/60 sm:text-[16px] sm:leading-[1.7]">
+                We build AI automations and assistants into your workflows, then
+                train your people to run them. Most clients start with a one-day
+                workshop and grow from there.
+              </p>
+              <p className="mt-4 max-w-[52ch] text-[14px] leading-relaxed text-white/50 sm:text-[15px] sm:leading-[1.7]">
+                If you need a full ERP rebuild or large-scale data engineering,
+                we will say so and point you to a partner who does it well.
               </p>
             </Reveal>
             <Reveal delay={220}>
               <div className="mt-8 flex flex-wrap gap-2">
                 {[
-                  { label: "Enablement", href: "#enablement" },
                   { label: "Integration", href: "#integration" },
                   { label: "Products", href: "#products" },
+                  { label: "Enablement", href: "#enablement" },
                 ].map((item) => (
                   <a
                     key={item.href}

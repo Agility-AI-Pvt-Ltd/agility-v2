@@ -11,16 +11,19 @@ import StrategicPartnership from "@/components/StrategicPartnership";
 import { COMPANY_SUBHEADING } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Agility AI | AI Enablement, Integration and Products",
+  title:
+    "Agility AI | AI Automation, Assistants and Training for Government, Corporates and Institutions",
   description: COMPANY_SUBHEADING,
   openGraph: {
-    title: "Agility AI | AI Enablement, Integration and Products",
+    title:
+      "Agility AI | AI Automation, Assistants and Training for Government, Corporates and Institutions",
     description: COMPANY_SUBHEADING,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agility AI | AI Enablement, Integration and Products",
+    title:
+      "Agility AI | AI Automation, Assistants and Training for Government, Corporates and Institutions",
     description: COMPANY_SUBHEADING,
   },
 };

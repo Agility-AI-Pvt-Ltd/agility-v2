@@ -110,25 +110,6 @@ const agilityStages = [
     ),
   },
   {
-    title: "Enablement",
-    subtitle: "Train your teams and drive adoption.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-5"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M12 3l1.8 5.4H19l-4.2 3.2 1.6 5.4L12 14.2 7.6 17l1.6-5.4L5 8.4h5.2L12 3z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
     title: "Automation",
     subtitle: "Deploy AI tools and integrations into your workflows.",
     icon: (
@@ -140,6 +121,25 @@ const agilityStages = [
       >
         <path
           d="M13 3L5 13h6l-1 8 9-12h-6l0-6z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Enablement",
+    subtitle: "Train your teams and drive adoption.",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="size-5"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3l1.8 5.4H19l-4.2 3.2 1.6 5.4L12 14.2 7.6 17l1.6-5.4L5 8.4h5.2L12 3z"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinejoin="round"
@@ -171,8 +171,8 @@ const agilityStages = [
 
 const workflows = [
   {
-    name: "Document Processing",
-    status: "Active",
+    name: "Invoicely",
+    status: "Live",
     tone: "green" as const,
     icon: (
       <svg
@@ -196,8 +196,8 @@ const workflows = [
     ),
   },
   {
-    name: "Support Assistant",
-    status: "Active",
+    name: "AI Sales Agent",
+    status: "Live",
     tone: "green" as const,
     icon: (
       <svg
@@ -216,8 +216,8 @@ const workflows = [
     ),
   },
   {
-    name: "Data Insights",
-    status: "Running",
+    name: "HRMS",
+    status: "Live",
     tone: "blue" as const,
     icon: (
       <svg
@@ -248,8 +248,8 @@ const workflows = [
     ),
   },
   {
-    name: "Workflow Automation",
-    status: "Active",
+    name: "Multilingual Voice Translator",
+    status: "Live",
     tone: "green" as const,
     icon: (
       <svg
@@ -273,7 +273,7 @@ const workflows = [
 const runOwnExtend = [
   {
     label: "Run",
-    hint: "Daily use in real workflows",
+    hint: "People approve every output that matters.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -480,14 +480,12 @@ export default function Capabilities() {
             id="capabilities-heading"
             className="font-[family-name:var(--font-serif)] text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-neutral-950"
           >
-            Buy AI fast.{" "}
-            <span className="bg-gradient-to-r from-[#6366f1] to-[#7c3aed] bg-clip-text text-transparent">
-              Run it well.
-            </span>
+            We build AI automations and assistants into your workflows, then
+            train your people to run and improve them.
           </h2>
           <p className="mx-auto mt-5 max-w-[52ch] text-[15px] leading-relaxed text-neutral-500 sm:text-[16px]">
-            We help organisations move from AI intent to real business impact —
-            with the right strategy, tools, implementation and ongoing support.
+            We map how your teams work, build what saves them time, and train
+            them to run it.
           </p>
         </header>
 
@@ -538,11 +536,11 @@ export default function Capabilities() {
               02 Agility AI
             </p>
             <h3 className="mt-3 font-[family-name:var(--font-serif)] text-[clamp(1.35rem,2.2vw,1.65rem)] leading-snug tracking-[-0.02em] text-neutral-950">
-              We design and deploy the right AI solution.
+              We build it, and train the people who will use it.
             </h3>
             <p className="mt-2 text-[13px] leading-relaxed text-neutral-500 sm:text-[14px]">
-              From strategy to execution, we set up AI systems that fit your
-              business and are easy to adopt.
+              Automations and assistants that fit your tools, plus hands-on
+              training so your teams adopt them.
             </p>
 
             <AgilityHubNetwork />
@@ -574,7 +572,7 @@ export default function Capabilities() {
               03 Running well
             </p>
             <h3 className="mt-3 font-[family-name:var(--font-serif)] text-[clamp(1.35rem,2.2vw,1.65rem)] leading-snug tracking-[-0.02em] text-neutral-950">
-              You get real, ongoing value.
+              It runs in daily work, and your team owns it.
             </h3>
             <p className="mt-2 text-[13px] leading-relaxed text-neutral-500 sm:text-[14px]">
               We ensure the solution runs smoothly, delivers impact, and

@@ -14,15 +14,15 @@ const PROJECTS = [
   {
     number: "01",
     category: "Mentorship",
-    name: "FutureX Fellowship",
+    name: "FutureX Fellowship platform",
     slug: "futurex",
     description:
-      "An AI mentorship platform that helps student entrepreneurs build real ventures, not just learn the theory.",
+      "The learning platform behind the FutureX student programme, built for our parent company, Lyfshilp Academy.",
     image: "/assets/built/01_futurex_fellowship.jpg",
     bg: "bg-[#f3efff]",
     badgeBg: "bg-[#ede9fe] text-[#6d28d9]",
     accent: "#7c3aed",
-    chips: ["Live cohort", "Build real ventures"],
+    chips: ["Live", "Lyfshilp Academy"],
     wide: true,
   },
   {
@@ -36,7 +36,7 @@ const PROJECTS = [
     bg: "bg-[#eef4ff]",
     badgeBg: "bg-[#dbeafe] text-[#1d4ed8]",
     accent: "#2563eb",
-    chips: ["Invoices", "Payments", "Expenses"],
+    chips: ["Live", "Invoices", "Payments"],
     wide: true,
   },
   {
@@ -50,7 +50,7 @@ const PROJECTS = [
     bg: "bg-[#fff7e6]",
     badgeBg: "bg-[#ffedd5] text-[#c2410c]",
     accent: "#ea580c",
-    chips: ["Quest", "Score", "Level"],
+    chips: ["Live", "Quest", "Score"],
     wide: false,
   },
   {
@@ -64,7 +64,7 @@ const PROJECTS = [
     bg: "bg-[#e6f9f0]",
     badgeBg: "bg-[#dcfce7] text-[#15803d]",
     accent: "#16a34a",
-    chips: ["First read done"],
+    chips: ["Live", "First read done"],
     wide: false,
   },
   {
@@ -78,7 +78,7 @@ const PROJECTS = [
     bg: "bg-[#f9e6f0]",
     badgeBg: "bg-[#fce7f3] text-[#be185d]",
     accent: "#db2777",
-    chips: ["Hiring", "Attendance", "Reimburse"],
+    chips: ["Live", "Hiring", "Attendance"],
     wide: false,
   },
 ] as const;

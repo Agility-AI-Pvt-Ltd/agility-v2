@@ -23,22 +23,22 @@ export const metadata: Metadata = {
 
 const founders = [
   {
-    name: "Sharad Raj Utsav",
+    name: "Sharad Raaj Utsav",
     role: "Founder & CEO",
     image: "/assets/image/sharad.jpeg",
-    bio: "B.Tech, NSUT Delhi. MBA (Rural Management), IRMA. M.Sc. Data Science and AI, BITS Pilani. Stanford Seed alumnus. Claude Certified Instructor.",
+    bio: "Leads strategy and partnerships. MBA, IRMA. Lead facilitator of NDDB's two-day AI Productivity Programme.",
   },
   {
     name: "Shreya Sinha",
     role: "Co-Founder & COO",
     image: "/assets/image/shreya.png",
-    bio: "B.Tech, NSUT Delhi. Women Startup Program, IIM Bangalore. PGP in Digital and Strategic Marketing, MICA Ahmedabad.",
+    bio: "Leads sales, product design and delivery. B.Tech, NSUT Delhi; PGP, MICA Ahmedabad. About eight years at Piramal Group in digital marketing, data analytics and market research, including two years as a Gandhi Fellow in rural government schools in Rajasthan.",
   },
   {
     name: "Aryan Shukla",
     role: "Co-Founder & CTO",
     image: "/assets/image/aryan.png",
-    bio: "Integrated B.Tech and M.Tech, Mathematics and Computing, IIT (BHU) Varanasi.",
+    bio: "Leads engineering and builds our products and client systems. IIT BHU. Former ML Engineer, Samsung Research.",
   },
 ] as const;
 
@@ -93,14 +93,14 @@ const advisors = [
     role: "Advisor",
     initials: "SR",
     image: "/image/advisory/shrinivasan.jpeg",
-    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD.",
+    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD. Northeastern University",
   },
   {
     name: "Prof. Manzoor UI Akram",
     role: "Advisor",
     initials: "MA",
     image: "/image/advisory/manzoor.jpeg",
-    bio: "Faculty, BITS Pilani Dubai. PhD.",
+    bio: "Faculty, BITS Pilani Dubai. PhD. IIM Rohtak",
   },
 ];
 
@@ -109,8 +109,8 @@ export default function TeamPage() {
     <SiteChrome>
       <PageHero
         eyebrow="Team and Advisors"
-        title="The people building this and the people making sure we build it right."
-        description="Meet the founding team and advisory board behind Agility AI — spanning AI engineering, rural management, public policy, law and entrepreneurship."
+        title="The people who build and train"
+        description="Meet the founding team and advisers behind Agility AI, spanning AI engineering, rural management, public policy, law and entrepreneurship."
       />
 
       {/* Founding team */}
@@ -119,7 +119,7 @@ export default function TeamPage() {
           <div className="mb-8 flex items-center gap-3">
             <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
             <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-              Founding team
+              The people who build and train
             </p>
           </div>
 
@@ -161,12 +161,11 @@ export default function TeamPage() {
           <div className="mb-4 flex items-center gap-3">
             <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
             <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-              Advisory board
+              Our advisers
             </p>
           </div>
           <h2 className="max-w-[28ch] font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
-            The people who make sure we&apos;re not just moving fast, but moving
-            right.
+            Our advisers
           </h2>
 
           <ul className="mt-10 grid gap-4 sm:grid-cols-2">

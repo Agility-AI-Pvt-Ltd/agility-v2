@@ -415,32 +415,18 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-[#05070c]/75 via-[#05070c]/35 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#05070c] to-transparent" />
 
-      <Marker
-        label="Vision"
-        icon="square"
-        delay="0s"
-        className="left-[6%] top-[18%] xl:left-[10%]"
-      />
-      <Marker
-        label="Precise"
-        icon="triangle"
-        delay="0.8s"
-        className="bottom-[24%] left-[8%] xl:left-[12%]"
-      />
-      <Marker
-        label="Smax8"
-        icon="target"
-        delay="1.4s"
-        className="right-[6%] top-[36%] xl:right-[12%]"
-      />
-
       <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-col items-center px-5 pb-10 pt-6 text-center sm:px-6 sm:pb-12 sm:pt-8">
         <div className="relative">
           <div
             className="pointer-events-none absolute left-1/2 top-1/2 h-[140%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(5,7,12,0.72)_0%,rgba(5,7,12,0.35)_55%,transparent_75%)]"
             aria-hidden="true"
           />
-          <p className="hero-reveal relative font-[family-name:var(--font-brand)] text-[clamp(3rem,12vw,7rem)] font-light uppercase leading-[0.9] tracking-[0.02em] text-white">
+          <p className="hero-reveal relative mx-auto max-w-[40ch] font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase leading-relaxed tracking-[0.14em] text-white/55 sm:max-w-[52ch] sm:text-[12px]">
+            AI automation, assistants and training for government, corporates,
+            institutions and social enterprises
+          </p>
+
+          <p className="hero-reveal hero-reveal-delay-1 relative mt-5 font-[family-name:var(--font-brand)] text-[clamp(2.6rem,10vw,6.5rem)] font-light uppercase leading-[0.9] tracking-[0.02em] text-white">
             Agility AI
           </p>
 
@@ -449,8 +435,8 @@ export default function Hero() {
             adopted AI yet.
           </h1>
 
-          <p className="hero-reveal hero-reveal-delay-2 relative mx-auto mt-2.5 text-center font-[family-name:var(--font-geist-mono)] text-[clamp(0.75rem,1.5vw,0.9rem)] font-normal leading-snug tracking-[-0.03em] text-white/60 sm:mt-3 sm:whitespace-nowrap">
-            Not just AI powered. AI fluent.
+          <p className="hero-reveal hero-reveal-delay-2 relative mx-auto mt-2.5 max-w-[36ch] text-center font-[family-name:var(--font-geist-mono)] text-[clamp(0.75rem,1.5vw,0.9rem)] font-normal leading-snug tracking-[-0.03em] text-white/60 sm:mt-3 sm:max-w-[44ch]">
+            We build AI into your workflows, then train your teams to run it.
           </p>
         </div>
 
@@ -459,15 +445,27 @@ export default function Hero() {
             href="/services"
             className="cta-cut inline-flex h-11 items-center justify-center bg-white px-7 font-[family-name:var(--font-geist-mono)] text-[13px] font-medium uppercase tracking-[0.06em] text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98] sm:h-10"
           >
-            See how it works
+            See what we build
           </a>
           <a
-            href="/contact"
+            href="/contact#book-call"
             className="cta-cut inline-flex h-11 items-center justify-center border border-white/80 bg-transparent px-7 font-[family-name:var(--font-geist-mono)] text-[13px] font-medium uppercase tracking-[0.06em] text-white transition-all duration-300 hover:bg-white hover:text-black active:scale-[0.98] sm:h-10"
           >
-            Talk to us
+            Book a 20-minute call
           </a>
         </div>
+
+        <p className="hero-reveal hero-reveal-delay-3 mt-6 flex max-w-[42rem] flex-wrap items-center justify-center gap-x-3 gap-y-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase leading-relaxed tracking-[0.12em] text-white/45 sm:text-[11px]">
+          <span>Incubated at IRMA ISEED Foundation</span>
+          <span className="hidden text-white/25 sm:inline" aria-hidden="true">
+            ·
+          </span>
+          <span>DPIIT-recognised startup</span>
+          <span className="hidden text-white/25 sm:inline" aria-hidden="true">
+            ·
+          </span>
+          <span>Member of NVIDIA Inception</span>
+        </p>
       </div>
 
       <ScrollMouse />

@@ -5,46 +5,49 @@ import SiteChrome, { PageHero } from "@/components/SiteChrome";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "AI Training for Government, Cooperatives and Enterprises | Agility AI",
+      "AI for Government, Corporates, Institutions and Schools | Agility AI",
   },
   description:
-    "Sector-specific AI enablement and integration for government, dairy cooperatives, education and enterprise — adapted to how your industry actually decides and delivers.",
+    "We build and train for government, corporates, institutions, schools and social enterprises. Each segment names the organisations we have worked with.",
   openGraph: {
     title:
-      "AI Training for Government, Cooperatives and Enterprises | Agility AI",
+      "AI for Government, Corporates, Institutions and Schools | Agility AI",
     description:
-      "Sector-specific AI enablement and integration for government, dairy cooperatives, education and enterprise.",
+      "We build and train for government, corporates, institutions, schools and social enterprises.",
   },
 };
 
 const industries = [
   {
-    name: "Government / Public sector",
-    problem:
-      "Large programmes move slowly when field data, training academies and HQ systems do not share a common rhythm — and AI pilots stall without adoption.",
-    approach:
-      "We work with departments, PSUs and training bodies (including NDDB-type federations and academy partners) on enablement plus practical automation that respects decision rights and audit trails.",
+    name: "Government",
+    promise:
+      "AI for officers, departments and training academies, designed around how government works.",
+    clients: "MEA, SSIFS, HIPA, MoFAHD, NDDB",
   },
   {
-    name: "Dairy / Cooperative",
-    problem:
-      "Fragmented member data, field operations, and decision cycles that move slower than market and supply realities.",
-    approach:
-      "We pair enablement for co-op teams with practical automation in procurement, quality, member services, and planning—so AI supports the cooperative model instead of fighting it.",
+    name: "Corporates",
+    promise:
+      "AI that takes routine work off busy teams, from sales to the back office.",
+    clients: "IDMC Limited",
   },
   {
-    name: "Education",
-    problem:
-      "Institutions adopt tools for teaching or administration without the fluency, ownership, or workflow design to sustain them.",
-    approach:
-      "We help academic and operations teams build AI literacy, then implement systems for learning support, knowledge work, and administrative load with clear governance.",
+    name: "Institutions",
+    promise:
+      "AI for training institutes, federations and the people they serve.",
+    clients: "EDII, KMF, NCDFI",
   },
   {
-    name: "Enterprise / Corporate",
-    problem:
-      "Pilots multiply across functions while production systems, accountability, and operating rhythms stay thin.",
-    approach:
-      "We align adoption and implementation across business and tech—prioritising use cases, shipping into real stacks, and installing owners who can extend what ships.",
+    name: "Schools",
+    promise:
+      "AI programmes for students and teachers, delivered with our parent company, Lyfshilp Academy.",
+    clients:
+      "DPS Gurugram Sector 45, DPS R.K. Puram, Mount Carmel Dwarka, Springdales Pusa Road, Modern School Barakhamba Road",
+  },
+  {
+    name: "Social enterprises",
+    promise:
+      "AI for foundations and non-profits that need to do more with small teams.",
+    clients: "FIA",
   },
 ] as const;
 
@@ -53,8 +56,8 @@ export default function IndustriesPage() {
     <SiteChrome>
       <PageHero
         eyebrow="Industries"
-        title="Sector context without one-size-fits-all scripts"
-        description="Every industry has different decision rights, risk tolerances, and workflow realities. We adapt adoption and implementation to how your sector actually operates."
+        title="Where we work"
+        description="We build and train for government, corporates, institutions, schools and social enterprises. Each segment below names the organisations we have worked with."
       />
 
       <section className="bg-white text-black">
@@ -68,23 +71,16 @@ export default function IndustriesPage() {
                 <h2 className="text-[20px] font-semibold tracking-[-0.02em] text-neutral-950 sm:text-[22px]">
                   {industry.name}
                 </h2>
-                <div className="mt-6 space-y-5 border-t border-dashed border-neutral-300 pt-6">
-                  <div>
-                    <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-neutral-400">
-                      The problem
-                    </p>
-                    <p className="mt-2 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px]">
-                      {industry.problem}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-                      How Agility AI approaches it
-                    </p>
-                    <p className="mt-2 text-[14px] leading-relaxed text-neutral-700 sm:text-[15px]">
-                      {industry.approach}
-                    </p>
-                  </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-neutral-700 sm:text-[16px]">
+                  {industry.promise}
+                </p>
+                <div className="mt-6 border-t border-dashed border-neutral-300 pt-5">
+                  <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
+                    Organisations
+                  </p>
+                  <p className="mt-2 text-[14px] leading-relaxed text-neutral-600">
+                    {industry.clients}
+                  </p>
                 </div>
               </li>
             ))}
@@ -92,8 +88,8 @@ export default function IndustriesPage() {
 
           <div className="mt-12 flex flex-col gap-4 border-t border-neutral-200 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-lg text-[14px] text-neutral-500">
-              Don&apos;t see your sector listed? Enablement, integration, and
-              products still apply — we&apos;ll tailor the framing with you.
+              Don&apos;t see your sector listed? Enablement, integration and
+              products still apply. We will tailor the framing with you.
             </p>
             <Link
               href="/contact"

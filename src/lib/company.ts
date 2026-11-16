@@ -1,8 +1,18 @@
 /** Company identity line used in footer, contact, and metadata. */
+/** Meta / OG / Twitter description. Do not add headcount claims here until Shreya verifies 5,200+. */
 export const COMPANY_SUBHEADING =
-  "Agility AI Pvt. Ltd. — a subsidiary of Lyfshilp Academy, an AI enablement and automation company.";
+  "We build AI automations and assistants into your workflows and train your teams to run them. For government, corporates, institutions and social enterprises.";
 
-export const COMPANY_LEGAL_NAME = "Agility AI Pvt. Ltd.";
+export const COMPANY_LEGAL_NAME = "Agility AI Private Limited";
+
+export const COMPANY_CIN = "U62099UP2025PTC215093";
+
+export const COMPANY_GSTIN = "09ABBCA9983H1Z5";
+
+export const COMPANY_REGISTERED_OFFICE = "Ghaziabad, Uttar Pradesh";
+
+export const VALUE_PROPOSITION =
+  "We build AI into your workflows, then train your people to run it.";
 
 export const LYFSHILP_ACADEMY_NAME = "Lyfshilp Academy";
 
@@ -16,11 +26,11 @@ export const LYFSHILP_ACADEMY_LOGO = "/assets/credentials/group/lyfshilp.png";
 export const PARENT_COMPANY_BLURB =
   "Agility AI is the AI automation arm of Lyfshilp Academy, an AI enablement company working with government, corporates, institutions, schools and social enterprises. Lyfshilp trains people to use AI; Agility AI builds the systems they use it in.";
 
-export const CONTACT_EMAIL = "organization@agilityai.in";
+export const CONTACT_EMAIL = "agilityaibusiness@gmail.com";
 
 export const PROGRAMMES_CONTACT = {
   name: "Bhawna Khorwal",
-  role: "Head of Programmes",
+  role: "Head of Programs",
   phoneDisplay: "7042149608",
   phoneE164: "917042149608",
 } as const;

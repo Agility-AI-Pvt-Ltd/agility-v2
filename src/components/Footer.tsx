@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { BookCallButton } from "@/components/BookCallModal";
 import {
+  COMPANY_CIN,
+  COMPANY_GSTIN,
   COMPANY_LEGAL_NAME,
+  COMPANY_REGISTERED_OFFICE,
   LYFSHILP_ACADEMY_NAME,
   LYFSHILP_ACADEMY_URL,
 } from "@/lib/company";
@@ -32,8 +35,7 @@ export default function Footer({ hideCta = false }: FooterProps) {
                 Ready when you are
               </p>
               <p className="mt-2 max-w-md text-[14px] text-white/50">
-                Send us a brief or book a 20-minute call on WhatsApp with our
-                programmes team.
+                Send us a brief or book a 20-minute call.
               </p>
             </div>
             <BookCallButton className="cta-cut inline-flex h-11 items-center justify-center bg-white px-5 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-black transition-all hover:bg-white/90">
@@ -57,7 +59,12 @@ export default function Footer({ hideCta = false }: FooterProps) {
               className="text-white/60 underline-offset-2 transition-colors hover:text-white hover:underline"
             >
               {LYFSHILP_ACADEMY_NAME}
-            </Link>.
+            </Link>
+            .
+          </p>
+          <p className="mt-3 max-w-sm text-[11px] leading-relaxed text-white/35">
+            {COMPANY_LEGAL_NAME} · CIN {COMPANY_CIN} · GSTIN {COMPANY_GSTIN} ·
+            Registered office: {COMPANY_REGISTERED_OFFICE}
           </p>
         </div>
 
@@ -82,7 +89,7 @@ export default function Footer({ hideCta = false }: FooterProps) {
           <p>
             © {new Date().getFullYear()} {COMPANY_LEGAL_NAME}
           </p>
-          <p>Startup India · DIPP205863</p>
+          <p>DPIIT-recognised startup · DIPP205863</p>
         </div>
       </div>
     </footer>

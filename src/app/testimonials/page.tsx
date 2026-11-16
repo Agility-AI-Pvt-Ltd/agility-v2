@@ -7,16 +7,16 @@ export const metadata: Metadata = {
     absolute: "Client Voices | Agility AI Enablement Testimonials",
   },
   description:
-    "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
+    "Leaders and teams from government, corporates, institutions and social enterprises on working with Agility AI.",
   openGraph: {
     title: "Client Voices | Agility AI Enablement Testimonials",
     description:
-      "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
+      "Leaders and teams from government, corporates, institutions and social enterprises on working with Agility AI.",
   },
   twitter: {
     title: "Client Voices | Agility AI Enablement Testimonials",
     description:
-      "Hear directly from people who have gone through Agility AI's AI enablement sessions, in their own words.",
+      "Leaders and teams from government, corporates, institutions and social enterprises on working with Agility AI.",
   },
 };
 

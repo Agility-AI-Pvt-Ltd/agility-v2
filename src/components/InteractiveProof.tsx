@@ -134,7 +134,7 @@ function ManualCard({ active }: { active: boolean }) {
             By hand
           </p>
           <p className="mt-0.5 font-[family-name:var(--font-serif)] text-[clamp(1.7rem,2.4vw,2.1rem)] leading-none tracking-[-0.02em] text-neutral-950">
-            6 hours
+            Hours across tools
           </p>
           <p className="mt-1.5 text-[13px] text-neutral-500">
             Dig through multiple tools and tabs
@@ -271,7 +271,7 @@ function AgilityCard({ active }: { active: boolean }) {
             With Agility AI
           </p>
           <p className="mt-0.5 font-[family-name:var(--font-serif)] text-[clamp(1.7rem,2.4vw,2.1rem)] leading-none tracking-[-0.02em] text-neutral-950">
-            20 minutes
+            One answer, with sources
           </p>
           <p className="mt-1.5 text-[13px] text-neutral-500">
             One clear answer, with sources
@@ -331,7 +331,7 @@ function AgilityCard({ active }: { active: boolean }) {
         </ul>
 
         <p className="mt-4 text-center font-[family-name:var(--font-cursive)] text-[1.15rem] leading-tight text-[#7c3aed]">
-          Minutes, not hours — with sources attached.
+          One answer, with sources attached.
         </p>
       </div>
     </article>
@@ -406,8 +406,7 @@ export default function InteractiveProof() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-relaxed text-neutral-500 sm:text-[15px]">
-            See how the same question goes from hours of digging to a clear
-            answer in minutes with Agility AI.
+            Illustrative example: one question, answered from scattered sources.
           </p>
         </div>
 

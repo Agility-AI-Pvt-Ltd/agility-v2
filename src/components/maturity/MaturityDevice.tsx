@@ -136,8 +136,8 @@ function DeviceScreen({
         </div>
         <h2 className="maturity-screen-title">AI Maturity Check</h2>
         <p className="maturity-screen-body">
-          Not just AI powered. AI fluent. Five questions. One minute. Find your
-          rung on the ladder.
+          Answer five questions about how your team works today. See your score
+          straight away. No sign-up needed.
         </p>
         <button
           type="button"
