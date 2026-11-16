@@ -109,8 +109,8 @@ export function buildSiteKnowledgeBase() {
 - Prof. Sumit Kumar Yadav — IIT Roorkee. PhD, IIM Ahmedabad. B.Tech, IIT Bombay.
 - Prof. Aashish Argade — IRMA Anand. PhD, IIM Ahmedabad.
 - Cdr Praveen Kumar — CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.
-- Prof. Srinivasan Radhakrishnan — Faculty, Indian Institute of Management Ahmedabad (IIM-A).
-- Manzoor UI Akram — Faculty, BITS Pilani Dubai.
+- Prof. Srinivasan Radhakrishnan — Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD.
+- Prof. Manzoor UI Akram — Faculty, BITS Pilani Dubai. PhD.
 
 ## CAREERS / HIRING
 - Culture: Small team, real ownership. What you build goes live. Work directly with founders. Things shipped this month are usually live next month.

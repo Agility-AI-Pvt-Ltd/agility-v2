@@ -93,14 +93,14 @@ const advisors = [
     role: "Advisor",
     initials: "SR",
     image: "/image/advisory/shrinivasan.jpeg",
-    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A).",
+    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD.",
   },
   {
-    name: "Manzoor UI Akram",
+    name: "Prof. Manzoor UI Akram",
     role: "Advisor",
     initials: "MA",
     image: "/image/advisory/manzoor.jpeg",
-    bio: "Faculty, BITS Pilani Dubai.",
+    bio: "Faculty, BITS Pilani Dubai. PhD.",
   },
 ];
 
