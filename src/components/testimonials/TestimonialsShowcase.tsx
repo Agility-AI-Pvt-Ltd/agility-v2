@@ -107,18 +107,20 @@ export default function TestimonialsShowcase({
         </p>
 
         {clientVoiceSections.length > 0 && (
-          <div className="mt-10 space-y-12 border-b border-dashed border-neutral-200 pb-12">
-            {clientVoiceSections.map((section) => (
-              <div key={section.id}>
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-                  <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                    {section.label}
-                  </p>
+          <div className="mt-10 border-b border-dashed border-neutral-200 pb-12">
+            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+              {clientVoiceSections.map((section) => (
+                <div key={section.id} className="min-w-0">
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="h-[3px] w-5 shrink-0 bg-black" aria-hidden="true" />
+                    <p className="truncate font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-500 sm:text-[11px]">
+                      {section.label}
+                    </p>
+                  </div>
+                  <TestimonialVideoGrid videos={section.videos} />
                 </div>
-                <TestimonialVideoGrid videos={section.videos} />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 

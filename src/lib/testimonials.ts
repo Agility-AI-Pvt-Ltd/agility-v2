@@ -43,7 +43,7 @@ export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
     videos: [
       {
         id: "exec-director-nddb",
-        driveFileId: "", // TODO: paste Drive file ID for Exec Director NDDB.mp4
+        driveFileId: "17tH3FYAY6_ssITe8_qSfh9_xrKa4W_2t",
         name: "Executive Director",
         organization: "NDDB",
         category: "workshops",
@@ -58,7 +58,7 @@ export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
     videos: [
       {
         id: "md-idmc",
-        driveFileId: "", // TODO: paste Drive file ID for MD IDMC.mp4
+        driveFileId: "1b_WUPielIcP0i13BEjqmyqkSA8RXoxnP",
         name: "Managing Director",
         organization: "IDMC Limited",
         category: "workshops",
@@ -73,7 +73,7 @@ export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
     videos: [
       {
         id: "client-voice-2026-10-07-a",
-        driveFileId: "", // TODO: paste Drive file ID for WhatsApp Video 2026-10-07 at 10.18.59 AM.mp4
+        driveFileId: "1ZHEpshpgApD0ZwrQw7fF3J3Qa2ixCAAF",
         name: "Client voice",
         organization: "Institution programme",
         category: "workshops",
@@ -88,7 +88,7 @@ export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
     videos: [
       {
         id: "client-voice-2026-10-07-b",
-        driveFileId: "", // TODO: paste Drive file ID for WhatsApp Video 2026-10-07 at 10.21.40 AM.mp4
+        driveFileId: "1gUsy9ntFsbXHXQ8yZ5BfjFsoJWM9uVgJ",
         name: "Client voice",
         organization: "Social enterprise programme",
         category: "workshops",

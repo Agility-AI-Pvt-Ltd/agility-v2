@@ -30,6 +30,8 @@ function drivePreviewUrl(fileId: string) {
 
 type VideoGridProps = {
   videos: readonly TestimonialVideo[];
+  /** Override grid columns, e.g. "grid-cols-1" for a single card in a parent column. */
+  gridClassName?: string;
 };
 
 function PlayIcon() {
@@ -291,13 +293,21 @@ function PlayerDialog({
   );
 }
 
-export default function TestimonialVideoGrid({ videos }: VideoGridProps) {
+export default function TestimonialVideoGrid({
+  videos,
+  gridClassName,
+}: VideoGridProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = videos.find((video) => video.id === activeId) ?? null;
+  const columns =
+    gridClassName ??
+    (videos.length === 1
+      ? "grid-cols-1"
+      : "grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3");
 
   return (
     <>
-      <ul className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
+      <ul className={["grid", columns].join(" ")}>
         {videos.map((video, index) => (
           <li key={video.id}>
             <VideoCard
