@@ -6,7 +6,11 @@ export type MainFilterId = /* "futurex" | */ "workshops";
 export type WorkshopMediaId = "video" | "images";
 
 export type CategorisedTestimonial = TestimonialVideo & {
-  category: MainFilterId | "founder-on-stage" | "anand-workshop" /* | "futurex" */;
+  category:
+    | MainFilterId
+    | "founder-on-stage"
+    | "anand-workshop"
+    | "ssifs" /* | "futurex" */;
 };
 
 export const MAIN_FILTERS = [
@@ -19,6 +23,88 @@ export const WORKSHOP_MEDIA_FILTERS = [
   { id: "images" as const, label: "Images" },
 ] as const;
 
+/**
+ * Client voice videos from
+ * https://drive.google.com/drive/folders/1ksLe5KThDes7wi5HZS336XyzkDyLhkCx
+ *
+ * Paste each file's Drive ID (from Share → Copy link → /file/d/FILE_ID/view).
+ * Folder must be shared as "Anyone with the link" for playback on the site.
+ */
+export type ClientVoiceSection = {
+  id: string;
+  label: string;
+  videos: CategorisedTestimonial[];
+};
+
+export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
+  {
+    id: "government",
+    label: "Government",
+    videos: [
+      {
+        id: "exec-director-nddb",
+        driveFileId: "", // TODO: paste Drive file ID for Exec Director NDDB.mp4
+        name: "Executive Director",
+        organization: "NDDB",
+        category: "workshops",
+        kind: "video",
+        aspect: "portrait",
+      },
+    ],
+  },
+  {
+    id: "corporates",
+    label: "Corporates",
+    videos: [
+      {
+        id: "md-idmc",
+        driveFileId: "", // TODO: paste Drive file ID for MD IDMC.mp4
+        name: "Managing Director",
+        organization: "IDMC Limited",
+        category: "workshops",
+        kind: "video",
+        aspect: "portrait",
+      },
+    ],
+  },
+  {
+    id: "institutions",
+    label: "Institutions",
+    videos: [
+      {
+        id: "client-voice-2026-10-07-a",
+        driveFileId: "", // TODO: paste Drive file ID for WhatsApp Video 2026-10-07 at 10.18.59 AM.mp4
+        name: "Client voice",
+        organization: "Institution programme",
+        category: "workshops",
+        kind: "video",
+        aspect: "portrait",
+      },
+    ],
+  },
+  {
+    id: "social-enterprises",
+    label: "Social enterprises",
+    videos: [
+      {
+        id: "client-voice-2026-10-07-b",
+        driveFileId: "", // TODO: paste Drive file ID for WhatsApp Video 2026-10-07 at 10.21.40 AM.mp4
+        name: "Client voice",
+        organization: "Social enterprise programme",
+        category: "workshops",
+        kind: "video",
+        aspect: "portrait",
+      },
+    ],
+  },
+];
+
+export function getClientVoiceSections(): ClientVoiceSection[] {
+  return CLIENT_VOICE_SECTIONS.map((section) => ({
+    ...section,
+    videos: section.videos.filter((video) => Boolean(video.driveFileId)),
+  })).filter((section) => section.videos.length > 0);
+}
 
 const workshopVideos: CategorisedTestimonial[] = [
   { id: "IMG_4141", driveFileId: "19GoScUvUAnhHMcA9lgdqEuY6o4YZ2RUb" },
@@ -105,6 +191,15 @@ const ANAND_PHOTOS = [
   "IMG-20260914-WA0022.jpg",
 ] as const;
 
+const SSIFS_PHOTOS = [
+  "WhatsApp Image 2026-11-16 at 12.40.42 PM.jpeg",
+  "WhatsApp Image 2026-11-16 at 12.40.42 PM (1).jpeg",
+  "WhatsApp Image 2026-11-16 at 12.42.59 PM.jpeg",
+  "WhatsApp Image 2026-11-16 at 1.16.27 PM.jpeg",
+  "WhatsApp Image 2026-11-16 at 1.17.05 PM.jpeg",
+  "WhatsApp Image 2026-11-16 at 1.17.07 PM.jpeg",
+] as const;
+
 const founderOnStagePhotos: CategorisedTestimonial[] = FOUNDER_PHOTOS.map(
   (file) => {
     const id = file.replace(/\.[^.]+$/, "");
@@ -133,6 +228,20 @@ const anandWorkshopPhotos: CategorisedTestimonial[] = ANAND_PHOTOS.map(
   },
 );
 
+const ssifsPhotos: CategorisedTestimonial[] = SSIFS_PHOTOS.map((file, index) => {
+  const path = `/assets/SSIFS/${encodeURIComponent(file)}`;
+  return {
+    id: `ssifs-${index + 1}`,
+    name: "SSIFS",
+    organization: "Sushma Swaraj Institute of Foreign Service",
+    category: "ssifs" as const,
+    kind: "photo" as const,
+    aspect: "landscape" as const,
+    thumbnailUrl: path,
+    imageUrl: path,
+  };
+});
+
 // export function getFuturexVideos(): CategorisedTestimonial[] {
 //   return futurexVideos;
 // }
@@ -142,5 +251,5 @@ export function getWorkshopVideos(): CategorisedTestimonial[] {
 }
 
 export function getWorkshopImages(): CategorisedTestimonial[] {
-  return [...founderOnStagePhotos, ...anandWorkshopPhotos];
+  return [...ssifsPhotos, ...founderOnStagePhotos, ...anandWorkshopPhotos];
 }

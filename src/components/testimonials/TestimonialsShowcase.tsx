@@ -5,6 +5,7 @@ import TestimonialVideoGrid from "@/components/testimonials/TestimonialVideoGrid
 import TextTestimonials from "@/components/testimonials/TextTestimonials";
 import {
   WORKSHOP_MEDIA_FILTERS,
+  getClientVoiceSections,
   getWorkshopImages,
   getWorkshopVideos,
   type WorkshopMediaId,
@@ -48,6 +49,8 @@ export default function TestimonialsShowcase({
   className = "",
 }: TestimonialsShowcaseProps) {
   const [workshopMedia, setWorkshopMedia] = useState<WorkshopMediaId>("video");
+
+  const clientVoiceSections = useMemo(() => getClientVoiceSections(), []);
 
   const items = useMemo(() => {
     const list =
@@ -102,6 +105,22 @@ export default function TestimonialsShowcase({
           Leaders and teams from government, corporates, institutions and social
           enterprises, in their own words.
         </p>
+
+        {clientVoiceSections.length > 0 && (
+          <div className="mt-10 space-y-12 border-b border-dashed border-neutral-200 pb-12">
+            {clientVoiceSections.map((section) => (
+              <div key={section.id}>
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
+                  <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
+                    {section.label}
+                  </p>
+                </div>
+                <TestimonialVideoGrid videos={section.videos} />
+              </div>
+            ))}
+          </div>
+        )}
 
         <div
           role="tablist"
