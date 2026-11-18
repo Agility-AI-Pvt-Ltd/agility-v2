@@ -1,16 +1,22 @@
 import type { TestimonialVideo } from "@/components/testimonials/TestimonialVideoGrid";
+import { PHOTO_CATEGORY_SOURCES } from "@/lib/testimonial-photo-sources";
 
 // Futurex filter commented out — student testimonials moved off this site.
 export type MainFilterId = /* "futurex" | */ "workshops";
 
-export type WorkshopMediaId = "video" | "images";
+export type WorkshopMediaId = "video" | "images" | "letters";
 
 export type CategorisedTestimonial = TestimonialVideo & {
-  category:
-    | MainFilterId
-    | "founder-on-stage"
-    | "anand-workshop"
-    | "ssifs" /* | "futurex" */;
+  category: MainFilterId /* | "futurex" */;
+};
+
+export type AppreciationLetter = {
+  id: string;
+  organization: string;
+  location?: string;
+  title: string;
+  pdfUrl: string;
+  logoSrc: string;
 };
 
 export const MAIN_FILTERS = [
@@ -21,7 +27,32 @@ export const MAIN_FILTERS = [
 export const WORKSHOP_MEDIA_FILTERS = [
   { id: "video" as const, label: "Video" },
   { id: "images" as const, label: "Images" },
+  { id: "letters" as const, label: "Letters" },
 ] as const;
+
+const APPRECIATION_LETTERS_DIR = "/assets/appreciation-letters";
+
+export const APPRECIATION_LETTERS: AppreciationLetter[] = [
+  {
+    id: "nddb-appreciation",
+    organization: "National Dairy Development Board",
+    title: "Official letter of appreciation",
+    pdfUrl: `${APPRECIATION_LETTERS_DIR}/nddb-appreciation-letter.pdf`,
+    logoSrc: "/assets/clients/nddb.jpg",
+  },
+  {
+    id: "hipa-appreciation",
+    organization: "Haryana Institute of Public Administration",
+    location: "Gurugram",
+    title: "Appreciation letter",
+    pdfUrl: `${APPRECIATION_LETTERS_DIR}/hipa-appreciation-letter.pdf`,
+    logoSrc: "/assets/clients/hipa.jpg",
+  },
+];
+
+export function getAppreciationLetters(): AppreciationLetter[] {
+  return APPRECIATION_LETTERS;
+}
 
 /**
  * Client voice videos from
@@ -61,21 +92,6 @@ export const CLIENT_VOICE_SECTIONS: ClientVoiceSection[] = [
         driveFileId: "1b_WUPielIcP0i13BEjqmyqkSA8RXoxnP",
         name: "Managing Director",
         organization: "IDMC Limited",
-        category: "workshops",
-        kind: "video",
-        aspect: "portrait",
-      },
-    ],
-  },
-  {
-    id: "institutions",
-    label: "Institutions",
-    videos: [
-      {
-        id: "client-voice-2026-10-07-a",
-        driveFileId: "1ZHEpshpgApD0ZwrQw7fF3J3Qa2ixCAAF",
-        name: "Client voice",
-        organization: "Institution programme",
         category: "workshops",
         kind: "video",
         aspect: "portrait",
@@ -165,82 +181,41 @@ const workshopVideos: CategorisedTestimonial[] = [
 //   thumbnailUrl: `/testimonials/thumbs/futurex/${video.id}.jpg`,
 // }));
 
-const FOUNDER_PHOTOS = [
-  "IMG_2498.jpg",
-  "IMG_2508.jpg",
-  "IMG_2509.jpg",
-  "IMG_4173.jpg",
-  "IMG_4174-1.jpg",
-  "IMG_4177-1.jpg",
-  "IMG_4180.jpg",
-  "IMG_4181-1.jpg",
-] as const;
+export type PhotoCategorySection = {
+  id: string;
+  label: string;
+  folder: string;
+  photos: CategorisedTestimonial[];
+};
 
-const ANAND_PHOTOS = [
-  "IMG-20260914-WA0000.jpg",
-  "IMG-20260914-WA0001.jpg",
-  "IMG-20260914-WA0002.jpg",
-  "IMG-20260914-WA0003.jpg",
-  "IMG-20260914-WA0010.jpg",
-  "IMG-20260914-WA0016.jpg",
-  "IMG-20260914-WA0017.jpg",
-  "IMG-20260914-WA0018.jpg",
-  "IMG-20260914-WA0019.jpg",
-  "IMG-20260914-WA0020.jpg",
-  "IMG-20260914-WA0021.jpg",
-  "IMG-20260914-WA0022.jpg",
-] as const;
+function slugifyFolder(folder: string): string {
+  return folder
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
 
-const SSIFS_PHOTOS = [
-  "WhatsApp Image 2026-11-16 at 12.40.42 PM.jpeg",
-  "WhatsApp Image 2026-11-16 at 12.40.42 PM (1).jpeg",
-  "WhatsApp Image 2026-11-16 at 12.42.59 PM.jpeg",
-  "WhatsApp Image 2026-11-16 at 1.16.27 PM.jpeg",
-  "WhatsApp Image 2026-11-16 at 1.17.05 PM.jpeg",
-  "WhatsApp Image 2026-11-16 at 1.17.07 PM.jpeg",
-] as const;
-
-const founderOnStagePhotos: CategorisedTestimonial[] = FOUNDER_PHOTOS.map(
-  (file) => {
-    const id = file.replace(/\.[^.]+$/, "");
+export const PHOTO_CATEGORY_SECTIONS: PhotoCategorySection[] =
+  PHOTO_CATEGORY_SOURCES.map((source) => {
+    const id = slugifyFolder(source.folder);
+    const photos: CategorisedTestimonial[] = source.files.map((file, index) => {
+      const path = `/testimonials/photos/${encodeURIComponent(source.folder)}/${encodeURIComponent(file)}`;
+      return {
+        id: `${id}-${index + 1}`,
+        category: "workshops" as const,
+        kind: "photo" as const,
+        aspect: "landscape" as const,
+        thumbnailUrl: path,
+        imageUrl: path,
+      };
+    });
     return {
-      id: `founder-${id}`,
-      category: "founder-on-stage" as const,
-      kind: "photo" as const,
-      aspect: "landscape" as const,
-      thumbnailUrl: `/assets/founder-on-stage/${file}`,
-      imageUrl: `/assets/founder-on-stage/${file}`,
+      id,
+      label: source.label,
+      folder: source.folder,
+      photos,
     };
-  },
-);
-
-const anandWorkshopPhotos: CategorisedTestimonial[] = ANAND_PHOTOS.map(
-  (file) => {
-    const id = file.replace(/\.[^.]+$/, "");
-    return {
-      id: `anand-${id}`,
-      category: "anand-workshop" as const,
-      kind: "photo" as const,
-      aspect: "landscape" as const,
-      thumbnailUrl: `/assets/anand-workshop/${file}`,
-      imageUrl: `/assets/anand-workshop/${file}`,
-    };
-  },
-);
-
-const ssifsPhotos: CategorisedTestimonial[] = SSIFS_PHOTOS.map((file, index) => {
-  const path = `/assets/SSIFS/${encodeURIComponent(file)}`;
-  return {
-    id: `ssifs-${index + 1}`,
-    name: "SSIFS",
-    organization: "Sushma Swaraj Institute of Foreign Service",
-    category: "ssifs" as const,
-    kind: "photo" as const,
-    aspect: "landscape" as const,
-    thumbnailUrl: path,
-    imageUrl: path,
-  };
-});
+  });
 
 // export function getFuturexVideos(): CategorisedTestimonial[] {
 //   return futurexVideos;
@@ -250,6 +225,10 @@ export function getWorkshopVideos(): CategorisedTestimonial[] {
   return workshopVideos;
 }
 
+export function getWorkshopImageSections(): PhotoCategorySection[] {
+  return PHOTO_CATEGORY_SECTIONS.filter((section) => section.photos.length > 0);
+}
+
 export function getWorkshopImages(): CategorisedTestimonial[] {
-  return [...ssifsPhotos, ...founderOnStagePhotos, ...anandWorkshopPhotos];
+  return getWorkshopImageSections().flatMap((section) => section.photos);
 }

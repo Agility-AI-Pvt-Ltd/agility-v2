@@ -145,11 +145,12 @@ export default function ServicesPage() {
 
               <Reveal delay={200}>
                 <p className="mt-6 max-w-[70ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
-                  Institutional engagements include NDDB, the Foundation for
-                  Innovation and Action (FIA), the Entrepreneurship Development
-                  Institute of India (EDII), the National Cooperative Dairy
-                  Federation of India (NCDFI), Karnataka Cooperative Milk
-                  Federation (KMF) and Indian Dairy Machinery Company (IDMC).
+                  Institutional engagements include the National Dairy
+                  Development Board (NDDB), the Foundation for Innovation and
+                  Action (FIA), the Entrepreneurship Development Institute of
+                  India (EDII), the National Cooperative Dairy Federation of
+                  India (NCDFI), Karnataka Cooperative Milk Federation (KMF) and
+                  Indian Dairy Machinery Company (IDMC).
                 </p>
               </Reveal>
             </div>

@@ -149,25 +149,6 @@ function VideoCard({
         </button>
       </div>
 
-      {(video.organization || video.name || video.caption) && (
-        <div className="flex flex-1 flex-col p-5 sm:p-6">
-          {video.organization && (
-            <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.14em] text-[#3b6ef5]">
-              {video.organization}
-            </p>
-          )}
-          {video.name && (
-            <h3 className="mt-2 text-[16px] font-semibold tracking-[-0.01em] text-neutral-950">
-              {video.name}
-            </h3>
-          )}
-          {video.caption && (
-            <p className="mt-2 flex-1 text-[14px] leading-relaxed text-neutral-600">
-              {video.caption}
-            </p>
-          )}
-        </div>
-      )}
     </article>
   );
 }

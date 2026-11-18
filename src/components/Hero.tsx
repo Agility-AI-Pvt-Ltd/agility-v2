@@ -345,54 +345,6 @@ function PixelMountain() {
   );
 }
 
-function Marker({
-  label,
-  icon,
-  className,
-  delay = "0s",
-}: {
-  label: string;
-  icon: "square" | "triangle" | "target";
-  className: string;
-  delay?: string;
-}) {
-  return (
-    <div
-      className={[
-        "hero-marker pointer-events-none absolute z-10 hidden flex-col items-center gap-2 text-white/70 lg:flex",
-        className,
-      ].join(" ")}
-      style={{ animationDelay: delay }}
-      aria-hidden="true"
-    >
-      {icon === "square" && (
-        <span className="relative size-3.5 border border-white/70">
-          <span className="absolute left-1/2 top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80" />
-        </span>
-      )}
-      {icon === "triangle" && (
-        <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
-          <path
-            d="M7 1L13 11H1L7 1Z"
-            stroke="rgba(255,255,255,0.75)"
-            strokeWidth="1.2"
-          />
-        </svg>
-      )}
-      {icon === "target" && (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,0.75)" />
-          <circle cx="7" cy="7" r="2.5" stroke="rgba(255,255,255,0.75)" />
-          <circle cx="7" cy="7" r="0.8" fill="rgba(255,255,255,0.8)" />
-        </svg>
-      )}
-      <span className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.18em]">
-        {label}
-      </span>
-    </div>
-  );
-}
-
 function ScrollMouse() {
   return (
     <div
@@ -454,18 +406,6 @@ export default function Hero() {
             Book a 20-minute call
           </a>
         </div>
-
-        <p className="hero-reveal hero-reveal-delay-3 mt-6 flex max-w-[42rem] flex-wrap items-center justify-center gap-x-3 gap-y-2 font-[family-name:var(--font-geist-mono)] text-[10px] uppercase leading-relaxed tracking-[0.12em] text-white/45 sm:text-[11px]">
-          <span>Incubated at IRMA ISEED Foundation</span>
-          <span className="hidden text-white/25 sm:inline" aria-hidden="true">
-            ·
-          </span>
-          <span>DPIIT-recognised startup</span>
-          <span className="hidden text-white/25 sm:inline" aria-hidden="true">
-            ·
-          </span>
-          <span>Member of NVIDIA Inception</span>
-        </p>
       </div>
 
       <ScrollMouse />

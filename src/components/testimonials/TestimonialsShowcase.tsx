@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import AppreciationLetters from "@/components/testimonials/AppreciationLetters";
 import TestimonialVideoGrid from "@/components/testimonials/TestimonialVideoGrid";
-import TextTestimonials from "@/components/testimonials/TextTestimonials";
 import {
   WORKSHOP_MEDIA_FILTERS,
+  getAppreciationLetters,
   getClientVoiceSections,
-  getWorkshopImages,
+  getWorkshopImageSections,
   getWorkshopVideos,
   type WorkshopMediaId,
 } from "@/lib/testimonials";
@@ -51,15 +52,30 @@ export default function TestimonialsShowcase({
   const [workshopMedia, setWorkshopMedia] = useState<WorkshopMediaId>("video");
 
   const clientVoiceSections = useMemo(() => getClientVoiceSections(), []);
-
-  const items = useMemo(() => {
-    const list =
-      workshopMedia === "video" ? getWorkshopVideos() : getWorkshopImages();
-
+  const photoSections = useMemo(() => getWorkshopImageSections(), []);
+  const letters = useMemo(() => {
+    const list = getAppreciationLetters();
     return typeof limit === "number" ? list.slice(0, limit) : list;
-  }, [workshopMedia, limit]);
+  }, [limit]);
 
-  const showWorkshopQuotes = workshopMedia === "video";
+  const videoItems = useMemo(() => {
+    const list = getWorkshopVideos();
+    return typeof limit === "number" ? list.slice(0, limit) : list;
+  }, [limit]);
+
+  const limitedPhotoSections = useMemo(() => {
+    if (typeof limit !== "number") return photoSections;
+    let remaining = limit;
+    const sections = [];
+    for (const section of photoSections) {
+      if (remaining <= 0) break;
+      const photos = section.photos.slice(0, remaining);
+      if (photos.length === 0) continue;
+      sections.push({ ...section, photos });
+      remaining -= photos.length;
+    }
+    return sections;
+  }, [photoSections, limit]);
 
   return (
     <section
@@ -108,7 +124,7 @@ export default function TestimonialsShowcase({
 
         {clientVoiceSections.length > 0 && (
           <div className="mt-10 border-b border-dashed border-neutral-200 pb-12">
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
               {clientVoiceSections.map((section) => (
                 <div key={section.id} className="min-w-0">
                   <div className="mb-3 flex items-center gap-2">
@@ -139,21 +155,37 @@ export default function TestimonialsShowcase({
           ))}
         </div>
 
-        {showWorkshopQuotes && (
-          <div className="mt-10">
-            <div className="mb-8 flex items-center gap-3">
-              <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-              <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                In their words
+        <div className="mt-10">
+          {workshopMedia === "video" ? (
+            videoItems.length > 0 ? (
+              <TestimonialVideoGrid videos={videoItems} />
+            ) : (
+              <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
+                Media for this category is being prepared.
               </p>
-            </div>
-            <TextTestimonials />
-          </div>
-        )}
-
-        <div className={showWorkshopQuotes ? "mt-12" : "mt-10"}>
-          {items.length > 0 ? (
-            <TestimonialVideoGrid videos={items} />
+            )
+          ) : workshopMedia === "images" ? (
+            limitedPhotoSections.length > 0 ? (
+              <div className="space-y-12">
+                {limitedPhotoSections.map((section) => (
+                  <div key={section.id}>
+                    <div className="mb-5 flex items-center gap-3">
+                      <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
+                      <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
+                        {section.label}
+                      </p>
+                    </div>
+                    <TestimonialVideoGrid videos={section.photos} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
+                Media for this category is being prepared.
+              </p>
+            )
+          ) : letters.length > 0 ? (
+            <AppreciationLetters letters={letters} />
           ) : (
             <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
               Media for this category is being prepared.
