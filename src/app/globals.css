@@ -1817,6 +1817,15 @@ html.lenis body {
   }
 }
 
+@keyframes clients-marquee-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 .clients-marquee-track {
   animation: clients-marquee-ltr 48s linear infinite;
   will-change: transform;
@@ -1824,4 +1833,64 @@ html.lenis body {
 
 .clients-marquee:hover .clients-marquee-track {
   animation-play-state: paused;
+}
+
+.hero-clients-marquee-track {
+  animation: clients-marquee-rtl 40s linear infinite;
+  will-change: transform;
+}
+
+.hero-clients-marquee:hover .hero-clients-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-clients-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .work-in-action-marquee-rtl,
+  .work-in-action-marquee-ltr {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+.work-in-action-marquee-rtl {
+  animation: clients-marquee-rtl 48s linear infinite;
+  will-change: transform;
+}
+
+.work-in-action-marquee-ltr {
+  animation: clients-marquee-ltr 52s linear infinite;
+  will-change: transform;
+}
+
+.work-in-action-marquee:hover .work-in-action-marquee-rtl,
+.work-in-action-marquee:hover .work-in-action-marquee-ltr {
+  animation-play-state: paused;
+}
+
+.testimonial-photo-marquee-rtl {
+  animation: clients-marquee-rtl 42s linear infinite;
+  will-change: transform;
+}
+
+.testimonial-photo-marquee-ltr {
+  animation: clients-marquee-ltr 50s linear infinite;
+  will-change: transform;
+}
+
+.testimonial-photo-marquee:hover .testimonial-photo-marquee-rtl,
+.testimonial-photo-marquee:hover .testimonial-photo-marquee-ltr {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-photo-marquee-rtl,
+  .testimonial-photo-marquee-ltr {
+    animation: none !important;
+    transform: none !important;
+  }
 }

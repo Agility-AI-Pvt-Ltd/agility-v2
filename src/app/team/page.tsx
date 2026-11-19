@@ -47,19 +47,20 @@ const FOUNDER_IMAGE_VERSION = "20261013a";
 
 const advisors = [
   {
+    name: "Prof. Srinivasan Radhakrishnan",
+    role: "Advisor",
+    initials: "SR",
+    image: "/image/advisory/shrinivasan.jpeg",
+    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD. Northeastern University",
+  },
+  {
     name: "Sri R. Ramaseshan",
     role: "Advisor",
     initials: "RR",
     image: "/image/advisory/R_Ramaseshan_sir.jpg",
     bio: "Former IAS. Ex-MD & CEO, NCDEX. Chairman, National Commodity Clearing Ltd.",
   },
-  {
-    name: "Prof. Ashok R. Patil",
-    role: "Advisor",
-    initials: "AP",
-    image: "/image/advisory/ashok.jpg",
-    bio: "Vice Chancellor, NUSRL Ranchi. Professor, NLSIU Bengaluru.",
-  },
+
   {
     name: "Prof. Nakul Parameswar",
     role: "Advisor",
@@ -88,19 +89,20 @@ const advisors = [
     image: "/image/advisory/cdr_praveen.jpeg",
     bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
-  {
-    name: "Prof. Srinivasan Radhakrishnan",
-    role: "Advisor",
-    initials: "SR",
-    image: "/image/advisory/shrinivasan.jpeg",
-    bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD. Northeastern University",
-  },
+
   {
     name: "Prof. Manzoor UI Akram",
     role: "Advisor",
     initials: "MA",
     image: "/image/advisory/manzoor.jpeg",
     bio: "Faculty, BITS Pilani Dubai. PhD. IIM Rohtak",
+  },
+  {
+    name: "Prof. Ashok R. Patil",
+    role: "Advisor",
+    initials: "AP",
+    image: "/image/advisory/ashok.jpg",
+    bio: "Vice Chancellor, NUSRL Ranchi. Professor, NLSIU Bengaluru.",
   },
 ];
 
@@ -197,7 +199,7 @@ export default function TeamPage() {
                   <h3 className="mt-1.5 font-[family-name:var(--font-serif)] text-[1.2rem] leading-tight tracking-[-0.02em] text-neutral-950 sm:text-[1.25rem]">
                     {advisor.name}
                   </h3>
-                  <p className="mt-2.5 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.65]">
+                  <p className="mt-2.5 text-[14px] font-semibold leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.65]">
                     {advisor.bio}
                   </p>
                 </div>

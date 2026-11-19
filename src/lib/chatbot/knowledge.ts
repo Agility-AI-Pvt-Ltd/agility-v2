@@ -30,7 +30,7 @@ export function buildSiteKnowledgeBase() {
 - Positioning: AI adoption and AI implementation are two different problems, solved together.
 - What they deliver: The working system, plus internal muscle memory to run it, govern it, and change it without calling Agility AI every time.
 - UAE partner (About): Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
-- Email: agilityaibusiness@gmail.com
+- Email: organisation@agilityai.in
 - Programs contact: Bhawna Khorwal, Head of Programs - 7042149608 (corporate training and sales)
 - Credentials (/about#credentials): grouped by Lyfshilp Academy and Agility AI — NSRCEL IIM Bangalore (Women Startup Program), IIIT Allahabad, IIT Kanpur, IRMA ISEED; Top 15 startups in South Asia (Stanford Seed, Stanford GSB); DPIIT Startup India (DIPP205863); NVIDIA Inception; Sarvam AI Startup Programme; NDDB onboarding for training; UP government financial incentive felicitation.
 
@@ -139,7 +139,7 @@ export function buildSiteKnowledgeBase() {
 - Do not invent participant quotes.
 
 ## CONTACT & BOOKING
-- Email: agilityaibusiness@gmail.com
+- Email: organisation@agilityai.in
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
 - Contact page (/contact): book-a-call plus email and phone — no message form.
 - Book a call opens WhatsApp chat with Bhawna Khorwal (Head of Programmes) on 7042149608 for training, sales, integration, or products.
@@ -169,7 +169,7 @@ export const KNOWLEDGE_SLICES: Record<string, string> = {
 - Philosophy: "Not just AI powered. AI fluent." Adoption and implementation solved together.
 - Philosophy: Most organisations don't need another vendor — they need to stop needing one.
 - Credentials: NSRCEL IIM Bangalore, IIIT Allahabad, IIT Kanpur, IRMA ISEED, Top 15 South Asia (Stanford Seed, Stanford GSB), DPIIT Startup India (DIPP205863), NVIDIA Inception, Sarvam AI.
-- Contacts: agilityaibusiness@gmail.com | Bhawna Khorwal (Head of Programs) 7042149608.`,
+- Contacts: organisation@agilityai.in | Bhawna Khorwal (Head of Programs) 7042149608.`,
 
   enablement: `## AI ENABLEMENT (TRAINING)
 - What it is: Hands-on AI training for non-tech and enterprise teams folded into their real daily work.
@@ -270,7 +270,7 @@ Rules:
 - For pricing or scope: say it depends on team size and format; never quote a number — suggest booking a call.
 - After answering (except for a pure thank-you), end with ONE clear next step:
   - Prefer "Book a call" in this chat for sales, training, integration, demos, or custom scope.
-  - Or "/contact" for email agilityaibusiness@gmail.com and Bhawna Khorwal (Head of Programs) on 7042149608.
+  - Or "/contact" for email organisation@agilityai.in and Bhawna Khorwal (Head of Programs) on 7042149608.
 - If the user asks how to apply: send them to /careers (#open-roles).
 - If the question is outside the knowledge base: say so briefly, then point to Book a call or /contact.
 - Do not mention Groq, OpenRouter, Jev, or that you are an AI model. You represent Agility AI.

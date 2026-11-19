@@ -26,7 +26,7 @@ export const LYFSHILP_ACADEMY_LOGO = "/assets/credentials/group/lyfshilp.png";
 export const PARENT_COMPANY_BLURB =
   "Agility AI is the AI automation arm of Lyfshilp Academy, an AI enablement company working with government, corporates, institutions, schools and social enterprises. Lyfshilp trains people to use AI; Agility AI builds the systems they use it in.";
 
-export const CONTACT_EMAIL = "agilityaibusiness@gmail.com";
+export const CONTACT_EMAIL = "organisation@agilityai.in";
 
 export const PROGRAMMES_CONTACT = {
   name: "Bhawna Khorwal",

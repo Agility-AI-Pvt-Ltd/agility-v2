@@ -88,87 +88,6 @@ const organisationItems = [
   },
 ] as const;
 
-const agilityStages = [
-  {
-    title: "Strategy",
-    subtitle: "Identify the right use cases and roadmap for impact.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-5"
-        fill="none"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <path
-          d="M12 8v4l3 2"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Automation",
-    subtitle: "Deploy AI tools and integrations into your workflows.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-5"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M13 3L5 13h6l-1 8 9-12h-6l0-6z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Enablement",
-    subtitle: "Train your teams and drive adoption.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-5"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M12 3l1.8 5.4H19l-4.2 3.2 1.6 5.4L12 14.2 7.6 17l1.6-5.4L5 8.4h5.2L12 3z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Governance",
-    subtitle: "Set up guardrails, monitoring and responsible usage.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-5"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M12 3l7 4v5c0 5-3 9-7 9s-7-4-7-9V7l7-4z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-        <circle cx="12" cy="11" r="2" fill="currentColor" />
-      </svg>
-    ),
-  },
-] as const;
-
 const workflows = [
   {
     name: "Invoicely",
@@ -545,25 +464,6 @@ export default function Capabilities() {
 
             <AgilityHubNetwork />
             <AgilityHubLogoOnly />
-
-            <ul className="grid grid-cols-2 gap-3">
-              {agilityStages.map((stage) => (
-                <li
-                  key={stage.title}
-                  className="rounded-xl border border-neutral-100 bg-[#fafafa] p-3.5 text-center sm:p-4"
-                >
-                  <div className="mx-auto mb-2 flex size-10 items-center justify-center rounded-lg bg-[#ede9fe] text-[#6d28d9]">
-                    {stage.icon}
-                  </div>
-                  <p className="text-[13px] font-semibold text-neutral-900">
-                    {stage.title}
-                  </p>
-                  <p className="mt-1.5 text-[11px] leading-snug text-neutral-500">
-                    {stage.subtitle}
-                  </p>
-                </li>
-              ))}
-            </ul>
           </article>
 
           {/* 03 Running well */}

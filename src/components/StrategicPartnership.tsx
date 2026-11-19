@@ -14,23 +14,6 @@ const QUOTES = [
   },
 ] as const;
 
-function UaeFlag({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 12 8"
-      className={className}
-      aria-hidden="true"
-      role="img"
-    >
-      <title>Flag of the United Arab Emirates</title>
-      <rect width="12" height="8" fill="#fff" />
-      <rect width="12" height="2.666" y="0" fill="#00732f" />
-      <rect width="12" height="2.666" y="5.334" fill="#000" />
-      <rect width="3" height="8" fill="#ff0000" />
-    </svg>
-  );
-}
-
 export default function StrategicPartnership() {
   return (
     <section
@@ -95,7 +78,6 @@ export default function StrategicPartnership() {
         <div className="mx-auto max-w-[44rem] text-center">
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-[#ddd6fe] bg-white/80 px-4 py-1.5 font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-[#5b21b6] shadow-[0_8px_24px_rgba(124,58,237,0.08)]">
-              <UaeFlag className="h-3 w-[18px] shrink-0 overflow-hidden rounded-[2px] shadow-sm ring-1 ring-black/10" />
               Client voices
             </p>
           </Reveal>

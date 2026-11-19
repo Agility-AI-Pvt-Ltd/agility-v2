@@ -5,6 +5,7 @@ import Reveal from "@/components/about/Reveal";
 import { PARENT_COMPANY_BLURB } from "@/lib/company";
 
 const ASSET = "/assets/credentials";
+const INCUB_ASSET = "/assets/incubations";
 
 type EntityHolder = "lyfshilp" | "agility" | "both";
 
@@ -16,51 +17,67 @@ type CredLogo = {
   textLabel?: string;
 };
 
+type IncubationIcon = {
+  id: string;
+  alt: string;
+  src: string;
+};
+
 type CredentialBlock = {
   number: string;
   title: string;
   headline: string;
-  description: string;
+  description?: string;
   photo: string;
   photoAlt: string;
-  logos: CredLogo[];
+  logos?: CredLogo[];
+  pills?: string[];
+  icons?: IncubationIcon[];
 };
+
+const INCUBATION_PILLS = [
+  "NSRCEL, IIM Bangalore",
+  "SIIC, IIT Kanpur",
+  "IIF, IIIT Allahabad",
+  "DPIIT Recognised",
+  "NVIDIA Inception",
+  "Sarvam AI Startup Programme",
+  "Claude Startups Program",
+  "Stanford Seed (Stanford GSB)",
+] as const;
+
+const INCUBATION_ICONS: IncubationIcon[] = [
+  {
+    id: "nsrcel",
+    alt: "NSRCEL, IIM Bangalore",
+    src: `${INCUB_ASSET}/nsrcel.webp`,
+  },
+  {
+    id: "siic",
+    alt: "SIIC, IIT Kanpur",
+    src: `${INCUB_ASSET}/siic-iit-kanpur.webp`,
+  },
+  {
+    id: "iit-kanpur",
+    alt: "IIT Kanpur",
+    src: `${INCUB_ASSET}/iit-kanpur.jpeg`,
+  },
+  {
+    id: "iiit-allahabad",
+    alt: "IIF, IIIT Allahabad",
+    src: `${INCUB_ASSET}/iiit-allahabad.jpeg`,
+  },
+];
 
 const credentialBlocks: CredentialBlock[] = [
   {
     number: "01",
     title: "INCUBATION",
-    headline: "Incubated by leading institutions.",
-    description:
-      "Incubated at IIIT Allahabad, IIT Kanpur, NSRCEL (IIM Bangalore) under Women Startup Program, and IRMA ISEED Foundation.",
+    headline: "Incubated & recognised by",
     photo: `${ASSET}/photos/01_incubation.jpg`,
     photoAlt: "IIIT Allahabad campus entrance",
-    logos: [
-      {
-        id: "iiit",
-        alt: "IIIT Allahabad",
-        entity: "lyfshilp",
-        textLabel: "IIIT Allahabad",
-      },
-      {
-        id: "iit-kanpur",
-        alt: "IIT Kanpur",
-        entity: "lyfshilp",
-        textLabel: "IIT Kanpur",
-      },
-      {
-        id: "nsrcel-row",
-        alt: "NSRCEL IIM Bangalore",
-        entity: "lyfshilp",
-        src: `${ASSET}/01_nsrcel_iim_bangalore.png`,
-      },
-      {
-        id: "irma-row",
-        alt: "IRMA ISEED Foundation",
-        entity: "agility",
-        src: `${ASSET}/04_irma_iseed_foundation.png`,
-      },
-    ],
+    pills: [...INCUBATION_PILLS],
+    icons: INCUBATION_ICONS,
   },
   {
     number: "02",
@@ -177,6 +194,7 @@ function LogoTile({ logo }: { logo: CredLogo }) {
 
 function CredentialRow({ block }: { block: CredentialBlock }) {
   const fallback = PHOTO_FALLBACK[block.number] ?? `${ASSET}/nsrcel.png`;
+  const logos = block.logos ?? [];
 
   return (
     <article className="border border-neutral-200/90 bg-white">
@@ -196,25 +214,61 @@ function CredentialRow({ block }: { block: CredentialBlock }) {
             <h3 className="mt-2 font-[family-name:var(--font-serif)] text-[1.2rem] leading-snug tracking-[-0.02em] text-neutral-950 sm:text-[1.35rem]">
               {block.headline}
             </h3>
-            <p className="mt-2 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px]">
-              {block.description}
-            </p>
+            {block.description ? (
+              <p className="mt-2 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px]">
+                {block.description}
+              </p>
+            ) : null}
           </div>
 
-          <ul
-            className={[
-              "grid gap-2",
-              block.logos.length === 2
-                ? "grid-cols-2"
-                : "grid-cols-2 sm:grid-cols-3",
-            ].join(" ")}
-          >
-            {block.logos.map((logo) => (
-              <li key={`${block.number}-${logo.id}`}>
-                <LogoTile logo={logo} />
-              </li>
-            ))}
-          </ul>
+          {block.pills?.length ? (
+            <ul className="flex flex-wrap gap-1.5">
+              {block.pills.map((pill) => (
+                <li key={`${block.number}-${pill}`}>
+                  <span className="inline-flex items-center rounded-full border border-[#9ec9e8] bg-[#e8f4fb] px-2.5 py-1 text-[11px] font-medium leading-snug text-[#1e3a5f] sm:text-[12px]">
+                    {pill}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {block.icons?.length ? (
+            <ul className="flex flex-wrap items-center gap-4 sm:gap-5">
+              {block.icons.map((icon) => (
+                <li
+                  key={`${block.number}-${icon.id}`}
+                  className="flex h-24 min-w-[7rem] items-center justify-center bg-white px-3 sm:h-28 sm:min-w-[8.5rem]"
+                >
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={240}
+                    height={112}
+                    sizes="(max-width: 640px) 32vw, 160px"
+                    className="max-h-20 w-auto max-w-full object-contain sm:max-h-24"
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {logos.length > 0 ? (
+            <ul
+              className={[
+                "grid gap-2",
+                logos.length === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-2 sm:grid-cols-3",
+              ].join(" ")}
+            >
+              {logos.map((logo) => (
+                <li key={`${block.number}-${logo.id}`}>
+                  <LogoTile logo={logo} />
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </div>
     </article>

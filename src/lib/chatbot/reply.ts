@@ -246,8 +246,8 @@ function detectFallbackIntent(query: string): string {
   if (
     includesAny(query, [
       "contact", "email", "phone", "reach", "bhawna", "7042149608",
-      "agilityaibusiness@gmail.com",
-      "organization@agilityai.in",
+      "organisation@agilityai.in",
+      "organisation@agilityai.in",
     ])
   ) {
     return "contact_info";
@@ -381,7 +381,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
     if (jev.intent === "contact_info") {
       return {
         reply:
-          "You can reach Agility AI at agilityaibusiness@gmail.com or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
+          "You can reach Agility AI at organisation@agilityai.in or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
         action: "contact",
         suggestedReplies: ["Book a call", "Explore services", "Careers"],
         source: "jev_decision",
@@ -445,7 +445,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
   if (fallbackIntent === "contact_info") {
     return {
       reply:
-        "You can reach Agility AI at agilityaibusiness@gmail.com or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
+        "You can reach Agility AI at organisation@agilityai.in or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
       action: "contact",
       suggestedReplies: ["Book a call", "Explore services"],
       source: "fallback",

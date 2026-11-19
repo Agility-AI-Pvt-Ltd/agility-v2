@@ -1,6 +1,56 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+const HERO_CLIENTS = [
+  {
+    id: "ssifs",
+    label: "SSIFS",
+    image: "/assets/clients/Sushma_Swaraj_Institute_of_Foreign_Service.jpg",
+  },
+  {
+    id: "hipa",
+    label: "HIPA",
+    image: "/assets/clients/hipa.jpg",
+  },
+  {
+    id: "nddb",
+    label: "NDDB",
+    image: "/assets/clients/nddb.jpg",
+  },
+  {
+    id: "mofahd",
+    label: "MoFAHD",
+    image:
+      "/assets/clients/goi-ministry-of-fisheries-animal-husbandry-and-dairying.png",
+  },
+  {
+    id: "kmf",
+    label: "KMF",
+    image: "/assets/clients/kmf.png",
+  },
+  {
+    id: "idmc",
+    label: "IDMC",
+    image: "/assets/clients/IDMC_log_with_R.jpg",
+  },
+  {
+    id: "ncdfi",
+    label: "NCDFI",
+    image: "/assets/clients/ncdfi.jpg",
+  },
+  {
+    id: "edii",
+    label: "EDII",
+    image: "/assets/clients/EDII.jpg",
+  },
+  {
+    id: "fia",
+    label: "FIA",
+    image: "/assets/clients/fia.jpg",
+  },
+] as const;
 
 function hash2(x: number, y: number) {
   const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
@@ -348,11 +398,80 @@ function PixelMountain() {
 function ScrollMouse() {
   return (
     <div
-      className="hero-reveal hero-reveal-delay-4 absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center sm:bottom-8"
+      className="hero-reveal hero-reveal-delay-4 absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center sm:bottom-5"
       aria-hidden="true"
     >
       <div className="relative flex h-9 w-5 justify-center rounded-full border border-white/55 pt-1.5">
         <span className="hero-scroll-dot size-1 rounded-full bg-white/80" />
+      </div>
+    </div>
+  );
+}
+
+function HeroClientLogo({
+  label,
+  image,
+}: {
+  label: string;
+  image: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="flex h-14 w-[9.5rem] shrink-0 items-center justify-center bg-white px-4 sm:h-16 sm:w-[11rem]">
+      {failed ? (
+        <span className="font-[family-name:var(--font-geist-mono)] text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-700">
+          {label}
+        </span>
+      ) : (
+        <Image
+          src={image}
+          alt={label}
+          width={140}
+          height={48}
+          className="h-8 w-auto max-w-full object-contain sm:h-9"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
+
+function HeroClientsMarquee() {
+  const loop = [...HERO_CLIENTS, ...HERO_CLIENTS];
+
+  return (
+    <div className="hero-reveal hero-reveal-delay-3 relative z-10 mt-8 w-full sm:mt-10">
+      <p className="mb-4 text-center font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-white sm:mb-5 sm:text-[12px]">
+        Organisations we&apos;ve{" "}
+        <span className="text-white/70">worked with</span>
+      </p>
+
+      <div className="hero-clients-marquee relative w-full overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#05070c] to-transparent sm:w-16"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#05070c] to-transparent sm:w-16"
+        />
+
+        <ul className="sr-only">
+          {HERO_CLIENTS.map((client) => (
+            <li key={client.id}>{client.label}</li>
+          ))}
+        </ul>
+
+        <div className="hero-clients-marquee-track flex w-max gap-4 sm:gap-5">
+          {loop.map((client, index) => (
+            <HeroClientLogo
+              key={`${client.id}-${index}`}
+              label={client.label}
+              image={client.image}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -365,9 +484,9 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,transparent_0%,rgba(5,7,12,0.15)_40%,rgba(5,7,12,0.75)_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-[#05070c]/75 via-[#05070c]/35 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#05070c] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#05070c] via-[#05070c]/85 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-col items-center px-5 pb-10 pt-6 text-center sm:px-6 sm:pb-12 sm:pt-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-col items-center px-5 pb-16 pt-6 text-center sm:px-6 sm:pb-20 sm:pt-8">
         <div className="relative">
           <div
             className="pointer-events-none absolute left-1/2 top-1/2 h-[140%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(5,7,12,0.72)_0%,rgba(5,7,12,0.35)_55%,transparent_75%)]"
@@ -386,13 +505,9 @@ export default function Hero() {
             Your biggest competitor is the version of you that hasn&apos;t
             adopted AI yet.
           </h1>
-
-          <p className="hero-reveal hero-reveal-delay-2 relative mx-auto mt-2.5 max-w-[36ch] text-center font-[family-name:var(--font-geist-mono)] text-[clamp(0.75rem,1.5vw,0.9rem)] font-normal leading-snug tracking-[-0.03em] text-white/60 sm:mt-3 sm:max-w-[44ch]">
-            We build AI into your workflows, then train your teams to run it.
-          </p>
         </div>
 
-        <div className="hero-reveal hero-reveal-delay-3 mt-7 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-3">
+        <div className="hero-reveal hero-reveal-delay-2 mt-7 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-3">
           <a
             href="/services"
             className="cta-cut inline-flex h-11 items-center justify-center bg-white px-7 font-[family-name:var(--font-geist-mono)] text-[13px] font-medium uppercase tracking-[0.06em] text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98] sm:h-10"
@@ -407,6 +522,8 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      <HeroClientsMarquee />
 
       <ScrollMouse />
     </section>

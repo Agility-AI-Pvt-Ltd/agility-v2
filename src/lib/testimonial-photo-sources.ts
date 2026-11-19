@@ -38,8 +38,6 @@ export const PHOTO_CATEGORY_SOURCES = [
       "IMG_4177 (2).JPG",
       "IMG_4180 (1).JPG",
       "IMG_4180 (3).JPG",
-      "IMG_4185 (1) (1).JPG",
-      "IMG_4185 (2).JPG",
       "IMG_4329 (1).JPG",
       "IMG_4330 (1).JPG",
       "IMG_4334 (1).JPG",

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import AppreciationLetters from "@/components/testimonials/AppreciationLetters";
+import TestimonialPhotoMarquee from "@/components/testimonials/TestimonialPhotoMarquee";
 import TestimonialVideoGrid from "@/components/testimonials/TestimonialVideoGrid";
 import {
   WORKSHOP_MEDIA_FILTERS,
@@ -98,23 +99,7 @@ export default function TestimonialsShowcase({
           className="max-w-[18ch] font-[family-name:var(--font-serif)] text-[clamp(2rem,5vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-neutral-950"
         >
           Real people. Real{" "}
-          <span className="relative inline-block text-[#3b2f8f]">
-            outcomes.
-            <svg
-              viewBox="0 0 220 18"
-              className="pointer-events-none absolute -bottom-1 left-0 h-[0.55em] w-full text-[#c4b5fd]"
-              aria-hidden="true"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M2 11c38-6 72-9 108-7 36 2 72 8 108 4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-              />
-            </svg>
-          </span>
+          <span className="text-[#3b2f8f]">outcomes.</span>
         </h2>
 
         <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-neutral-500 sm:text-[16px] sm:leading-[1.7]">
@@ -155,44 +140,46 @@ export default function TestimonialsShowcase({
           ))}
         </div>
 
-        <div className="mt-10">
-          {workshopMedia === "video" ? (
-            videoItems.length > 0 ? (
-              <TestimonialVideoGrid videos={videoItems} />
+        {workshopMedia !== "images" && (
+          <div className="mt-10">
+            {workshopMedia === "video" ? (
+              videoItems.length > 0 ? (
+                <TestimonialVideoGrid videos={videoItems} />
+              ) : (
+                <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
+                  Media for this category is being prepared.
+                </p>
+              )
+            ) : letters.length > 0 ? (
+              <AppreciationLetters letters={letters} />
             ) : (
               <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
                 Media for this category is being prepared.
               </p>
-            )
-          ) : workshopMedia === "images" ? (
-            limitedPhotoSections.length > 0 ? (
-              <div className="space-y-12">
-                {limitedPhotoSections.map((section) => (
-                  <div key={section.id}>
-                    <div className="mb-5 flex items-center gap-3">
-                      <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-                      <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                        {section.label}
-                      </p>
-                    </div>
-                    <TestimonialVideoGrid videos={section.photos} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
-                Media for this category is being prepared.
-              </p>
-            )
-          ) : letters.length > 0 ? (
-            <AppreciationLetters letters={letters} />
+            )}
+          </div>
+        )}
+      </div>
+
+      {workshopMedia === "images" && (
+        <div className="pb-14 sm:pb-16 md:pb-20">
+          {limitedPhotoSections.length > 0 ? (
+            <div className="mt-2 space-y-14 sm:space-y-16">
+              {limitedPhotoSections.map((section) => (
+                <TestimonialPhotoMarquee
+                  key={section.id}
+                  label={section.label}
+                  photos={section.photos}
+                />
+              ))}
+            </div>
           ) : (
-            <p className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
+            <p className="mx-auto max-w-[1100px] rounded-lg border border-dashed border-neutral-300 bg-neutral-50 px-5 py-10 text-center text-[14px] text-neutral-500">
               Media for this category is being prepared.
             </p>
           )}
         </div>
-      </div>
+      )}
     </section>
   );
 }

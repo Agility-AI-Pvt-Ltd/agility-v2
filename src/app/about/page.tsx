@@ -9,9 +9,9 @@ import {
 import CredentialsSection from "@/components/about/CredentialsSection";
 import FaqAccordion from "@/components/about/FaqAccordion";
 import Reveal from "@/components/about/Reveal";
-import UaePartnerSection from "@/components/about/UaePartnerSection";
 import OurClients from "@/components/OurClients";
 import SiteChrome from "@/components/SiteChrome";
+import StrategicPartnership from "@/components/StrategicPartnership";
 import {
   COMPANY_CIN,
   COMPANY_GSTIN,
@@ -209,6 +209,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <StrategicPartnership />
+
       <CredentialsSection />
 
       {/* FAQ */}
@@ -259,7 +261,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <UaePartnerSection />
       <OurClients />
       <AboutContactSection />
 
