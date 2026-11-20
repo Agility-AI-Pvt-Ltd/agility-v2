@@ -36,11 +36,11 @@ export default function Home() {
         <div className="relative">
           <Hero />
           <ProgrammesPartnerships />
+          <OurClients />
           <HomeImpactMetrics />
           <InteractiveProof />
           <Capabilities />
           <WorkInAction />
-          <OurClients />
         </div>
       </main>
       <Footer />

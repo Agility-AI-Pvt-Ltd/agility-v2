@@ -2,16 +2,6 @@ import Image from "next/image";
 
 const PROGRAMMES = [
   {
-    id: "nsrcel",
-    label: "Incubated at NSRCEL, IIM Bangalore",
-    logos: [
-      {
-        src: "/assets/incubations/nsrcel.webp",
-        alt: "NSRCEL, IIM Bangalore",
-      },
-    ],
-  },
-  {
     id: "claude",
     label: "Claude Partner Network",
     logos: [
@@ -57,7 +47,7 @@ export default function ProgrammesPartnerships() {
           Programmes &amp; Partnerships
         </h2>
 
-        <ul className="mt-12 grid gap-10 sm:mt-14 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:grid-cols-4 lg:gap-10">
+        <ul className="mt-12 grid gap-10 sm:mt-14 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:grid-cols-3 lg:gap-10">
           {PROGRAMMES.map((item) => (
             <li
               key={item.id}
