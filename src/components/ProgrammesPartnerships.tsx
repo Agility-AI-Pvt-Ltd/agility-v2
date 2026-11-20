@@ -39,37 +39,37 @@ export default function ProgrammesPartnerships() {
       aria-labelledby="programmes-partnerships-heading"
       className="relative z-10 border-b border-neutral-200 bg-[#f5f5f5] text-black"
     >
-      <div className="mx-auto max-w-[1200px] px-6 py-16 sm:px-10 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-[1200px] px-6 py-10 sm:px-10 sm:py-12 lg:py-14">
         <h2
           id="programmes-partnerships-heading"
-          className="text-center font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-[-0.02em] text-neutral-900"
+          className="text-center font-[family-name:var(--font-serif)] text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] text-neutral-900"
         >
           Programmes &amp; Partnerships
         </h2>
 
-        <ul className="mt-12 grid gap-10 sm:mt-14 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-16 lg:grid-cols-3 lg:gap-10">
+        <ul className="mt-8 grid gap-6 sm:mt-9 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:mt-10 lg:grid-cols-3 lg:gap-8">
           {PROGRAMMES.map((item) => (
             <li
               key={item.id}
               className="flex h-full flex-col items-center text-center"
             >
-              <div className="flex min-h-[7.5rem] w-full items-center justify-center gap-3 sm:min-h-[8.5rem]">
+              <div className="flex min-h-[5.5rem] w-full items-center justify-center gap-3 sm:min-h-[6rem]">
                 {item.logos.map((logo) => (
                   <div
                     key={logo.src}
-                    className="flex h-28 w-full max-w-[14rem] items-center justify-center bg-white px-5 py-4 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:h-32"
+                    className="flex h-20 w-full max-w-[12rem] items-center justify-center bg-white px-4 py-3 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:h-24"
                   >
                     <Image
                       src={logo.src}
                       alt={logo.alt}
                       width={220}
                       height={96}
-                      className="h-16 w-auto max-w-full object-contain sm:h-20"
+                      className="h-12 w-auto max-w-full object-contain sm:h-14"
                     />
                   </div>
                 ))}
               </div>
-              <p className="mt-5 flex min-h-[3.25rem] items-start justify-center px-2 text-[15px] font-semibold leading-snug text-neutral-800 sm:mt-6 sm:min-h-[3.5rem] sm:text-[16px]">
+              <p className="mt-3 flex items-start justify-center px-2 text-[14px] font-semibold leading-snug text-neutral-800 sm:mt-4 sm:text-[15px]">
                 {item.label}
               </p>
             </li>

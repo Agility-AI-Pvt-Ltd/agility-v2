@@ -5,6 +5,7 @@ import Reveal from "@/components/about/Reveal";
 import { PARENT_COMPANY_BLURB } from "@/lib/company";
 
 const ASSET = "/assets/credentials";
+const INCUB_ASSET = "/assets/incubations";
 
 type EntityHolder = "lyfshilp" | "agility" | "both";
 
@@ -41,13 +42,13 @@ const credentialBlocks: CredentialBlock[] = [
         id: "iif-iiit-allahabad",
         alt: "IIF, IIIT Allahabad",
         entity: "lyfshilp",
-        textLabel: "IIF, IIIT Allahabad",
+        src: `${INCUB_ASSET}/iiit-allahabad.jpeg`,
       },
       {
         id: "siic-iit-kanpur",
         alt: "SIIC, IIT Kanpur",
         entity: "lyfshilp",
-        textLabel: "SIIC, IIT Kanpur",
+        src: `${INCUB_ASSET}/iit-kanpur.jpeg`,
       },
       {
         id: "nsrcel",
