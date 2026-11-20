@@ -43,24 +43,28 @@ const credentialBlocks: CredentialBlock[] = [
         alt: "IIF, IIIT Allahabad",
         entity: "lyfshilp",
         src: `${INCUB_ASSET}/iiit-allahabad.jpeg`,
+        textLabel: "IIF, IIIT Allahabad",
       },
       {
         id: "siic-iit-kanpur",
         alt: "SIIC, IIT Kanpur",
         entity: "lyfshilp",
         src: `${INCUB_ASSET}/iit-kanpur.jpeg`,
+        textLabel: "SIIC, IIT Kanpur",
       },
       {
         id: "nsrcel",
         alt: "NSRCEL, IIM Bangalore",
         entity: "lyfshilp",
-        src: `${ASSET}/01_nsrcel_iim_bangalore.png`,
+        src: `${INCUB_ASSET}/nsrcel.webp`,
+        textLabel: "NSRCEL, IIM Bangalore",
       },
       {
         id: "irma",
         alt: "IRMA ISEED Foundation",
         entity: "agility",
         src: `${ASSET}/04_irma_iseed_foundation.png`,
+        textLabel: "IRMA ISEED Foundation",
       },
     ],
   },
@@ -156,7 +160,7 @@ function EntityPill({ entity }: { entity: EntityHolder }) {
 function LogoTile({ logo }: { logo: CredLogo }) {
   return (
     <div className="flex min-h-[120px] min-w-0 flex-col items-center justify-between border border-neutral-200/90 bg-white p-3 sm:min-h-[132px]">
-      <div className="flex flex-1 items-center justify-center px-1 py-2">
+      <div className="flex flex-1 flex-col items-center justify-center gap-2 px-1 py-2">
         {logo.src ? (
           <Image
             src={logo.src}
@@ -166,11 +170,12 @@ function LogoTile({ logo }: { logo: CredLogo }) {
             sizes="(max-width: 640px) 28vw, 120px"
             className="max-h-10 w-auto max-w-full object-contain sm:max-h-11"
           />
-        ) : (
+        ) : null}
+        {logo.textLabel || !logo.src ? (
           <p className="text-center font-[family-name:var(--font-geist-mono)] text-[9px] font-semibold uppercase leading-snug tracking-[0.1em] text-neutral-700 sm:text-[10px]">
             {logo.textLabel ?? logo.alt}
           </p>
-        )}
+        ) : null}
       </div>
       <EntityPill entity={logo.entity} />
     </div>
