@@ -24,6 +24,7 @@ type CredentialBlock = {
   description?: string;
   photo: string;
   photoAlt: string;
+  photoObjectPosition?: string;
   logos?: CredLogo[];
   pills?: string[];
 };
@@ -37,6 +38,7 @@ const credentialBlocks: CredentialBlock[] = [
       "Incubated at IIF (IIIT Allahabad), SIIC (IIT Kanpur), NSRCEL (IIM Bangalore) under Women Startup Program, and IRMA ISEED Foundation.",
     photo: `${ASSET}/photos/01_incubation.jpg`,
     photoAlt: "IIIT Allahabad campus entrance",
+    photoObjectPosition: "object-[38%_center]",
     logos: [
       {
         id: "iif-iiit-allahabad",
@@ -79,9 +81,10 @@ const credentialBlocks: CredentialBlock[] = [
     logos: [
       {
         id: "stanford-seed-row",
-        alt: "Stanford Seed",
+        alt: "Stanford Seed, Stanford Graduate School of Business",
         entity: "lyfshilp",
         src: `${ASSET}/05_stanford_seed.png`,
+        textLabel: "Stanford Seed, Stanford Graduate School of Business",
       },
       {
         id: "dpiit-row",
@@ -99,6 +102,7 @@ const credentialBlocks: CredentialBlock[] = [
       "Member of NVIDIA Inception Program, Sarvam AI Startup Programme, and Anthropic (Claude) Partner Program.",
     photo: `${ASSET}/photos/03_ai_programmes.jpg`,
     photoAlt: "NVIDIA Inception workspace",
+    photoObjectPosition: "object-[28%_center]",
     logos: [
       {
         id: "nvidia-row",
@@ -193,6 +197,7 @@ function CredentialRow({ block }: { block: CredentialBlock }) {
           src={block.photo}
           fallback={fallback}
           alt={block.photoAlt}
+          objectPosition={block.photoObjectPosition}
         />
 
         <div className="flex min-w-0 flex-col gap-4 border-t border-neutral-200/80 p-5 sm:p-6 lg:border-l lg:border-t-0 lg:p-7 xl:p-8">

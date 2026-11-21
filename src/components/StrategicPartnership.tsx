@@ -1,20 +1,11 @@
 import Image from "next/image";
 import Reveal from "@/components/about/Reveal";
-
-const QUOTES = [
-  {
-    text: "AI is reshaping every industry in every market, and the future of work will belong to organisations that partner well and move early.",
-    name: "Shimal Thakrar",
-    title: "Founder & CEO, 108 Meridian",
-  },
-  {
-    text: "Through Shimal, 108 Meridian brings vision, senior relationships and delivery experience to help UAE organisations move from AI intent to real impact.",
-    name: "Sharad Utsav",
-    title: "Founder & CEO, Agility AI",
-  },
-] as const;
+import AppreciationLetters from "@/components/testimonials/AppreciationLetters";
+import { getAppreciationLetters } from "@/lib/testimonials";
 
 export default function StrategicPartnership() {
+  const letters = getAppreciationLetters();
+
   return (
     <section
       aria-labelledby="strategic-partnership-heading"
@@ -109,41 +100,10 @@ export default function StrategicPartnership() {
           </Reveal>
         </div>
 
-        {/* Cards + robot share one baseline */}
         <div className="relative mt-10 sm:mt-12 lg:mt-14">
-          <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:pr-32 xl:pr-36">
-            {QUOTES.map((quote, index) => (
-              <li key={quote.name}>
-                <Reveal delay={140 + index * 90} className="h-full">
-                  <article className="relative flex h-full min-h-[280px] flex-col rounded-[1.5rem] border-2 border-[#ddd6fe] bg-white p-7 shadow-[0_22px_60px_rgba(91,33,182,0.12)] sm:min-h-[320px] sm:p-9 lg:p-10">
-                    <span
-                      aria-hidden="true"
-                      className="font-[family-name:var(--font-serif)] text-[3.75rem] leading-none text-[#a78bfa] sm:text-[4.25rem]"
-                    >
-                      “
-                    </span>
-                    <p className="mt-1 font-[family-name:var(--font-serif)] text-[1.2rem] font-semibold italic leading-[1.55] tracking-[-0.015em] text-neutral-950 sm:text-[1.35rem] sm:leading-[1.6] lg:text-[1.45rem]">
-                      <mark className="bg-[#ede9fe] px-1 box-decoration-clone text-neutral-950">
-                        {quote.text}
-                      </mark>
-                    </p>
-                    <div className="mt-auto pt-8">
-                      <span
-                        aria-hidden="true"
-                        className="mb-4 block h-0.5 w-12 bg-[#a78bfa]"
-                      />
-                      <p className="font-[family-name:var(--font-serif)] text-[1.3rem] font-bold leading-tight tracking-[-0.02em] text-neutral-950 sm:text-[1.4rem]">
-                        {quote.name}
-                      </p>
-                      <p className="mt-2 font-[family-name:var(--font-geist-mono)] text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6d28d9] sm:text-[12px]">
-                        {quote.title}
-                      </p>
-                    </div>
-                  </article>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
+          <Reveal delay={140} className="lg:pr-32 xl:pr-36">
+            <AppreciationLetters letters={letters} />
+          </Reveal>
 
           {/* Robot — base aligned to card base */}
           <div className="pointer-events-none absolute bottom-0 right-10 z-10 hidden w-[130px] sm:right-14 sm:block lg:right-16 lg:w-[150px]">

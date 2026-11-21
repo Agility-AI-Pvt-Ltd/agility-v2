@@ -2,17 +2,16 @@ import Reveal from "@/components/about/Reveal";
 
 const STATS = [
   {
-    value: "5,200+",
-    label:
-      "professionals trained across government, PSUs, corporates and non-profits",
+    value: "6,300+",
+    label: "professionals & officials trained",
   },
   {
-    value: "600+",
-    label: "staff trained across NDDB and its associated bodies",
+    value: "60+",
+    label: "programmes delivered",
   },
   {
     value: "92%+",
-    label: "rated the sessions excellent",
+    label: "rated sessions excellent",
   },
 ] as const;
 

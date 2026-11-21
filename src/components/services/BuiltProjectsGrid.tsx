@@ -14,11 +14,11 @@ const PROJECTS = [
   {
     number: "01",
     category: "Mentorship",
-    name: "FutureX Fellowship platform",
+    name: "International Future X Fellowship Program",
     slug: "futurex",
     description:
       "The learning platform behind the FutureX student programme, built for our parent company, Lyfshilp Academy.",
-    image: "/assets/built/01_futurex_fellowship.jpg",
+    image: "/assets/project_images/futurex.png",
     bg: "bg-[#f3efff]",
     badgeBg: "bg-[#ede9fe] text-[#6d28d9]",
     accent: "#7c3aed",
@@ -32,7 +32,7 @@ const PROJECTS = [
     slug: "invoicely",
     description:
       "Handles a company's accounting questions in one place — invoices, payments, the works.",
-    image: "/assets/built/02_invoicely.jpg",
+    image: "/assets/project_images/invoicely.png",
     bg: "bg-[#eef4ff]",
     badgeBg: "bg-[#dbeafe] text-[#1d4ed8]",
     accent: "#2563eb",
@@ -74,7 +74,7 @@ const PROJECTS = [
     slug: "hrms",
     description:
       "One place for hiring, attendance, and reimbursements, instead of three different logins nobody wants to open.",
-    image: "/assets/built/05_hrms.jpg",
+    image: "/assets/project_images/hrms.png",
     bg: "bg-[#f9e6f0]",
     badgeBg: "bg-[#fce7f3] text-[#be185d]",
     accent: "#db2777",

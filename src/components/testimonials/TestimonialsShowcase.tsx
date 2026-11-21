@@ -52,7 +52,10 @@ export default function TestimonialsShowcase({
 }: TestimonialsShowcaseProps) {
   const [workshopMedia, setWorkshopMedia] = useState<WorkshopMediaId>("video");
 
-  const clientVoiceSections = useMemo(() => getClientVoiceSections(), []);
+  const clientVoiceVideos = useMemo(() => {
+    const list = getClientVoiceSections().flatMap((section) => section.videos);
+    return typeof limit === "number" ? list.slice(0, limit) : list;
+  }, [limit]);
   const photoSections = useMemo(() => getWorkshopImageSections(), []);
   const letters = useMemo(() => {
     const list = getAppreciationLetters();
@@ -107,21 +110,9 @@ export default function TestimonialsShowcase({
           enterprises, in their own words.
         </p>
 
-        {clientVoiceSections.length > 0 && (
+        {clientVoiceVideos.length > 0 && (
           <div className="mt-10 border-b border-dashed border-neutral-200 pb-12">
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
-              {clientVoiceSections.map((section) => (
-                <div key={section.id} className="min-w-0">
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="h-[3px] w-5 shrink-0 bg-black" aria-hidden="true" />
-                    <p className="truncate font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-500 sm:text-[11px]">
-                      {section.label}
-                    </p>
-                  </div>
-                  <TestimonialVideoGrid videos={section.videos} />
-                </div>
-              ))}
-            </div>
+            <TestimonialVideoGrid videos={clientVoiceVideos} />
           </div>
         )}
 

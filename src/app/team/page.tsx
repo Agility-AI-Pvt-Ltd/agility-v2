@@ -24,40 +24,65 @@ export const metadata: Metadata = {
 const founders = [
   {
     name: "Sharad Raaj Utsav",
-    role: "Founder & CEO",
-    image: "/assets/image/sharad.jpeg",
-    bio: "Leads strategy and partnerships. MBA, IRMA. Lead facilitator of NDDB's two-day AI Productivity Programme.",
+    role: "Founder and CEO, Agility AI Pvt. Ltd. and Lyfshilp Academy Pvt. Ltd.",
+    image: "/assets/image/sharad.png",
+    linkedin: "https://www.linkedin.com/in/sharadrajutsav/",
+    highlights: [
+      "B.Tech, NSUT Delhi",
+      "MBA (Rural Management), IRMA",
+      "Data Science and AI, BITS Pilani",
+      "Stanford Seed alumnus",
+      "Previously with Amul, Fasal and Piramal Foundation",
+    ],
   },
   {
     name: "Shreya Sinha",
-    role: "Co-Founder & COO",
+    role: "Co-founder and COO",
     image: "/assets/image/shreya.png",
-    bio: "Leads sales, product design and delivery. B.Tech, NSUT Delhi; PGP, MICA Ahmedabad. About eight years at Piramal Group in digital marketing, data analytics and market research, including two years as a Gandhi Fellow in rural government schools in Rajasthan.",
+    linkedin: "https://www.linkedin.com/in/shreya-sinha2802/",
+    highlights: [
+      "B.Tech, NSUT Delhi",
+      "NSRCEL Women Startup Program, IIM Bangalore",
+      "PGP in Digital and Strategic Marketing, MICA Ahmedabad",
+      "8 years with Piramal Group: digital marketing, data analytics and market research",
+    ],
   },
   {
     name: "Aryan Shukla",
-    role: "Co-Founder & CTO",
+    role: "Co-founder and CTO",
     image: "/assets/image/aryan.png",
-    bio: "Leads engineering and builds our products and client systems. IIT BHU. Former ML Engineer, Samsung Research.",
+    linkedin: "https://www.linkedin.com/in/aryan-shukla-b430b81a1/",
+    highlights: [
+      "Integrated B.Tech and M.Tech, Mathematics and Computing, IIT (BHU) Varanasi",
+      "Formerly AI Engineer, Samsung Research Institute, Delhi",
+    ],
   },
 ] as const;
 
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
 /** Bust Next/Image + browser cache when public cutouts are replaced in-place. */
-const FOUNDER_IMAGE_VERSION = "20261013a";
+const FOUNDER_IMAGE_VERSION = "20261121a";
 
 const advisors = [
   {
     name: "Prof. Srinivasan Radhakrishnan",
     role: "Advisor",
     initials: "SR",
-    image: "/image/advisory/shrinivasan.jpeg",
+    image: "/image/advisory/shrinivasan.png",
     bio: "Faculty, Indian Institute of Management Ahmedabad (IIM-A). PhD. Northeastern University",
   },
   {
     name: "Sri R. Ramaseshan",
     role: "Advisor",
     initials: "RR",
-    image: "/image/advisory/R_Ramaseshan_sir.jpg",
+    image: "/image/advisory/R_Ramaseshan_sir.png",
     bio: "Former IAS. Ex-MD & CEO, NCDEX. Chairman, National Commodity Clearing Ltd.",
   },
 
@@ -65,28 +90,28 @@ const advisors = [
     name: "Prof. Nakul Parameswar",
     role: "Advisor",
     initials: "NP",
-    image: "/image/advisory/nakul.jpeg",
+    image: "/image/advisory/nakul.png",
     bio: "IIT Hyderabad. PhD, IIT Delhi.",
   },
   {
     name: "Prof. Sumit Kumar Yadav",
     role: "Advisor",
     initials: "SY",
-    image: "/image/advisory/sumit.jpg",
+    image: "/image/advisory/sumit.png",
     bio: "IIT Roorkee. PhD, IIM Ahmedabad. B.Tech, IIT Bombay.",
   },
   {
     name: "Prof. Aashish Argade",
     role: "Advisor",
     initials: "AA",
-    image: "/image/advisory/aashish.jpg",
+    image: "/image/advisory/aashish.png",
     bio: "IRMA Anand. PhD, IIM Ahmedabad.",
   },
   {
     name: "Cdr Praveen Kumar",
     role: "Advisor",
     initials: "PK",
-    image: "/image/advisory/cdr_praveen.jpeg",
+    image: "/image/advisory/cdr_praveen.png",
     bio: "CIO, Nykaa. B.Tech, IIT Kanpur. ISB Hyderabad.",
   },
 
@@ -94,14 +119,14 @@ const advisors = [
     name: "Prof. Manzoor UI Akram",
     role: "Advisor",
     initials: "MA",
-    image: "/image/advisory/manzoor.jpeg",
+    image: "/image/advisory/manzoor.png",
     bio: "Faculty, BITS Pilani Dubai. PhD. IIM Rohtak",
   },
   {
     name: "Prof. Ashok R. Patil",
     role: "Advisor",
     initials: "AP",
-    image: "/image/advisory/ashok.jpg",
+    image: "/image/advisory/ashok.png",
     bio: "Vice Chancellor, NUSRL Ranchi. Professor, NLSIU Bengaluru.",
   },
 ];
@@ -138,19 +163,32 @@ export default function TeamPage() {
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_50%)]" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-[18px] font-semibold text-white">
-                      {member.name}
-                    </p>
-                    <p className="mt-1 font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.12em] text-white/65">
-                      {member.role}
-                    </p>
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+                    <div className="min-w-0">
+                      <p className="text-[18px] font-semibold text-white">
+                        {member.name}
+                      </p>
+                      <p className="mt-1 text-[12px] leading-snug text-white/75 sm:text-[13px]">
+                        {member.role}
+                      </p>
+                    </div>
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} on LinkedIn`}
+                      className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a66c2]"
+                    >
+                      <LinkedInIcon className="size-4" />
+                    </a>
                   </div>
                 </div>
 
-                <p className="mt-5 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
-                  {member.bio}
-                </p>
+                <ul className="mt-5 list-disc space-y-2 pl-5 text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.65]">
+                  {member.highlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>

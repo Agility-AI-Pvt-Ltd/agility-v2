@@ -16,24 +16,23 @@ type Metric = {
 const METRICS: Metric[] = [
   {
     id: "trained",
-    end: 5200,
+    end: 6300,
     suffix: "+",
-    label:
-      "professionals trained across government, PSUs, corporates and non-profits",
+    label: "professionals & officials trained",
     format: (value) => value.toLocaleString("en-IN"),
   },
   {
-    id: "nddb",
-    end: 600,
+    id: "programmes",
+    end: 60,
     suffix: "+",
-    label: "staff trained across NDDB and its associated bodies",
+    label: "programmes delivered",
     format: (value) => value.toLocaleString("en-IN"),
   },
   {
     id: "excellent",
     end: 92,
     suffix: "%+",
-    label: "rated the sessions excellent",
+    label: "rated sessions excellent",
   },
   {
     id: "hours",

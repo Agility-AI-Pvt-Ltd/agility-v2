@@ -3,6 +3,7 @@ import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HomeImpactMetrics from "@/components/HomeImpactMetrics";
+import HomeIncubation from "@/components/HomeIncubation";
 import InteractiveProof from "@/components/InteractiveProof";
 import Navbar from "@/components/Navbar";
 import OurClients from "@/components/OurClients";
@@ -36,6 +37,7 @@ export default function Home() {
         <div className="relative">
           <Hero />
           <ProgrammesPartnerships />
+          <HomeIncubation />
           <OurClients />
           <HomeImpactMetrics />
           <InteractiveProof />

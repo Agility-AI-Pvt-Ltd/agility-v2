@@ -44,7 +44,7 @@ export const APPRECIATION_LETTERS: AppreciationLetter[] = [
     id: "hipa-appreciation",
     organization: "Haryana Institute of Public Administration",
     location: "Gurugram",
-    title: "Appreciation letter",
+    title: "Official Appreciation letter",
     pdfUrl: `${APPRECIATION_LETTERS_DIR}/hipa-appreciation-letter.pdf`,
     logoSrc: "/assets/clients/hipa.jpg",
   },

@@ -34,8 +34,8 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [suggestedReplies, setSuggestedReplies] = useState<string[]>([
-    "AI Enablement",
-    "AI Integration",
+    "Engineering Products",
+    "Automation",
     "Book a call",
   ]);
 

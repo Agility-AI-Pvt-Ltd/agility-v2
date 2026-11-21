@@ -100,8 +100,8 @@ async function evaluateWithJev(state: string): Promise<JevDecision | null> {
               book_call: "Wants to book a call, discuss pricing, schedule a demo, hire, or request proposal.",
               contact_info: "Asking for contact details like email, phone number, WhatsApp, or address.",
               enablement: "Questions about AI training, enablement workshops, non-tech staff adoption, or curriculum.",
-              integration: "Questions about connecting AI to existing enterprise systems, workflows, or tech stacks.",
-              products: "Questions about pre-built software products (Invoicely, Edumaniax, Fairly Settled, HRMS).",
+              integration: "Questions about Automation — connecting AI to existing enterprise systems, workflows, or tech stacks.",
+              products: "Questions about Engineering Products — pre-built software (Invoicely, Edumaniax, Fairly Settled, HRMS, FutureX).",
               careers: "Questions about jobs, hiring process, work culture, or applying for open roles.",
               team: "Questions about founders, background, credentials, or advisory board.",
               maturity_check: "Questions about the AI maturity assessment or the 5 rungs.",
@@ -257,12 +257,32 @@ function detectFallbackIntent(query: string): string {
     return "enablement";
   }
 
-  if (includesAny(query, ["integration", "connect", "system", "stack", "database"])) {
-    return "integration";
+  if (
+    includesAny(query, [
+      "engineering product",
+      "engineering products",
+      "product",
+      "invoicely",
+      "edumaniax",
+      "fairly settled",
+      "hrms",
+      "futurex",
+    ])
+  ) {
+    return "products";
   }
 
-  if (includesAny(query, ["product", "invoicely", "edumaniax", "fairly settled", "hrms", "futurex"])) {
-    return "products";
+  if (
+    includesAny(query, [
+      "automation",
+      "integration",
+      "connect",
+      "system",
+      "stack",
+      "database",
+    ])
+  ) {
+    return "integration";
   }
 
   if (includesAny(query, ["career", "job", "hiring", "role", "apply", "intern"])) {
@@ -288,18 +308,18 @@ function getCuratedSummary(intent: string): string {
     case "enablement":
       return (
         "Agility AI provides hands-on AI enablement workshops for teams to use AI in their daily workflow.\n\n" +
-        "Sessions run half-day to full-day with a post-workshop follow-up window. Over 5,200 professionals have been trained with 92%+ positive feedback." +
+        "Sessions run half-day to full-day with a post-workshop follow-up window. Over 6,300 professionals & officials trained across 60+ programmes, with 92%+ rated sessions excellent." +
         cta
       );
     case "integration":
       return (
-        "We build AI integrations directly into existing enterprise systems and workflows, not another separate dashboard.\n\n" +
+        "Automation: we wire AI into existing enterprise systems and workflows — not another separate dashboard.\n\n" +
         "Work includes stack audits, custom implementation, and runbooks your own team can maintain." +
         cta
       );
     case "products":
       return (
-        "Our ready-to-use AI products include:\n" +
+        "Engineering Products — ready-to-use AI tools include:\n" +
         "1. FutureX Fellowship (AI student venture mentorship)\n" +
         "2. Invoicely (accounting & invoice resolution)\n" +
         "3. Edumaniax (gamified learning)\n" +
@@ -346,7 +366,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
     return {
       reply:
         "Hi — ask me about services, team, careers, industries, products, the AI maturity check, or how to get in touch.\n\nWhen you're ready, tap Book a call below to message Bhawna on WhatsApp.",
-      suggestedReplies: ["AI Enablement details", "AI Integration builds", "Book a call"],
+      suggestedReplies: ["Engineering Products", "Automation", "Book a call"],
       source: "fallback",
     };
   }
@@ -362,7 +382,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
       return {
         reply:
           "I can assist with questions regarding Agility AI's services, team, credentials, and programmes. How can I help with your organisation's AI initiatives?",
-        suggestedReplies: ["AI Enablement training", "AI Integration builds", "Contact details"],
+        suggestedReplies: ["Engineering Products", "Automation", "Contact details"],
         source: "jev_decision",
       };
     }
@@ -373,7 +393,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
         reply:
           "You can book a 20-minute call directly on WhatsApp with Bhawna Khorwal, our Head of Programmes (7042149608), or visit /contact for email.\n\nTap Book a call below to open WhatsApp chat.",
         action: "book_call",
-        suggestedReplies: ["Enablement training", "Integration builds", "View team credentials"],
+        suggestedReplies: ["Engineering Products", "Automation", "View team credentials"],
         source: "jev_decision",
       };
     }
@@ -383,7 +403,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
         reply:
           "You can reach Agility AI at organisation@agilityai.in or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
         action: "contact",
-        suggestedReplies: ["Book a call", "Explore services", "Careers"],
+        suggestedReplies: ["Book a call", "Engineering Products", "Automation"],
         source: "jev_decision",
       };
     }
@@ -392,7 +412,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
       return {
         reply:
           "I specialize in Agility AI's enablement programmes, integration builds, products, team, and careers. What would you like to explore?",
-        suggestedReplies: ["AI Enablement", "AI Integration", "AI Maturity Check"],
+        suggestedReplies: ["Engineering Products", "Automation", "AI Maturity Check"],
         source: "jev_decision",
       };
     }
@@ -437,7 +457,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
       reply:
         "You can book a 20-minute call directly on WhatsApp with Bhawna Khorwal, our Head of Programmes (7042149608), or visit /contact for email.\n\nTap Book a call below to open WhatsApp chat.",
       action: "book_call",
-      suggestedReplies: ["Enablement training", "Integration builds", "View team credentials"],
+      suggestedReplies: ["Engineering Products", "Automation", "View team credentials"],
       source: "fallback",
     };
   }
@@ -447,7 +467,7 @@ export async function getChatReply(messages: ChatTurn[]): Promise<ChatReply> {
       reply:
         "You can reach Agility AI at organisation@agilityai.in or message Bhawna Khorwal (Head of Programs) at 7042149608 on WhatsApp.\n\nVisit /contact for complete details.",
       action: "contact",
-      suggestedReplies: ["Book a call", "Explore services"],
+      suggestedReplies: ["Book a call", "Engineering Products", "Automation"],
       source: "fallback",
     };
   }

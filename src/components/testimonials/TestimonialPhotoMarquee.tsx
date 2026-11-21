@@ -84,9 +84,7 @@ function MarqueeRow({
   startIndex: number;
 }) {
   const loop =
-    photos.length === 0
-      ? []
-      : [...photos, ...photos, ...photos, ...photos];
+    photos.length === 0 ? [] : [...photos, ...photos, ...photos, ...photos];
 
   if (loop.length === 0) return null;
 
@@ -153,9 +151,7 @@ export default function TestimonialPhotoMarquee({
   if (photos.length === 0) return null;
 
   const single = photos.length === 1 ? photos[0] : null;
-  const singleSrc = single
-    ? single.imageUrl || single.thumbnailUrl
-    : null;
+  const singleSrc = single ? single.imageUrl || single.thumbnailUrl : null;
 
   return (
     <div className="w-full">
@@ -171,14 +167,14 @@ export default function TestimonialPhotoMarquee({
           <button
             type="button"
             onClick={() => setActiveId(single.id)}
-            className="relative aspect-[16/10] w-full max-w-[42rem] overflow-hidden rounded-2xl bg-neutral-200"
+            className="relative flex w-full max-w-[42rem] items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 p-3 sm:p-4"
             aria-label={`View ${label} photo`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={singleSrc}
               alt=""
-              className="h-full w-full object-cover"
+              className="max-h-[min(85vh,48rem)] w-auto max-w-full object-contain"
             />
           </button>
         </div>

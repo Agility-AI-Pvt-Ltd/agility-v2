@@ -1,5 +1,5 @@
 /** Company identity line used in footer, contact, and metadata. */
-/** Meta / OG / Twitter description. Do not add headcount claims here until Shreya verifies 5,200+. */
+/** Meta / OG / Twitter description. Do not add headcount claims here until Shreya verifies 6,300+. */
 export const COMPANY_SUBHEADING =
   "We build AI automations and assistants into your workflows and train your teams to run them. For government, corporates, institutions and social enterprises.";
 

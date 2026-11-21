@@ -75,10 +75,7 @@ export default function IndustriesPage() {
                   {industry.promise}
                 </p>
                 <div className="mt-6 border-t border-dashed border-neutral-300 pt-5">
-                  <p className="font-[family-name:var(--font-geist-mono)] text-[10px] font-medium uppercase tracking-[0.16em] text-[#3b6ef5]">
-                    Organisations
-                  </p>
-                  <p className="mt-2 text-[14px] leading-relaxed text-neutral-600">
+                  <p className="text-[14px] leading-relaxed text-neutral-600">
                     {industry.clients}
                   </p>
                 </div>

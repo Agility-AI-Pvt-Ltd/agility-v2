@@ -261,7 +261,7 @@ const OFFERINGS: Offering[] = [
         items: ["Speak in one language, be heard in another. Status: Live."],
       },
       {
-        title: "FutureX Fellowship platform",
+        title: "International Future X Fellowship Program",
         icon: <IconCube className="size-5" />,
         items: [
           "The learning platform behind the FutureX student programme, built for our parent company, Lyfshilp Academy. Status: Live.",

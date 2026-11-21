@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/about/Reveal";
+import HomeImpactMetrics from "@/components/HomeImpactMetrics";
 import BuiltProjectsGrid from "@/components/services/BuiltProjectsGrid";
 import OfferingsShowcase from "@/components/services/OfferingsShowcase";
 import ServicesHeroVisual from "@/components/services/ServicesHeroVisual";
@@ -24,26 +25,6 @@ export const metadata: Metadata = {
       "Explore Agility AI's three offerings: AI enablement training, AI integration builds and ready to use AI products, built for organisations across every industry.",
   },
 };
-
-const trackRecord = [
-  {
-    value: "5,200+",
-    label:
-      "professionals trained across government, PSUs, corporates and non-profits",
-  },
-  {
-    value: "600+",
-    label: "staff trained across NDDB and its associated bodies",
-  },
-  {
-    value: "92%+",
-    label: "rated the sessions excellent",
-  },
-  {
-    value: "5-7 hrs",
-    label: "saved per week on routine documentation",
-  },
-] as const;
 
 export default function ServicesPage() {
   return (
@@ -109,52 +90,7 @@ export default function ServicesPage() {
         <OfferingsShowcase />
 
         <div className="relative">
-          <section className="border-t border-neutral-200 bg-[#f7f7f7] text-black">
-            <div className="mx-auto max-w-[1100px] px-6 py-16 sm:px-10 sm:py-20">
-              <Reveal>
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="h-[3px] w-8 bg-black" aria-hidden="true" />
-                  <p className="font-[family-name:var(--font-geist-mono)] text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
-                    Track record
-                  </p>
-                </div>
-              </Reveal>
-              <Reveal delay={80}>
-                <h2 className="font-[family-name:var(--font-serif)] text-[clamp(1.75rem,3.5vw,2.4rem)] leading-[1.12] tracking-[-0.02em] text-neutral-950">
-                  Our Track Record
-                </h2>
-              </Reveal>
-
-              <Reveal delay={140}>
-                <ul className="mt-8 grid gap-px border border-neutral-900 bg-neutral-900 sm:grid-cols-2 lg:grid-cols-4">
-                  {trackRecord.map((stat) => (
-                    <li
-                      key={stat.value}
-                      className="flex flex-col bg-[#0b1f4a] px-5 py-7 sm:px-6 sm:py-8"
-                    >
-                      <p className="font-[family-name:var(--font-serif)] text-[clamp(1.85rem,3.5vw,2.5rem)] leading-none tracking-[-0.02em] text-[#f0e6a8]">
-                        {stat.value}
-                      </p>
-                      <p className="mt-4 text-[13px] leading-relaxed text-white/80 sm:text-[14px]">
-                        {stat.label}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal delay={200}>
-                <p className="mt-6 max-w-[70ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
-                  Institutional engagements include the National Dairy
-                  Development Board (NDDB), the Foundation for Innovation and
-                  Action (FIA), the Entrepreneurship Development Institute of
-                  India (EDII), the National Cooperative Dairy Federation of
-                  India (NCDFI), Karnataka Cooperative Milk Federation (KMF) and
-                  Indian Dairy Machinery Company (IDMC).
-                </p>
-              </Reveal>
-            </div>
-          </section>
+          <HomeImpactMetrics />
 
           <BuiltProjectsGrid />
 

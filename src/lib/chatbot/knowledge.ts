@@ -26,7 +26,7 @@ export function buildSiteKnowledgeBase() {
 ## COMPANY OVERVIEW
 - Legal entity: Agility AI Private Limited (CIN U62099UP2025PTC215093, GSTIN 09ABBCA9983H1Z5, registered office Ghaziabad, Uttar Pradesh).
 - Value proposition: We build AI into your workflows, then train your people to run it.
-- Meta description: We build AI automations and assistants into your workflows and train your teams to run them. For government, corporates, institutions and social enterprises. (5,200+ omitted from meta until verified.)
+- Meta description: We build AI automations and assistants into your workflows and train your teams to run them. For government, corporates, institutions and social enterprises. (6,300+ omitted from meta until verified.)
 - Positioning: AI adoption and AI implementation are two different problems, solved together.
 - What they deliver: The working system, plus internal muscle memory to run it, govern it, and change it without calling Agility AI every time.
 - UAE partner (About): Agility AI and 108 Meridian partner to implement AI in the UAE. Shimal Thakrar is Founder & CEO of 108 Meridian; Sharad Utsav is Founder & CEO of Agility AI.
@@ -48,7 +48,7 @@ export function buildSiteKnowledgeBase() {
 - Who it's for: Teams where AI was rolled out but nobody uses it; orgs launching AI tools who want people ready before day one; anyone tired of training decks that get forgotten.
 - Outcomes: Team using AI in real workflow without reminders; fewer questions to IT; tasks that took an afternoon now take twenty minutes.
 - Session length: Half a day to a full day — not a week away from desks.
-- Track record: 5,200+ professionals trained across government, PSUs, corporates and non-profits; 600+ staff trained across NDDB and associated bodies; 92%+ rated sessions excellent; 4-6 hrs saved per week on routine documentation.
+- Track record: 6,300+ professionals & officials trained; 60+ programmes delivered; 92%+ rated sessions excellent; 4-6 hrs saved per week on routine documentation.
 - CTA path: /contact?intent=training or book a call with interest "AI Enablement".
 
 ### 2. AI Integration
@@ -175,7 +175,7 @@ export const KNOWLEDGE_SLICES: Record<string, string> = {
 - What it is: Hands-on AI training for non-tech and enterprise teams folded into their real daily work.
 - Length: Half a day to one full day. Short follow-up window after the workshop.
 - Outcomes: Team actually uses AI by Monday; 5-7 hours saved per week on routine documentation.
-- Track record: 5,200+ trained across government, PSUs, corporates; 600+ trained at NDDB; 92%+ rated excellent.
+- Track record: 6,300+ professionals & officials trained; 60+ programmes delivered; 92%+ rated sessions excellent.
 - Next step: Book a 20-min call on WhatsApp or visit /services#enablement.`,
 
   integration: `## AI INTEGRATION (CUSTOM BUILDS)

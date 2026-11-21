@@ -7,12 +7,14 @@ type CredentialPhotoProps = {
   src: string;
   fallback: string;
   alt: string;
+  objectPosition?: string;
 };
 
 export default function CredentialPhoto({
   src,
   fallback,
   alt,
+  objectPosition = "object-center",
 }: CredentialPhotoProps) {
   const [current, setCurrent] = useState(src);
 
@@ -23,7 +25,7 @@ export default function CredentialPhoto({
         alt={alt}
         fill
         sizes="(max-width: 1024px) 100vw, 320px"
-        className="object-cover object-center"
+        className={`object-cover ${objectPosition}`}
         onError={() => {
           if (current !== fallback) setCurrent(fallback);
         }}
