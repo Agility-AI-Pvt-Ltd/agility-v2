@@ -1,6 +1,7 @@
 "use client";
 
 import { BookCallButton } from "@/components/BookCallModal";
+import { MessageUsButton } from "@/components/MessageUsModal";
 import { BOOK_CALL_WHATSAPP_URL, CONTACT_EMAIL } from "@/lib/company";
 
 type ContactCTAProps = {
@@ -37,19 +38,29 @@ export default function ContactCTA({
             ].join(" ")}
           >
             Tell us what you want to build or who you want to train. Book a call
-            on WhatsApp or email us directly.
+            on WhatsApp, message us, or email us directly.
           </p>
 
-          <BookCallButton
-            className={[
-              "cta-cut mt-8 inline-flex h-11 items-center justify-center px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] transition-all duration-300",
-              isDark
-                ? "bg-white text-black hover:bg-white/90"
-                : "bg-black text-white hover:bg-neutral-800",
-            ].join(" ")}
-          >
-            Book a Call
-          </BookCallButton>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <BookCallButton
+              className={[
+                "cta-cut inline-flex h-11 items-center justify-center px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] transition-all duration-300",
+                isDark
+                  ? "bg-white text-black hover:bg-white/90"
+                  : "bg-black text-white hover:bg-neutral-800",
+              ].join(" ")}
+            >
+              Book a Call
+            </BookCallButton>
+            <MessageUsButton
+              className={[
+                "cta-cut inline-flex h-11 items-center justify-center border px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] transition-all duration-300",
+                isDark
+                  ? "border-white/30 text-white hover:border-white/60 hover:bg-white/5"
+                  : "border-neutral-300 text-neutral-900 hover:border-neutral-500 hover:bg-neutral-50",
+              ].join(" ")}
+            />
+          </div>
 
           <div
             className={[

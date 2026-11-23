@@ -18,7 +18,7 @@ const LOGOS = [
     id: "siic-iit-kanpur",
     alt: "SIIC, IIT Kanpur",
     entity: "lyfshilp" as const,
-    src: `${INCUB_ASSET}/iit-kanpur.jpeg`,
+    src: `${INCUB_ASSET}/siic-iit-kanpur.webp`,
     textLabel: "SIIC, IIT Kanpur",
   },
   {

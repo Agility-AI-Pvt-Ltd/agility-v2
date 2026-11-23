@@ -141,7 +141,7 @@ export function buildSiteKnowledgeBase() {
 ## CONTACT & BOOKING
 - Email: organisation@agilityai.in
 - Programmes contact: Bhawna Khorwal, Head of Programmes — 7042149608 (corporate training and sales)
-- Contact page (/contact): book-a-call plus email and phone — no message form.
+- Contact page (/contact): book-a-call, Message us form, plus email and phone.
 - Book a call opens WhatsApp chat with Bhawna Khorwal (Head of Programmes) on 7042149608 for training, sales, integration, or products.
 - About contact section (/about#contact): two paths — Book a corporate training or Talk to sales; both dial Bhawna Khorwal, Head of Programmes on 7042149608.
 

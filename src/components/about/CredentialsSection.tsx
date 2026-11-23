@@ -51,7 +51,7 @@ const credentialBlocks: CredentialBlock[] = [
         id: "siic-iit-kanpur",
         alt: "SIIC, IIT Kanpur",
         entity: "lyfshilp",
-        src: `${INCUB_ASSET}/iit-kanpur.jpeg`,
+        src: `${INCUB_ASSET}/siic-iit-kanpur.webp`,
         textLabel: "SIIC, IIT Kanpur",
       },
       {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactCTA from "@/components/ContactCTA";
+import { MessageUsButton } from "@/components/MessageUsModal";
 import SiteChrome, { PageHero } from "@/components/SiteChrome";
 import {
   BOOK_CALL_WHATSAPP_URL,
@@ -49,30 +50,34 @@ export default function ContactPage() {
       />
 
       <section className="border-b border-white/10 bg-black">
-        <div className="mx-auto grid max-w-[1100px] gap-6 px-6 py-12 sm:grid-cols-3 sm:px-10">
-          {details.map((item) => (
-            <div key={item.label}>
-              <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.16em] text-white/40">
-                {item.label}
-              </p>
-              {"href" in item && item.href ? (
-                <a
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    item.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="mt-2 block text-[14px] text-white/80 transition-colors hover:text-white"
-                >
-                  {item.value}
-                </a>
-              ) : (
-                <p className="mt-2 text-[14px] text-white/80">{item.value}</p>
-              )}
-            </div>
-          ))}
+        <div className="mx-auto max-w-[1100px] px-6 py-12 sm:px-10">
+          <div className="grid gap-6 sm:grid-cols-3">
+            {details.map((item) => (
+              <div key={item.label}>
+                <p className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.16em] text-white/40">
+                  {item.label}
+                </p>
+                {"href" in item && item.href ? (
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      item.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className="mt-2 block text-[14px] text-white/80 transition-colors hover:text-white"
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-[14px] text-white/80">{item.value}</p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <MessageUsButton className="cta-cut mt-8 inline-flex h-11 items-center justify-center border border-white/30 px-6 font-[family-name:var(--font-geist-mono)] text-[12px] font-medium uppercase tracking-[0.06em] text-white transition-all hover:border-white/60 hover:bg-white/5" />
         </div>
       </section>
 
