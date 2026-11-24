@@ -6,8 +6,9 @@ const PROGRAMMES = [
     label: "Claude Partner Network",
     logos: [
       {
-        src: "/assets/credentials/10_claude.png",
+        src: "/assets/ai_programmes/claude.png",
         alt: "Claude Partner Network",
+        imageClassName: "h-16 w-auto max-w-full object-contain sm:h-20",
       },
     ],
   },
@@ -64,7 +65,11 @@ export default function ProgrammesPartnerships() {
                       alt={logo.alt}
                       width={220}
                       height={96}
-                      className="h-12 w-auto max-w-full object-contain sm:h-14"
+                      className={
+                        "imageClassName" in logo && logo.imageClassName
+                          ? logo.imageClassName
+                          : "h-12 w-auto max-w-full object-contain sm:h-14"
+                      }
                     />
                   </div>
                 ))}

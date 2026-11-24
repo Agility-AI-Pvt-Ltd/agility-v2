@@ -79,8 +79,9 @@ export default function HomeIncubation() {
 
         <Reveal delay={60}>
           <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-neutral-600 sm:text-[15px] sm:leading-[1.7]">
-            Incubated at IIF (IIIT Allahabad), SIIC (IIT Kanpur), NSRCEL (IIM
-            Bangalore) under Women Startup Program, and IRMA ISEED Foundation.
+            Agility AI, together with its parent company Lyfshilp Academy, is
+            incubated at leading institutions, including IIF (IIIT Allahabad),
+            SIIC (IIT Kanpur), NSRCEL (IIM Bangalore) and IRMA iSEED Foundation.
           </p>
         </Reveal>
 

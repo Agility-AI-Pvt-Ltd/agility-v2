@@ -75,9 +75,9 @@ const credentialBlocks: CredentialBlock[] = [
     title: "RECOGNITION",
     headline: "Recognised among top startups.",
     description:
-      "Stanford Seed, Stanford Graduate School of Business — among South Asia's top 15 startups. DPIIT-recognised startup and part of Startup India.",
-    photo: `${ASSET}/photos/02_recognition.jpg`,
-    photoAlt: "Stanford campus",
+      "Agility AI, together with its parent company Lyfshilp Academy, is incubated at leading institutions, including IIF (IIIT Allahabad), SIIC (IIT Kanpur), NSRCEL (IIM Bangalore) and IRMA iSEED Foundation.",
+    photo: "/assets/ai_programmes/seed_dpit.jpeg",
+    photoAlt: "Stanford Seed and DPIIT recognition",
     logos: [
       {
         id: "stanford-seed-row",
@@ -100,8 +100,8 @@ const credentialBlocks: CredentialBlock[] = [
     headline: "Supported by global AI leaders.",
     description:
       "Member of NVIDIA Inception Program, Sarvam AI Startup Programme, and Anthropic (Claude) Partner Program.",
-    photo: `${ASSET}/photos/03_ai_programmes.jpg`,
-    photoAlt: "NVIDIA Inception workspace",
+    photo: "/assets/ai_programmes/ai_programmes.jpeg",
+    photoAlt: "AI programmes recognition",
     photoObjectPosition: "object-[28%_center]",
     logos: [
       {
@@ -114,7 +114,8 @@ const credentialBlocks: CredentialBlock[] = [
         id: "sarvam-row",
         alt: "Sarvam AI",
         entity: "agility",
-        src: `${ASSET}/09_sarvam_ai.png`,
+        src: "/assets/ai_programmes/sarvam.png",
+        textLabel: "Sarvam AI",
       },
       {
         id: "claude-row",
