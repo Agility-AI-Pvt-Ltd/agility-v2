@@ -1,4 +1,9 @@
 import { isGroqConfigured, isOpenRouterConfigured } from "@/lib/chatbot/config";
+import {
+  getRequestVisitorMeta,
+  isChatUuid,
+  persistChatTurn,
+} from "@/lib/chatbot/persist";
 import { getChatReply, type ChatTurn } from "@/lib/chatbot/reply";
 import { NextResponse } from "next/server";
 
@@ -29,7 +34,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { messages } = body as { messages?: unknown };
+  const { messages, userId, sessionId } = body as {
+    messages?: unknown;
+    userId?: unknown;
+    sessionId?: unknown;
+  };
 
   if (!Array.isArray(messages) || messages.length === 0) {
     return NextResponse.json({ error: "Messages are required." }, { status: 400 });
@@ -50,6 +59,24 @@ export async function POST(request: Request) {
   }
 
   const result = await getChatReply(messages);
+  const lastUser = [...messages]
+    .reverse()
+    .find((message) => message.role === "user");
+
+  if (
+    lastUser &&
+    result.reply &&
+    isChatUuid(userId) &&
+    isChatUuid(sessionId)
+  ) {
+    void persistChatTurn({
+      userId,
+      sessionId,
+      userMessage: lastUser.content.trim(),
+      assistantMessage: result.reply,
+      visitor: getRequestVisitorMeta(request),
+    });
+  }
 
   return NextResponse.json(result);
 }

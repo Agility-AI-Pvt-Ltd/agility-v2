@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { openBookCall } from "@/lib/book-call/open-book-call";
+import { getChatSessionId, getChatUserId } from "@/lib/chatbot/client-ids";
 
 export const OPEN_CHAT_EVENT = "agility:open-chat";
 
@@ -24,6 +25,7 @@ const WELCOME: Message = {
 
 export default function Chatbot() {
   const router = useRouter();
+  const pathname = usePathname();
   const idSeq = useRef(0);
   const titleId = useId();
   const inputId = useId();
@@ -100,7 +102,11 @@ export default function Chatbot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: toApiMessages(nextMessages) }),
+        body: JSON.stringify({
+          messages: toApiMessages(nextMessages),
+          userId: getChatUserId(),
+          sessionId: getChatSessionId(),
+        }),
       });
 
       const body = (await res.json()) as {
@@ -155,6 +161,10 @@ export default function Chatbot() {
   function chooseContact() {
     setOpen(false);
     router.push("/contact");
+  }
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
   }
 
   return (
